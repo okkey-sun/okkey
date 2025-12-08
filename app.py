@@ -1,7 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from database import db
+from model import Question
 
 app = Flask(__name__)
 app.secret_key = "test123"
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///quiz.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 USERS = {
     "student@example.com": "pass123",
