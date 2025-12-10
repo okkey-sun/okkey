@@ -1,9 +1,20 @@
 [
+        {
+        "question": "Pythonという言語の名前の由来として、ソーステキストで言及されているものはどれですか？",
+        "choices": [
+            "神話に登場する巨大な蛇",
+            "BBCのテレビ番組",
+            "開発者が飼っていたペットの名前",
+            "特定の爬虫類の種類"
+        ],
+        "correct": 1,
+        "category": "section_1"
+    },
     {
         "question": "Pythonでリストを作る構文は？",
         "choices": ["(1){1,2,3}","(2)[1,2,3]","(3)<1,2,3>","(4)(1,2,3)"],
         "correct":2,
-        "category": "section"
+        "category": "section_2"
     },
     {
         "question": "PEP8　が定めているのは何？",
