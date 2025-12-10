@@ -4,15 +4,25 @@
 <body>
 <h2>章末テスト</h2>
 
-<p>{{ question }}</p>
+{% if chapters %}
+    <h3>出題範囲を選択してください</h3>
+    <ul>
+        <li><a href="{{ url_for('section_test', category='all') }}">すべて</a></li>
+        {% for chapter_num in chapters %}
+            <li><a href="{{ url_for('section_test', category='section_' + chapter_num|string) }}">第{{ chapter_num }}章</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>{{ question }}</p>
 
-<form method="post">
-    {% for c in choices %}
-      <label><input type="radio" name="choice" value="{{ loop.index }}">{{ c }}</label><br>
-    {% endfor %}
-    <input type="hidden" name="correct" value="{{ correct}}">
-    <button type="submit">回答する</button>
-</form>
+    <form method="post">
+        {% for c in choices %}
+          <label><input type="radio" name="choice" value="{{ loop.index }}">{{ c }}</label><br>
+        {% endfor %}
+        <input type="hidden" name="correct" value="{{ correct}}">
+        <button type="submit">回答する</button>
+    </form>
+{% endif %}
 
 <p><a href="/home">ホームに戻る</a></p>
 </body>

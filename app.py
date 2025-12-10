@@ -56,14 +56,28 @@ def section_test():
         return redirect("/")
     
     if request.method == "POST":
+        # 回答処理
         answer = int(request.form.get("choice"))
         correct = int(request.form.get("correct"))
         result = (answer == correct)
+        # 次の問題へ進むか、結果を表示するかなどは後で実装
         return redirect(url_for("result", ok=result))
-    
-    q_list = Question.query.filter_by(category="section").all()
+
+    category = request.args.get('category')
+
+    if not category:
+        # 章選択画面を表示
+        chapters = list(range(1, 17))  # 1章から16章
+        return render_template("section_test.html", chapters=chapters)
+
+    # 問題表示
+    if category == 'all':
+        q_list = Question.query.filter(Question.category.like('section_%')).all()
+    else:
+        q_list = Question.query.filter_by(category=category).all()
+
     if not q_list:
-        return "章末テスト用の問題がDBにありません"
+        return "その範囲の問題はDBにありません" # or redirect with a message
     
     q = random.choice(q_list)
     
@@ -72,6 +86,7 @@ def section_test():
         question=q.question, 
         choices=[q.choice1, q.choice2, q.choice3, q.choice4],
         correct=q.correct,
+        category=category  # どのカテゴリの問題かテンプレートに渡す
         )
 
 @app.route("/practice", methods=["GET","POST"])
