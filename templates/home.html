@@ -1,18 +1,80 @@
 <!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"><title>ホーム</title></head>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホーム</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+        }
+        .welcome-header {
+            text-align: right;
+            margin-bottom: 30px;
+        }
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
 <body>
-    <h2>ホーム</h2>
-    <p>{{ user }} さん、ようこそ。</p>
+    <div class="container">
+        <div class="welcome-header">
+            <h4>{{ user }} さん、ようこそ。</h4>
+            <a href="/logout" class="btn btn-outline-secondary btn-sm">ログアウト</a>
+        </div>
 
-    <p><a href="/material">教材を見る</a></p>
-    <p><a href="/section_test">章末テスト</a></p>
-    <p><a href="/practice">過去問演習</a></p>
+        <h2 class="text-center mb-4">メニュー</h2>
 
-{% if user == "admin@example.com" %}
-<p><a href="/admin">管理者画面</a></p>
-{% endif %}
-
-<p><a href="/logout">ログアウト</a></p>
+        <div class="d-grid gap-3">
+            <a href="/material" class="card-link">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">教材を見る</h5>
+                        <p class="card-text">Pythonの基礎教材を学習します。</p>
+                    </div>
+                </div>
+            </a>
+            <a href="/section_test" class="card-link">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">章末テスト</h5>
+                        <p class="card-text">各章の理解度を確認するテストです。</p>
+                    </div>
+                </div>
+            </a>
+            <a href="/practice" class="card-link">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">過去問演習</h5>
+                        <p class="card-text">過去の問題を解いて実力を試します。</p>
+                    </div>
+                </div>
+            </a>
+            {% if user == "admin@example.com" %}
+            <a href="/admin" class="card-link">
+                <div class="card h-100 text-center bg-light">
+                    <div class="card-body">
+                        <h5 class="card-title">管理者画面</h5>
+                        <p class="card-text">問題の管理やユーザーの状況を確認します。</p>
+                    </div>
+                </div>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
