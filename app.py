@@ -87,7 +87,10 @@ def submit_section():
     results = []
     score = 0
 
-    q_list = Question.query.filter_by(category=category).all()
+    if category == 'all':
+        q_list = Question.query.filter(Question.category.like('section_%')).all()
+    else:
+        q_list = Question.query.filter_by(category=category).all()
 
     for q in q_list:
         selected_choice_val = request.form.get(f'question_{q.id}')
