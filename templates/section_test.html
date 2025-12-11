@@ -51,31 +51,41 @@
             </script>
 
         {% else %}
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">問題</h5>
-                    <p class="card-text">{{ question }}</p>
-
-                    <form method="post">
+            <h3 class="text-center mb-3">
+                {{ category }} (全 {{ total }} 問)
+            </h3>
+            <form method="post" action="{{ url_for('submit_section') }}">
+                <input type="hidden" name="category" value="{{ category }}">
+                
+                {% for q in questions %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">問題 {{ loop.index }}</h5>
+                        <p class="card-text">{{ q.question }}</p>
+                        
                         <div class="mb-3">
+                            {% set choices = [q.choice1, q.choice2, q.choice3, q.choice4] %}
                             {% for c in choices %}
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="choice" id="choice{{ loop.index }}" value="{{ loop.index }}">
-                                <label class="form-check-label" for="choice{{ loop.index }}">
+                                <input class="form-check-input" type="radio" name="question_{{ q.id }}" id="choice_{{ q.id }}_{{ loop.index }}" value="{{ loop.index }}">
+                                <label class="form-check-label" for="choice_{{ q.id }}_{{ loop.index }}">
                                     {{ c }}
                                 </label>
                             </div>
                             {% endfor %}
                         </div>
-                        <input type="hidden" name="correct" value="{{ correct }}">
-                        <button type="submit" class="btn btn-primary">回答する</button>
-                    </form>
+                    </div>
                 </div>
-            </div>
+                {% endfor %}
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">回答を提出する</button>
+                </div>
+            </form>
         {% endif %}
 
         <div class="text-center">
-            <a href="/home" class="btn btn-secondary">ホームに戻る</a>
+            <br><a href="/home" class="btn btn-secondary">ホームに戻る</a>
         </div>
     </div>
 

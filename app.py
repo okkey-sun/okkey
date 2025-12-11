@@ -50,18 +50,10 @@ def material():
         return redirect("/")
     return render_template("material.html")
 
-@app.route("/section_test", methods=["GET","POST"])
+@app.route("/section_test", methods=["GET"])
 def section_test():
     if "user" not in session:
         return redirect("/")
-    
-    if request.method == "POST":
-        # 回答処理
-        answer = int(request.form.get("choice"))
-        correct = int(request.form.get("correct"))
-        result = (answer == correct)
-        # 次の問題へ進むか、結果を表示するかなどは後で実装
-        return redirect(url_for("result", ok=result))
 
     category = request.args.get('category')
 
@@ -70,24 +62,60 @@ def section_test():
         chapters = list(range(1, 17))  # 1章から16章
         return render_template("section_test.html", chapters=chapters)
 
-    # 問題表示
+    # 問題リスト表示
     if category == 'all':
         q_list = Question.query.filter(Question.category.like('section_%')).all()
     else:
         q_list = Question.query.filter_by(category=category).all()
 
     if not q_list:
-        return "その範囲の問題はDBにありません" # or redirect with a message
-    
-    q = random.choice(q_list)
-    
+        return "その範囲の問題はDBにありません"  # or redirect with a message
+
     return render_template(
-        "section_test.html", 
-        question=q.question, 
-        choices=[q.choice1, q.choice2, q.choice3, q.choice4],
-        correct=q.correct,
-        category=category  # どのカテゴリの問題かテンプレートに渡す
-        )
+        "section_test.html",
+        questions=q_list,
+        category=category,
+        total=len(q_list)
+    )
+
+@app.route('/submit_section', methods=['POST'])
+def submit_section():
+    if 'user' not in session:
+        return redirect('/')
+
+    category = request.form.get('category')
+    results = []
+    score = 0
+
+    q_list = Question.query.filter_by(category=category).all()
+
+    for q in q_list:
+        selected_choice_val = request.form.get(f'question_{q.id}')
+        
+        selected_choice_index = None # 1-based index
+        user_answer_text = "未回答" # Default for unanswered
+
+        if selected_choice_val is not None:
+            selected_choice_index = int(selected_choice_val)
+            choices = [q.choice1, q.choice2, q.choice3, q.choice4]
+            user_answer_text = choices[selected_choice_index - 1] # Convert 1-based to 0-based for list access
+
+        is_correct = (selected_choice_index == q.correct)
+
+        if is_correct:
+            score += 1
+        
+        results.append({
+            'question': q,
+            'user_answer': user_answer_text,
+            'selected_choice_index': selected_choice_index, # Add selected choice index
+            'correct_choice_index': q.correct, # Add correct choice index
+            'is_correct': is_correct
+        })
+    
+    total = len(q_list)
+
+    return render_template('result.html', results=results, score=score, total=total)
 
 @app.route("/practice", methods=["GET","POST"])
 def practice():
