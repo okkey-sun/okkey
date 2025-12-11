@@ -93,11 +93,11 @@
                             >
                             <div class="icon-container">
                             {% if is_selected and res.is_correct %}
-                                <span class="status-icon correct">〇</span>
+                                <span class="status-icon correct">✔</span>
                             {% elif is_selected and not res.is_correct %}
                                 <span class="status-icon incorrect">✖</span>
                             {% elif is_correct_choice %}
-                                <span class="status-icon correct">〇</span>
+                                <span class="status-icon correct">✔</span>
                             {% endif %}
                             </div>
                             <span class="choice-label">{{ choice_text }}</span>
