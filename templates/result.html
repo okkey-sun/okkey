@@ -38,12 +38,19 @@
             border-color: #dc3545;
         }
         .choice-label {
-            margin-left: 10px;
             flex-grow: 1;
+            padding-left: 5px; /* Small padding between icon and text */
+        }
+        .icon-container {
+            width: 25px; /* Adjust as needed for icon size */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0; /* Prevent shrinking */
         }
         .status-icon {
             font-size: 1.2em;
-            margin-left: 10px;
+            /* Removed margin-left as it's now handled by icon-container */
         }
         .status-icon.correct {
             color: #28a745;
@@ -84,7 +91,7 @@
                         <div class="choice-item 
                             {% if is_selected and res.is_correct %}correct{% elif is_selected and not res.is_correct %}incorrect{% elif is_correct_choice and not is_selected %}correct{% endif %}"
                             >
-                            <span class="choice-label">{{ choice_text }}</span>
+                            <div class="icon-container">
                             {% if is_selected and res.is_correct %}
                                 <span class="status-icon correct">✔</span>
                             {% elif is_selected and not res.is_correct %}
@@ -92,6 +99,8 @@
                             {% elif is_correct_choice %}
                                 <span class="status-icon correct">✔</span>
                             {% endif %}
+                            </div>
+                            <span class="choice-label">{{ choice_text }}</span>
                         </div>
                     {% endfor %}
                 </div>
