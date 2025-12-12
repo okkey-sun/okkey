@@ -118,38 +118,67 @@ def submit_section():
     
     total = len(q_list)
 
-    return render_template('result.html', results=results, score=score, total=total)
+    return render_template('result.html', results=results, score=score, total=total, test_type='section')
 
-@app.route("/practice", methods=["GET","POST"])
+@app.route("/practice", methods=["GET"])
 def practice():
     if "user" not in session:
         return redirect("/")
     
-    if request.method == "POST":
-        answer = int(request.form.get("choice"))
-        correct = int(request.form.get("correct"))
-        result = (answer == correct)
-        return redirect(url_for("result", ok=result))
+    all_questions = Question.query.all()
     
-    q_list = Question.query.filter_by(category="practice").all()
-    if not q_list:
-        return "章末テスト用の問題がDBにありません"
-    
-    q = random.choice(q_list)
+    # Ensure there are at least 10 questions to choose from
+    num_questions = min(len(all_questions), 10)
+    if num_questions == 0:
+        return "問題がDBにありません"
+
+    q_list = random.sample(all_questions, num_questions)
 
     return render_template(
-        "practice.html", 
-        question=q.question, 
-        choices=[q.choice1, q.choice2, q.choice3, q.choice4],
-        correct=q.correct,
-        )
+        "practice_test.html",
+        questions=q_list,
+        total=len(q_list)
+    )
 
-@app.route("/result")
-def result():
-    if "user" not in session:
-        return redirect("/")
-    ok = request.args.get("ok") == "True"
-    return render_template("result.html",ok=ok)
+@app.route('/submit_practice', methods=['POST'])
+def submit_practice():
+    if 'user' not in session:
+        return redirect('/')
+
+    results = []
+    score = 0
+    
+    # Get all question IDs submitted from the form
+    submitted_q_ids = [key.split('_')[1] for key in request.form if key.startswith('question_')]
+    q_list = Question.query.filter(Question.id.in_(submitted_q_ids)).all()
+
+    for q in q_list:
+        selected_choice_val = request.form.get(f'question_{q.id}')
+        
+        selected_choice_index = None # 1-based index
+        user_answer_text = "未回答" # Default for unanswered
+
+        if selected_choice_val is not None:
+            selected_choice_index = int(selected_choice_val)
+            choices = [q.choice1, q.choice2, q.choice3, q.choice4]
+            user_answer_text = choices[selected_choice_index - 1]
+
+        is_correct = (selected_choice_index == q.correct)
+
+        if is_correct:
+            score += 1
+        
+        results.append({
+            'question': q,
+            'user_answer': user_answer_text,
+            'selected_choice_index': selected_choice_index,
+            'correct_choice_index': q.correct,
+            'is_correct': is_correct
+        })
+    
+    total = len(q_list)
+
+    return render_template('result.html', results=results, score=score, total=total, test_type='practice')
 
 @app.route("/admin")
 def admin():
