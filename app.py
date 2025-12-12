@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from database import db
-from model import Question
+from model import Question, User
 import random
 
 app = Flask(__name__)
@@ -13,22 +13,43 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-USERS = {
-    "student@example.com": "pass123",
-    "admin@example.com": "admin123"
-}
-
 @app.route("/")
 def login():
     return render_template("login.html")
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        # Check if user already exists
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            return render_template("login.html", error="ログインに失敗しました")
+
+        # Create new user
+        new_user = User(email=email)
+        new_user.set_password(password)
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        return redirect(url_for("login"))
+
+    return render_template("register.html")
+
 
 @app.route("/try_login", methods=["POST"])
 def try_login():
     email = request.form.get("email")
     pw = request.form.get("password")
 
-    if email in USERS and USERS[email] == pw:
-        session["user"] = email
+    user = User.query.filter_by(email=email).first()
+
+    if user and user.check_password(pw):
+        session["user"] = user.email
+        session["is_admin"] = user.is_admin
         return redirect(url_for("home"))
     else:
         return render_template("login.html", error="ログインに失敗しました")
@@ -182,7 +203,7 @@ def submit_practice():
 
 @app.route("/admin")
 def admin():
-    if session.get("user") != "admin@example.com":
+    if not session.get("is_admin"):
         return redirect("/")
     return render_template("admin.html")
 
