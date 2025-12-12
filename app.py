@@ -59,7 +59,7 @@ def section_test():
 
     if not category:
         # 章選択画面を表示
-        chapters = list(range(1, 17))  # 1章から16章
+        chapters = list(range(1, 17))  # 1章から16章 test
         return render_template("section_test.html", chapters=chapters)
 
     # 問題リスト表示
