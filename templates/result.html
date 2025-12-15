@@ -58,6 +58,10 @@
         .status-icon.incorrect {
             color: #dc3545;
         }
+        .custom-rationale-bg,
+        .custom-reference-bg {
+            background-color: #f5f5f5;
+        }
     </style>
 </head>
 <body>
@@ -80,30 +84,78 @@
                     {% endif %}
                 </h5>
                 <p class="card-text">{{ res.question.question }}</p>
-                
-                <div class="mb-3">
-                    {% set all_choices = [res.question.choice1, res.question.choice2, res.question.choice3, res.question.choice4] %}
-                    {% for choice_text in all_choices %}
-                        {% set current_choice_index = loop.index %}
-                        {% set is_selected = (current_choice_index == res.selected_choice_index) %}
-                        {% set is_correct_choice = (current_choice_index == res.correct_choice_index) %}
 
-                        <div class="choice-item 
-                            {% if is_selected and res.is_correct %}correct{% elif is_selected and not res.is_correct %}incorrect{% elif is_correct_choice and not is_selected %}correct{% endif %}"
-                            >
-                            <div class="icon-container">
-                            {% if is_selected and res.is_correct %}
-                                <span class="status-icon correct">✔</span>
-                            {% elif is_selected and not res.is_correct %}
-                                <span class="status-icon incorrect">✖</span>
-                            {% elif is_correct_choice %}
-                                <span class="status-icon correct">✔</span>
-                            {% endif %}
-                            </div>
-                            <span class="choice-label">{{ choice_text }}</span>
-                        </div>
-                    {% endfor %}
-                </div>
+                                <div class="mb-3">
+
+                                    {% set all_choices = [res.question.choice1, res.question.choice2, res.question.choice3, res.question.choice4] %}
+
+                                    {% for choice_text in all_choices %}
+
+                                        {% set current_choice_index = loop.index %}
+
+                                        {% set is_selected = (current_choice_index == res.selected_choice_index) %}
+
+                                        {% set is_correct_choice = (current_choice_index == res.correct_choice_index) %}
+
+                
+
+                                        <div class="choice-item 
+
+                                            {% if is_selected and res.is_correct %}correct{% elif is_selected and not res.is_correct %}incorrect{% elif is_correct_choice and not is_selected %}correct{% endif %}"
+
+                                            >
+
+                                            <div class="icon-container">
+
+                                            {% if is_selected and res.is_correct %}
+
+                                                <span class="status-icon correct">✔</span>
+
+                                            {% elif is_selected and not res.is_correct %}
+
+                                                <span class="status-icon incorrect">✖</span>
+
+                                            {% elif is_correct_choice %}
+
+                                                <span class="status-icon correct">✔</span>
+
+                                            {% endif %}
+
+                                            </div>
+
+                                            <span class="choice-label">{{ choice_text }}</span>
+
+                                        </div>
+
+                                    {% endfor %}
+
+                                </div>
+
+                                {% if res.question.rationale %}
+
+                                <div class="custom-rationale-bg alert mt-3">
+
+                                    <strong>解説:</strong><br>
+
+                                    {{ res.question.rationale }}
+
+                                </div>
+
+                                {% endif %}
+
+                                {% if res.question.reference %}
+
+                                <div class="custom-reference-bg alert">
+
+                                    <strong>参照URL:</strong><br>
+
+                                    <a href="{{ res.question.reference }}" target="_blank">{{ res.question.reference }}</a>
+
+                                </div>
+
+                                {% endif %}
+
+                
             </div>
         </div>
         {% endfor %}

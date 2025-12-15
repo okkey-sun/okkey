@@ -7,6 +7,7 @@ def import_json(json_file):
     print(f"JSON 読み込み中: {json_file}")
     with app.app_context():
 
+        db.drop_all()
         db.create_all()
 
         with open(json_file, "r", encoding="utf-8") as f:
@@ -20,7 +21,9 @@ def import_json(json_file):
                 choice3=item["choices"][2],
                 choice4=item["choices"][3],
                 correct=item["correct"],
-                category=item.get("category","none")
+                category=item.get("category","none"),
+                rationale=item.get("rationale"),
+                reference=item.get("reference")
             )
             db.session.add(q)
 

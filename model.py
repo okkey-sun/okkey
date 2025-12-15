@@ -26,3 +26,5 @@ class Question(db.Model):
     choice4 = db.Column(db.String(200))
     correct = db.Column(db.Integer)
     category = db.Column(db.String(50))
+    rationale = db.Column(db.Text)
+    reference = db.Column(db.String(300))
