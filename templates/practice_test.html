@@ -23,6 +23,7 @@
         <h2 class="text-center mb-4">模擬試験 (全 {{ total }} 問)</h2>
 
         <form method="post" action="{{ url_for('submit_practice') }}">
+            <input type="hidden" name="all_q_ids" value="{{ questions | map(attribute='id') | join(',') }}">
             
             {% for q in questions %}
             <div class="card">
