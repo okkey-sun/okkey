@@ -146,14 +146,42 @@ def practice():
     if "user" not in session:
         return redirect("/")
     
+    num_questions_str = request.args.get('num_questions')
+
+    if not num_questions_str:
+        # Display selection screen
+        options = {
+            "5問": 5,
+            "10問": 10,
+            "20問": 20,
+            "30問": 30,
+            "40問（本試験）": 40,
+            "50問": 50,
+            "100問": 100,
+            "すべて": "all"
+        }
+        return render_template("practice_test.html", question_options=options)
+
     all_questions = Question.query.all()
+    total_available = len(all_questions)
+
+    if num_questions_str == 'all':
+        num_to_sample = total_available
+    else:
+        num_to_sample = int(num_questions_str)
+
+    # Ensure we don't request more questions than available
+    num_to_sample = min(num_to_sample, total_available)
     
-    # Ensure there are at least 10 questions to choose from
-    num_questions = min(len(all_questions), 10)
-    if num_questions == 0:
+    if num_to_sample == 0:
         return "問題がDBにありません"
 
-    q_list = random.sample(all_questions, num_questions)
+    # Shuffle all questions if 'all' is selected, otherwise sample
+    if num_questions_str == 'all':
+        q_list = all_questions
+        random.shuffle(q_list)
+    else:
+        q_list = random.sample(all_questions, num_to_sample)
 
     return render_template(
         "practice_test.html",

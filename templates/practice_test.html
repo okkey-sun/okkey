@@ -20,36 +20,68 @@
 </head>
 <body>
     <div class="container">
-        <h2 class="text-center mb-4">模擬試験 (全 {{ total }} 問)</h2>
+        <h2 class="text-center mb-4">模擬試験</h2>
 
-        <form method="post" action="{{ url_for('submit_practice') }}">
-            <input type="hidden" name="all_q_ids" value="{{ questions | map(attribute='id') | join(',') }}">
-            
-            {% for q in questions %}
+        {% if question_options %}
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">問題 {{ loop.index }}</h5>
-                    <p class="card-text">{{ q.question }}</p>
-                    
-                    <div class="mb-3">
-                        {% set choices = [q.choice1, q.choice2, q.choice3, q.choice4] %}
-                        {% for c in choices %}
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="question_{{ q.id }}" id="choice_{{ q.id }}_{{ loop.index }}" value="{{ loop.index }}">
-                            <label class="form-check-label" for="choice_{{ q.id }}_{{ loop.index }}">
-                                {{ c }}
-                            </label>
+                    <h5 class="card-title">問題数を選択してください</h5>
+                    <form id="question-count-select-form" class="row g-3 align-items-center">
+                        <div class="col-auto">
+                            <select name="num_questions" id="num-questions-select" class="form-select">
+                                {% for text, value in question_options.items() %}
+                                    <option value="{{ value }}">{{ text }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
-                        {% endfor %}
-                    </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">テストを開始</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            {% endfor %}
 
-            <div class="text-center mt-4">
-                <button type="submit" class="btn btn-primary btn-lg">回答を提出する</button>
-            </div>
-        </form>
+            <script>
+                document.getElementById('question-count-select-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var num_questions = document.getElementById('num-questions-select').value;
+                    window.location.href = "{{ url_for('practice', num_questions='__NUM__') }}".replace('__NUM__', num_questions);
+                });
+            </script>
+
+        {% else %}
+            <h3 class="text-center mb-3">
+                (全 {{ total }} 問)
+            </h3>
+            <form method="post" action="{{ url_for('submit_practice') }}">
+                <input type="hidden" name="all_q_ids" value="{{ questions | map(attribute='id') | join(',') }}">
+                
+                {% for q in questions %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">問題 {{ loop.index }}</h5>
+                        <p class="card-text">{{ q.question }}</p>
+                        
+                        <div class="mb-3">
+                            {% set choices = [q.choice1, q.choice2, q.choice3, q.choice4] %}
+                            {% for c in choices %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="question_{{ q.id }}" id="choice_{{ q.id }}_{{ loop.index }}" value="{{ loop.index }}">
+                                <label class="form-check-label" for="choice_{{ q.id }}_{{ loop.index }}">
+                                    {{ c }}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">回答を提出する</button>
+                </div>
+            </form>
+        {% endif %}
 
         <div class="text-center">
             <br><a href="/home" class="btn btn-secondary">ホームに戻る</a>

@@ -1,156 +1,257 @@
 [
     {
-        "question": "Pythonという言語の名前の由来として、ソーステキストで言及されているものはどれですか？",
+        "question": "Python はどのような目的で使うのに適した言語だと説明されていますか？",
         "choices": [
-            "神話に登場する巨大な蛇",
-            "BBCのテレビ番組",
-            "開発者が飼っていたペットの名前",
-            "特定の爬虫類の種類"
+            "OS のカーネル開発",
+            "GUI アプリケーションや一般的なプログラミング",
+            "ハードウェア制御専用",
+            "低レベルなメモリ操作"
         ],
         "correct": 2,
-        "category": "section_1"
+        "category": "section_1",
+        "rationale": "本文では、Python は GUI アプリケーションや一般的なプログラミング作業に適していると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
     },
     {
-        "question": "インタプリタ言語であるPythonの利点として、ソーステキストで説明されているものはどれですか？",
+        "question": "Python が複数の OS で利用できることの利点として述べられているのはどれですか？",
         "choices": [
-            "プログラムの実行速度がC言語よりも常に速いこと",
-            "コンパイルやリンクが不要で、開発時間を節約できること",
-            "完成したプログラムのファイルサイズが非常に小さいこと",
-            "グラフィカルユーザインターフェースの作成に特化していること"
+            "OS ごとに文法が変わる",
+            "同じプログラムを複数の OS で実行できる",
+            "OS 固有の API に依存する",
+            "特定の OS でのみ高速に動作する"
         ],
         "correct": 2,
-        "category": "section_1"
+        "category": "section_1",
+        "rationale": "Python は複数の OS 上で動作し、同じプログラムを再利用できる点が利点として述べられています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
     },
     {
-        "question": "ソーステキストによると、PythonのプログラムがC言語やJavaのプログラムよりも短くなる理由として挙げられていないものはどれですか？",
+        "question": "Python が「インタプリタ言語」であることの特徴として正しいものはどれですか？",
         "choices": [
-            "高レベルのデータ型によって複雑な操作を一つの文で表現できるため",
-            "実行文のグループ化を、括弧ではなくインデントで行うため",
-            "変数や引数の宣言が不要であるため",
-            "AIによるコード自動生成機能が組み込まれているため"
+            "事前に必ずコンパイルが必要",
+            "実行時に逐次解釈される",
+            "機械語に直接変換される",
+            "リンク工程が必須"
+        ],
+        "correct": 2,
+        "category": "section_1",
+        "rationale": "Python はインタプリタによって実行時に逐次解釈される言語であると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
+    },
+    {
+        "question": "Python が C 言語よりも「高級」とされる理由の一つはどれですか？",
+        "choices": [
+            "実行速度が常に速いから",
+            "より多くのエラーチェックを実行時に行うから",
+            "ハードウェアに近いから",
+            "型が固定されているから"
+        ],
+        "correct": 2,
+        "category": "section_1",
+        "rationale": "本文では、Python は実行時に多くのエラーチェックを行う点が高級言語である理由の一つとして説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
+    },
+    {
+        "question": "Python に組み込まれている高レベルなデータ型の例として適切なものはどれですか？",
+        "choices": [
+            "ポインタ",
+            "レジスタ",
+            "リストや辞書",
+            "ビット列のみ"
+        ],
+        "correct": 3,
+        "category": "section_1",
+        "rationale": "Python にはリストや辞書といった高レベルなデータ型が組み込まれていると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
+    },
+    {
+        "question": "Python プログラムが C や Java より短く書ける理由として挙げられていないものはどれですか？",
+        "choices": [
+            "高レベルなデータ型がある",
+            "インデントで構造を表現する",
+            "変数宣言が不要",
+            "AI が自動的にコードを書く"
         ],
         "correct": 4,
-        "category": "section_1"
+        "category": "section_1",
+        "rationale": "AI による自動コード生成については本文では言及されていません。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
     },
     {
-        "question": "Pythonの「拡張性」について、ソーステキストの内容と合致する説明はどれですか？",
+        "question": "Python の拡張性について、正しく説明されているものはどれですか？",
         "choices": [
-            "Pythonで書いたプログラムを、あらゆるアプリケーションに組み込めること",
-            "ユーザーが独自のプログラミング文法を自由に追加できること",
-            "C言語で書いた関数やモジュールをインタプリタに追加できること",
-            "標準モジュールの数が継続的に増え続けること"
+            "文法を自由に変更できる",
+            "C 言語で書いたモジュールを追加できる",
+            "OS を拡張できる",
+            "ハードウェア命令を直接追加できる"
+        ],
+        "correct": 2,
+        "category": "section_1",
+        "rationale": "Python は C 言語で書かれた関数やモジュールを追加できる拡張性を持つと説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
+    },
+    {
+        "question": "Python がシェルスクリプトより優れている点として述べられているのはどれですか？",
+        "choices": [
+            "テキスト処理ができない",
+            "GUI アプリケーションにも向いている",
+            "必ず高速に動作する",
+            "OS に依存する"
+        ],
+        "correct": 2,
+        "category": "section_1",
+        "rationale": "Python は GUI アプリケーションにも向いている点でシェルスクリプトより優れていると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
+    },
+    {
+        "question": "Python が Awk や Perl より広い用途で使われる理由はどれですか？",
+        "choices": [
+            "より高速だから",
+            "より汎用的なデータ型を備えているから",
+            "歴史が最も古いから",
+            "構文が複雑だから"
+        ],
+        "correct": 2,
+        "category": "section_1",
+        "rationale": "Python はより汎用的なデータ型を備えているため、幅広い用途に使えると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
+    },
+    {
+        "question": "Python の標準モジュールについて正しい説明はどれですか？",
+        "choices": [
+            "最低限の機能しか含まれない",
+            "ファイル I/O やシステムコールを含む",
+            "外部ライブラリのみで構成される",
+            "GUI 機能は含まれない"
+        ],
+        "correct": 2,
+        "category": "section_1",
+        "rationale": "標準モジュールにはファイル I/O やシステムコールなど多くの機能が含まれると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
+    },
+
+    {
+        "question": "Python で実行文のグループ化に使われる仕組みは何ですか？",
+        "choices": [
+            "波括弧 {}",
+            "丸括弧 ()",
+            "インデント",
+            "begin/end"
         ],
         "correct": 3,
-        "category": "section_1"
+        "category": "section_1",
+        "rationale": "Python では実行文のグループ化をインデントで表現すると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
     },
     {
-        "question": "ソーステキストでは、Pythonがどのような作業に適していると説明されていますか？",
+        "question": "Python を学ぶ最良の方法として本文で述べられているのはどれですか？",
         "choices": [
-            "シェルスクリプトが苦手とするGUIアプリケーションやゲームの開発",
-            "オペレーティングシステムのカーネル開発のような低レベルな処理",
-            "C言語の代替となる、最高の実行速度を求める処理",
-            "ハードウェアを直接制御するデバイスドライバの作成"
-        ],
-        "correct": 1,
-        "category": "section_1"
-    },
-    {
-        "question": "Pythonでリストを作る構文は？",
-        "choices": [
-            "{1,2,3}",
-            "[1,2,3]",
-            "<1,2,3>",
-            "(1,2,3)"
+            "文法書を暗記する",
+            "実際に使ってみる",
+            "他人のコードを写す",
+            "動画を見るだけ"
         ],
         "correct": 2,
-        "category": "section_2"
+        "category": "section_1",
+        "rationale": "本文では、Python は実際に使ってみることで学ぶのが最良だと述べられています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
     },
+
     {
-        "question": "PEP8が定めているのは何？",
+        "question": "Python はどのような OS で動作すると説明されていますか？",
         "choices": [
-            "標準入力方法",
-            "コーディング規約",
-            "実行速度規約",
-            "セキュリティ規約"
+            "Windows のみ",
+            "Unix 系のみ",
+            "macOS のみ",
+            "Windows、macOS、Unix"
+        ],
+        "correct": 4,
+        "category": "section_1",
+        "rationale": "Python は Windows、macOS、Unix など複数の OS で動作すると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
+    },
+
+    {
+        "question": "Python が「超高級言語」と呼ばれる理由として正しいものはどれですか？",
+        "choices": [
+            "実行速度が最速だから",
+            "高級なデータ型を組み込みで持つから",
+            "低レベル命令を直接扱えるから",
+            "OS 専用だから"
         ],
         "correct": 2,
-        "category": "practice"
+        "category": "section_1",
+        "rationale": "高級なデータ型を組み込みで持つ点が理由として挙げられています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
     },
+
     {
-        "question": "Pythonで冪乗（べきじょう）を計算するために使用される演算子はどれですか？",
+        "question": "Python インタプリタを C アプリケーションに組み込むと、何として使えますか？",
         "choices": [
-            "^",
-            "**",
-            "pow()",
-            "exp()"
-        ],
-        "correct": 2,
-        "category": "section_3"
-    },
-    {
-        "question": "Pythonの文字列(str型)の性質について、正しい説明はどれですか？",
-        "choices": [
-            "可変(mutable)であり、インデックスを指定して文字を置き換えられる。",
-            "不変(immutable)であり、一度作成するとその内容を変更できない。",
-            "+演算子でのみ変更可能である。",
-            "append()メソッドで文字を追加できる。"
-        ],
-        "correct": 2,
-        "category": "section_3"
-    },
-    {
-        "question": "文字列とは対照的に、Pythonのリスト(list型)が持つ重要な特徴は何ですか？",
-        "choices": [
-            "不変(immutable)型であり、要素を変更できない。",
-            "可変(mutable)型であり、要素を入れ替えることができる。",
-            "*演算子で要素を削除できる。",
-            "要素はすべて同じ型でなければならない。"
-        ],
-        "correct": 2,
-        "category": "section_3"
-    },
-    {
-        "question": "word = 'Python' という文字列があるとき、word[:2] というスライス操作の結果はどうなりますか？",
-        "choices": [
-            "'Py'",
-            "'P'",
-            "'on'",
-            "エラーが発生する"
-        ],
-        "correct": 1,
-        "category": "section_3"
-    },
-    {
-        "question": "Pythonの対話モードにおいて、最後に表示された式の結果が代入される特別な変数は何ですか？",
-        "choices": [
-            "ans",
-            "last",
-            "_",
-            "result"
+            "コンパイラ",
+            "デバッガ",
+            "拡張言語",
+            "OS"
         ],
         "correct": 3,
-        "category": "section_3"
+        "category": "section_1",
+        "rationale": "Python は C アプリケーションに組み込んで拡張言語として使えると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
     },
+
     {
-        "question": "Pythonにおいて、whileループなどの実行文をグループにまとめるための方法はどれですか？",
+        "question": "このチュートリアルで最初に紹介される内容は何ですか？",
         "choices": [
-            "波括弧 {} を使う",
-            "beginとendキーワードを使う",
-            "インデント(字下げ)",
-            "丸括弧 () を使う"
-        ],
-        "correct": 3,
-        "category": "section_3"
-    },
-    {
-        "question": "'Py' 'thon' のように、連続して並んでいる複数の文字列リテラルはPythonインタプリタによってどのように扱われますか？",
-        "choices": [
-            "SyntaxErrorになる。",
-            "自動的に連結されて一つの文字列になる。",
-            "スペースで区切られた別の文字列として扱われる。",
-            "最初の文字列リテラルのみが評価される。"
+            "クラス",
+            "単純な式と実行文",
+            "Web 開発",
+            "データベース"
         ],
         "correct": 2,
-        "category": "section_3"
+        "category": "section_1",
+        "rationale": "このチュートリアルでは、まず単純な式や実行文が紹介されると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
+    },
+
+    {
+        "question": "Python を対話的に使う利点として挙げられていないものはどれですか？",
+        "choices": [
+            "電卓として使える",
+            "言語機能を試せる",
+            "完成品を配布できる",
+            "短いプログラムを書ける"
+        ],
+        "correct": 3,
+        "category": "section_1",
+        "rationale": "完成したアプリケーションの配布については対話的利用の利点として挙げられていません。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
+    },
+
+    {
+        "question": "Python の公式ドキュメントにおける Monty Python への言及はどのように扱われていますか？",
+        "choices": [
+            "禁止されている",
+            "非推奨",
+            "推奨されている",
+            "言及されていない"
+        ],
+        "correct": 3,
+        "category": "section_1",
+        "rationale": "Monty Python への言及はむしろ推奨されていると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
+    },
+
+    {
+        "question": "この章の次に説明される内容はどれですか？",
+        "choices": [
+            "クラス",
+            "インタプリタの使い方",
+            "標準ライブラリ",
+            "高度なアルゴリズム"
+        ],
+        "correct": 2,
+        "category": "section_1",
+        "rationale": "次の章ではインタプリタの使い方が説明されると述べられています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
     }
 ]
