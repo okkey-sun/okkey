@@ -526,5 +526,512 @@
         "category": "section_2",
         "rationale": "引数なしで起動した場合、`sys.argv[0]` は空文字列になります。",
         "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+        {
+        "question": "この章で最初に紹介される Python の使い方はどれですか？",
+        "choices": [
+            "クラス定義",
+            "関数定義",
+            "電卓として使う方法",
+            "ファイル操作"
+        ],
+        "correct": 3,
+        "category": "section_3",
+        "rationale": "この章では、Python を電卓のように使う簡単な例から紹介されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "Python で加算を行うために使う演算子はどれですか？",
+        "choices": [
+            "*",
+            "/",
+            "+",
+            "-"
+        ],
+        "correct": 3,
+        "category": "section_3",
+        "rationale": "加算には + 演算子を使うと説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "Python で冪乗（べきじょう）を表す演算子はどれですか？",
+        "choices": [
+            "^",
+            "**",
+            "pow",
+            "//"
+        ],
+        "correct": 2,
+        "category": "section_3",
+        "rationale": "Python では ** 演算子が冪乗を表します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "Python で割り算 `/` を使った場合の結果の型はどれですか？",
+        "choices": [
+            "常に整数",
+            "常に浮動小数点数",
+            "条件によって変わる",
+            "文字列"
+        ],
+        "correct": 2,
+        "category": "section_3",
+        "rationale": "/ 演算子は常に浮動小数点数を返すと説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "整数の商を求めるために使う演算子はどれですか？",
+        "choices": [
+            "/",
+            "//",
+            "%",
+            "**"
+        ],
+        "correct": 2,
+        "category": "section_3",
+        "rationale": "// は整数の商（切り捨て除算）を返します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "Python で余りを求めるために使う演算子はどれですか？",
+        "choices": [
+            "//",
+            "%",
+            "**",
+            "/"
+        ],
+        "correct": 2,
+        "category": "section_3",
+        "rationale": "% 演算子は余りを求めるために使われます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "変数に値を代入するために使う記号はどれですか？",
+        "choices": [
+            "==",
+            "=",
+            ":=",
+            "->"
+        ],
+        "correct": 2,
+        "category": "section_3",
+        "rationale": "Python では = を使って変数に値を代入します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "未定義の変数を参照した場合、何が起こりますか？",
+        "choices": [
+            "0 が返る",
+            "None が返る",
+            "NameError が発生する",
+            "警告だけが表示される"
+        ],
+        "correct": 3,
+        "category": "section_3",
+        "rationale": "未定義の変数を参照すると NameError が発生します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "Python でコメントを書くときに使う記号はどれですか？",
+        "choices": [
+            "//",
+            "/* */",
+            "#",
+            "--"
+        ],
+        "correct": 3,
+        "category": "section_3",
+        "rationale": "# から始まる行はコメントとして扱われます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "文字列を表すために使える区切り文字はどれですか？",
+        "choices": [
+            "シングルクォートとダブルクォート",
+            "バッククォートのみ",
+            "角括弧",
+            "中括弧"
+        ],
+        "correct": 1,
+        "category": "section_3",
+        "rationale": "文字列はシングルクォートまたはダブルクォートで囲みます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "文字列リテラルを連続して書いた場合、どのように扱われますか？",
+        "choices": [
+            "エラーになる",
+            "自動的に連結される",
+            "最初の文字列だけが有効",
+            "空白が挿入される"
+        ],
+        "correct": 2,
+        "category": "section_3",
+        "rationale": "連続した文字列リテラルは自動的に連結されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "文字列の一部を取り出す操作を何と呼びますか？",
+        "choices": [
+            "キャスト",
+            "スライス",
+            "マッピング",
+            "ループ"
+        ],
+        "correct": 2,
+        "category": "section_3",
+        "rationale": "文字列の一部を取り出す操作はスライスと呼ばれます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "Python の文字列の性質として正しいものはどれですか？",
+        "choices": [
+            "可変 (mutable)",
+            "不変 (immutable)",
+            "数値型",
+            "参照型ではない"
+        ],
+        "correct": 2,
+        "category": "section_3",
+        "rationale": "Python の文字列は不変 (immutable) 型です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "Python でリストを作成するために使う記号はどれですか？",
+        "choices": [
+            "()",
+            "{}",
+            "[]",
+            "<>"
+        ],
+        "correct": 3,
+        "category": "section_3",
+        "rationale": "リストは角括弧 [] を使って作成します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "リストの特徴として正しいものはどれですか？",
+        "choices": [
+            "不変である",
+            "要素を変更できる",
+            "常に同じ型の要素のみを持つ",
+            "要素数が固定されている"
+        ],
+        "correct": 2,
+        "category": "section_3",
+        "rationale": "リストは可変 (mutable) で、要素を変更できます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "リストの末尾に要素を追加するためのメソッドはどれですか？",
+        "choices": [
+            "add()",
+            "append()",
+            "push()",
+            "insert_end()"
+        ],
+        "correct": 2,
+        "category": "section_3",
+        "rationale": "append() メソッドを使ってリストの末尾に要素を追加します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "Python で同じ値を複数回含むリストを簡単に作る方法はどれですか？",
+        "choices": [
+            "+ 演算子",
+            "* 演算子",
+            "// 演算子",
+            "% 演算子"
+        ],
+        "correct": 2,
+        "category": "section_3",
+        "rationale": "* 演算子を使ってリストを繰り返すことができます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "代入文の右辺にまだ評価されていない変数を使った場合どうなりますか？",
+        "choices": [
+            "0 として扱われる",
+            "None になる",
+            "NameError が発生する",
+            "自動的に定義される"
+        ],
+        "correct": 3,
+        "category": "section_3",
+        "rationale": "未定義の変数を使うと NameError が発生します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "この章の目的として最も適切なものはどれですか？",
+        "choices": [
+            "高度なアルゴリズムを学ぶ",
+            "Python の厳密な仕様を学ぶ",
+            "Python の基本的な感覚をつかむ",
+            "GUI プログラミングを学ぶ"
+        ],
+        "correct": 3,
+        "category": "section_3",
+        "rationale": "この章は Python の基本的な使い方や感覚をつかむための導入として書かれています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/introduction.html"
+    },
+    {
+        "question": "if 文の基本的な役割は何ですか？",
+        "choices": [
+            "繰り返し処理を行う",
+            "条件に応じて処理を分岐する",
+            "例外を処理する",
+            "関数を定義する"
+        ],
+        "correct": 2,
+        "category": "section_4",
+        "rationale": "if 文は条件式の真偽によって実行する処理を分岐させるために使われます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "elif はどのような場面で使われますか？",
+        "choices": [
+            "条件が常に真のとき",
+            "複数の条件を順に判定したいとき",
+            "ループを終了したいとき",
+            "例外を捕捉したいとき"
+        ],
+        "correct": 2,
+        "category": "section_4",
+        "rationale": "elif は、複数の条件を順に評価したい場合に使用されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "for 文は主に何を行うために使われますか？",
+        "choices": [
+            "条件分岐",
+            "無限ループ",
+            "シーケンスの要素を順に処理する",
+            "例外処理"
+        ],
+        "correct": 3,
+        "category": "section_4",
+        "rationale": "for 文は、リストや文字列などのシーケンスの要素を順に処理するために使われます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "range() 関数の主な用途はどれですか？",
+        "choices": [
+            "ランダムな数を生成する",
+            "数値のシーケンスを生成する",
+            "入力値を取得する",
+            "リストを並べ替える"
+        ],
+        "correct": 2,
+        "category": "section_4",
+        "rationale": "range() は連続した数値のシーケンスを生成するために使われます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "range(3) の結果として正しいものはどれですか？",
+        "choices": [
+            "[1, 2, 3]",
+            "[0, 1, 2]",
+            "[0, 1, 2, 3]",
+            "[1, 2]"
+        ],
+        "correct": 2,
+        "category": "section_4",
+        "rationale": "range(3) は 0 から始まり 3 未満の数値を生成します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "break 文の役割はどれですか？",
+        "choices": [
+            "現在のループを終了する",
+            "次のループに進む",
+            "関数を終了する",
+            "例外を発生させる"
+        ],
+        "correct": 1,
+        "category": "section_4",
+        "rationale": "break 文は、ループを即座に終了させるために使われます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "continue 文の役割はどれですか？",
+        "choices": [
+            "ループ全体を終了する",
+            "次の繰り返しに進む",
+            "関数を呼び出す",
+            "例外処理を行う"
+        ],
+        "correct": 2,
+        "category": "section_4",
+        "rationale": "continue 文は、現在の繰り返しをスキップして次の反復に進みます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "ループの else 節はいつ実行されますか？",
+        "choices": [
+            "常に実行される",
+            "break によって終了したときのみ",
+            "正常にループが終了したとき",
+            "continue が使われたとき"
+        ],
+        "correct": 3,
+        "category": "section_4",
+        "rationale": "ループの else 節は、break を使わずにループが終了した場合に実行されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "pass 文の役割はどれですか？",
+        "choices": [
+            "何もしないことを示す",
+            "ループを終了する",
+            "条件分岐を行う",
+            "関数を呼び出す"
+        ],
+        "correct": 1,
+        "category": "section_4",
+        "rationale": "pass 文は、構文上必要だが何も処理を行わない場合に使われます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "関数を定義するために使うキーワードはどれですか？",
+        "choices": [
+            "func",
+            "define",
+            "def",
+            "function"
+        ],
+        "correct": 3,
+        "category": "section_4",
+        "rationale": "Python では def キーワードを使って関数を定義します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "関数定義の最初の行を何と呼びますか？",
+        "choices": [
+            "ボディ",
+            "ヘッダ",
+            "シグネチャ",
+            "ブロック"
+        ],
+        "correct": 3,
+        "category": "section_4",
+        "rationale": "関数名と引数を含む最初の行は関数シグネチャと呼ばれます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "return 文の役割はどれですか？",
+        "choices": [
+            "関数を定義する",
+            "値を呼び出し元に返す",
+            "例外を処理する",
+            "ループを続行する"
+        ],
+        "correct": 2,
+        "category": "section_4",
+        "rationale": "return 文は、関数の実行を終了し値を呼び出し元に返します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "関数に引数を渡さなかった場合、どうなりますか？",
+        "choices": [
+            "自動的に None が渡される",
+            "エラーになる場合がある",
+            "0 が渡される",
+            "空文字列が渡される"
+        ],
+        "correct": 2,
+        "category": "section_4",
+        "rationale": "必須引数が指定されていない場合、TypeError が発生します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "関数のデフォルト引数の特徴として正しいものはどれですか？",
+        "choices": [
+            "毎回新しく評価される",
+            "定義時に一度だけ評価される",
+            "実行時に評価されない",
+            "変更できない"
+        ],
+        "correct": 2,
+        "category": "section_4",
+        "rationale": "デフォルト引数は関数定義時に一度だけ評価されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "キーワード引数の利点はどれですか？",
+        "choices": [
+            "引数の順序を気にせず指定できる",
+            "必ず高速になる",
+            "引数を省略できない",
+            "数値しか使えない"
+        ],
+        "correct": 1,
+        "category": "section_4",
+        "rationale": "キーワード引数を使うと、引数名を指定して渡せるため順序を気にせずに済みます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "*args の役割はどれですか？",
+        "choices": [
+            "辞書形式で引数を受け取る",
+            "可変長の位置引数を受け取る",
+            "必須引数を定義する",
+            "引数を無視する"
+        ],
+        "correct": 2,
+        "category": "section_4",
+        "rationale": "*args は可変長の位置引数をタプルとして受け取ります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "**kwargs の役割はどれですか？",
+        "choices": [
+            "位置引数をまとめる",
+            "キーワード引数を辞書として受け取る",
+            "引数を省略する",
+            "戻り値を定義する"
+        ],
+        "correct": 2,
+        "category": "section_4",
+        "rationale": "**kwargs はキーワード引数を辞書として受け取ります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "lambda 式の特徴として正しいものはどれですか？",
+        "choices": [
+            "複数文を書ける",
+            "名前を持たない小さな関数を作れる",
+            "常に return が必要",
+            "クラス定義に使う"
+        ],
+        "correct": 2,
+        "category": "section_4",
+        "rationale": "lambda 式は名前を持たない小さな関数を定義するために使われます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "関数のドキュメント文字列はどこに書きますか？",
+        "choices": [
+            "関数の最後",
+            "関数定義の直後",
+            "ファイルの末尾",
+            "任意の場所"
+        ],
+        "correct": 2,
+        "category": "section_4",
+        "rationale": "ドキュメント文字列（docstring）は関数定義の直後に記述します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "Python に switch 文が存在しない代替として紹介されている方法はどれですか？",
+        "choices": [
+            "if / elif / else",
+            "goto 文",
+            "while 文",
+            "例外処理"
+        ],
+        "correct": 1,
+        "category": "section_4",
+        "rationale": "Python では switch 文の代わりに if / elif / else を使うと説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
     }
 ]
