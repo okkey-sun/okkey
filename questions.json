@@ -1,5 +1,18 @@
 [
     {
+    "question": "本文によると、Python が初心者にも学びやすいとされる理由はどれですか？",
+    "choices": [
+        "文法が他の言語よりも厳しいから",
+        "低レベルな処理を詳細に書く必要があるから",
+        "読みやすく簡潔な文法を持っているから",
+        "事前に多くの専門知識が必要だから"
+    ],
+    "correct": 3,
+    "category": "section_1",
+    "rationale": "本文では、Python は読みやすく簡潔な文法を持ち、初心者でも比較的学びやすい言語であると説明されています。",
+    "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
+    },
+    {
         "question": "Python はどのような目的で使うのに適した言語だと説明されていますか？",
         "choices": [
             "OS のカーネル開発",
@@ -253,5 +266,265 @@
         "category": "section_1",
         "rationale": "次の章ではインタプリタの使い方が説明されると述べられています。",
         "reference": "https://docs.python.org/ja/3/tutorial/appetite.html"
+    },
+    {
+        "question": "Python インタプリタを起動する最も一般的な方法はどれですか？",
+        "choices": [
+            "python ファイルを直接開く",
+            "コマンドラインで python と入力する",
+            "OS を再起動する",
+            "ブラウザから実行する"
+        ],
+        "correct": 2,
+        "category": "section_2",
+        "rationale": "本文では、コマンドライン（シェル）で python と入力してインタプリタを起動すると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "Python インタプリタが対話的に起動している状態を何と呼びますか？",
+        "choices": [
+            "スクリプトモード",
+            "対話モード (interactive mode)",
+            "コンパイルモード",
+            "バッチモード"
+        ],
+        "correct": 2,
+        "category": "section_2",
+        "rationale": "端末から命令を読み取り、結果を即座に返す状態を対話モードと呼ぶと説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "対話モードで一次プロンプトとして表示される記号は通常どれですか？",
+        "choices": [
+            "...",
+            ">>>",
+            "$",
+            "C>"
+        ],
+        "correct": 2,
+        "category": "section_2",
+        "rationale": "Python の対話モードでは、一次プロンプトとして >>> が表示されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "複数行の構文を入力する際に表示される二次プロンプトはどれですか？",
+        "choices": [
+            ">>>",
+            "...",
+            "$$",
+            "++"
+        ],
+        "correct": 2,
+        "category": "section_2",
+        "rationale": "継続行を入力する際には、二次プロンプトとして ... が表示されると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "Unix 系 OS で、ファイル終端文字として使われるキー操作はどれですか？",
+        "choices": [
+            "Control-C",
+            "Control-D",
+            "Control-Z",
+            "Escape"
+        ],
+        "correct": 2,
+        "category": "section_2",
+        "rationale": "Unix 系では Control-D がファイル終端（EOF）として使われます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "Windows でファイル終端文字として使われるキー操作はどれですか？",
+        "choices": [
+            "Control-D",
+            "Control-Z",
+            "Control-C",
+            "Alt-Z"
+        ],
+        "correct": 2,
+        "category": "section_2",
+        "rationale": "Windows では Control-Z がファイル終端として使われると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "Python スクリプトをファイルとして実行する方法として正しいものはどれですか？",
+        "choices": [
+            "python ファイル名.py",
+            "run ファイル名.py",
+            "exec ファイル名.py",
+            "compile ファイル名.py"
+        ],
+        "correct": 1,
+        "category": "section_2",
+        "rationale": "python の後にスクリプト名を指定することで実行できると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "コマンド `python -c command` は何を行いますか？",
+        "choices": [
+            "ファイルをコンパイルする",
+            "command を Python コードとして実行する",
+            "対話モードを開始する",
+            "モジュールをインストールする"
+        ],
+        "correct": 2,
+        "category": "section_2",
+        "rationale": "-c オプションは、指定した文字列を Python コマンドとして実行します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "`sys.argv` には何が格納されますか？",
+        "choices": [
+            "環境変数",
+            "コマンドライン引数",
+            "標準入力",
+            "実行結果"
+        ],
+        "correct": 2,
+        "category": "section_2",
+        "rationale": "`sys.argv` にはスクリプト名とコマンドライン引数が格納されると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "コマンド `python -m module` の目的は何ですか？",
+        "choices": [
+            "モジュールをインストールする",
+            "モジュールをスクリプトとして実行する",
+            "モジュールを編集する",
+            "モジュールを削除する"
+        ],
+        "correct": 2,
+        "category": "section_2",
+        "rationale": "-m オプションは、指定したモジュールをスクリプトとして実行します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "スクリプト実行後に対話モードへ移行するオプションはどれですか？",
+        "choices": [
+            "-c",
+            "-m",
+            "-i",
+            "-v"
+        ],
+        "correct": 3,
+        "category": "section_2",
+        "rationale": "-i オプションを使うと、スクリプト実行後に対話モードに入ります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "Python ソースコードのデフォルトのエンコーディングは何ですか？",
+        "choices": [
+            "ASCII",
+            "Shift-JIS",
+            "UTF-8",
+            "EUC-JP"
+        ],
+        "correct": 3,
+        "category": "section_2",
+        "rationale": "Python 3 ではソースコードのデフォルトエンコーディングは UTF-8 です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "エンコーディング宣言は通常ファイルのどこに書きますか？",
+        "choices": [
+            "ファイルの末尾",
+            "ファイルの任意の位置",
+            "ファイルの先頭付近",
+            "関数の中"
+        ],
+        "correct": 3,
+        "category": "section_2",
+        "rationale": "エンコーディング宣言はファイルの先頭付近に記述すると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "Unix でスクリプトを直接実行可能にするために必要な行はどれですか？",
+        "choices": [
+            "# python",
+            "#!/usr/bin/env python3",
+            "run python",
+            "<python>"
+        ],
+        "correct": 2,
+        "category": "section_2",
+        "rationale": "shebang 行として #!/usr/bin/env python3 を書くことで直接実行可能になります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "Python のコメントはどの文字で始まりますか？",
+        "choices": [
+            "//",
+            "--",
+            "#",
+            "/*"
+        ],
+        "correct": 3,
+        "category": "section_2",
+        "rationale": "Python のコメントは # から始まると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "対話モードで、最後に評価された式の結果が代入される特別な変数はどれですか？",
+        "choices": [
+            "ans",
+            "last",
+            "_",
+            "result"
+        ],
+        "correct": 3,
+        "category": "section_2",
+        "rationale": "対話モードでは、最後の結果が _ に代入されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "GNU Readline が有効な環境で利用できる機能はどれですか？",
+        "choices": [
+            "GUI 操作",
+            "行編集と履歴機能",
+            "自動コンパイル",
+            "並列実行"
+        ],
+        "correct": 2,
+        "category": "section_2",
+        "rationale": "GNU Readline により行編集や履歴機能が使えると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "対話モードで補完機能を呼び出すために使われるキーはどれですか？",
+        "choices": [
+            "Enter",
+            "Space",
+            "Tab",
+            "Esc"
+        ],
+        "correct": 3,
+        "category": "section_2",
+        "rationale": "Tab キーによって補完機能が呼び出されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "Python で対話モードを終了する一般的な方法はどれですか？",
+        "choices": [
+            "exit または quit",
+            "stop",
+            "end",
+            "close"
+        ],
+        "correct": 1,
+        "category": "section_2",
+        "rationale": "exit() や quit() を使って対話モードを終了できると説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
+    },
+    {
+        "question": "スクリプト名も引数も指定せずに起動した場合、`sys.argv[0]` は何になりますか？",
+        "choices": [
+            "None",
+            "空文字列",
+            "エラーになる",
+            "インタプリタのパス"
+        ],
+        "correct": 2,
+        "category": "section_2",
+        "rationale": "引数なしで起動した場合、`sys.argv[0]` は空文字列になります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interpreter.html"
     }
 ]
