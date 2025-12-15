@@ -169,9 +169,18 @@ def submit_practice():
     results = []
     score = 0
     
-    # Get all question IDs submitted from the form
-    submitted_q_ids = [key.split('_')[1] for key in request.form if key.startswith('question_')]
-    q_list = Question.query.filter(Question.id.in_(submitted_q_ids)).all()
+    # Get all question IDs that were part of the test, preserving order
+    all_q_ids = request.form.get('all_q_ids').split(',')
+    
+    # Fetch the questions from the database
+    questions_from_db = Question.query.filter(Question.id.in_(all_q_ids)).all()
+    
+    # The database query does not guarantee order, so we reorder them.
+    # Create a mapping from ID to Question object
+    question_map = {str(q.id): q for q in questions_from_db}
+    
+    # Re-order the questions based on the original ID list
+    q_list = [question_map[qid] for qid in all_q_ids if qid in question_map]
 
     for q in q_list:
         selected_choice_val = request.form.get(f'question_{q.id}')
