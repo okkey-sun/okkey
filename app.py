@@ -1,13 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, Response
 from database import db
 from model import Question, User
 import random
+import json
 
 app = Flask(__name__)
 app.secret_key = "test123"
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///quiz.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["JSON_AS_ASCII"] = False
 db.init_app(app)
 
 with app.app_context():
@@ -243,6 +245,88 @@ def admin():
     if not session.get("is_admin"):
         return redirect("/")
     return render_template("admin.html")
+
+@app.route("/admin/questions")
+def admin_questions():
+    if not session.get("is_admin"):
+        return redirect("/")
+    questions = Question.query.order_by(Question.id).all()
+    return render_template("admin_questions.html", questions=questions)
+
+@app.route("/admin/question/<int:id>", methods=["GET", "POST"])
+def edit_question(id):
+    if not session.get("is_admin"):
+        return redirect("/")
+    
+    question = Question.query.get_or_404(id)
+
+    if request.method == "POST":
+        question.question = request.form["question"]
+        question.choice1 = request.form["choice1"]
+        question.choice2 = request.form["choice2"]
+        question.choice3 = request.form["choice3"]
+        question.choice4 = request.form["choice4"]
+        question.correct = int(request.form["correct"])
+        question.category = request.form["category"]
+        question.rationale = request.form["rationale"]
+        question.reference = request.form["reference"]
+        db.session.commit()
+        return redirect(url_for("admin_questions"))
+
+    return render_template("edit_question.html", question=question)
+
+@app.route("/admin/question/new", methods=["GET", "POST"])
+def new_question():
+    if not session.get("is_admin"):
+        return redirect("/")
+
+    if request.method == "POST":
+        new_q = Question(
+            question=request.form["question"],
+            choice1=request.form["choice1"],
+            choice2=request.form["choice2"],
+            choice3=request.form["choice3"],
+            choice4=request.form["choice4"],
+            correct=int(request.form["correct"]),
+            category=request.form["category"],
+            rationale=request.form["rationale"],
+            reference=request.form["reference"]
+        )
+        db.session.add(new_q)
+        db.session.commit()
+        return redirect(url_for("admin_questions"))
+
+    return render_template("new_question.html")
+
+@app.route("/admin/export")
+def export_questions():
+    if not session.get("is_admin"):
+        return redirect("/")
+
+    questions = Question.query.all()
+    
+    export_data = []
+    for q in questions:
+        export_data.append({
+            "question": q.question,
+            "choices": [q.choice1, q.choice2, q.choice3, q.choice4],
+            "correct": q.correct,
+            "category": q.category,
+            "rationale": q.rationale,
+            "reference": q.reference
+        })
+    
+    json_data = json.dumps(export_data, ensure_ascii=False, indent=4)
+
+    return Response(
+        json_data,
+        mimetype='application/json',
+        headers={'Content-Disposition': 'attachment;filename=questions_export.json'}
+    )
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

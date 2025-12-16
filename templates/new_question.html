@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>クイズ新規登録</title>
+    <style>
+        body { font-family: sans-serif; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        textarea { height: 100px; }
+        .choices label { margin-top: 5px; font-weight: normal; }
+        .btn { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; background-color: #28a745; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>クイズ新規登録</h2>
+        
+        <form method="POST" action="{{ url_for('new_question') }}">
+            <div>
+                <label for="question">問題文:</label>
+                <textarea id="question" name="question" required></textarea>
+            </div>
+
+            <div class="choices">
+                <label>選択肢:</label>
+                <label for="choice1">1:</label>
+                <input type="text" id="choice1" name="choice1" required>
+                <label for="choice2">2:</label>
+                <input type="text" id="choice2" name="choice2" required>
+                <label for="choice3">3:</label>
+                <input type="text" id="choice3" name="choice3" required>
+                <label for="choice4">4:</label>
+                <input type="text" id="choice4" name="choice4" required>
+            </div>
+
+            <div>
+                <label for="correct">正解の選択肢番号 (1-4):</label>
+                <input type="number" id="correct" name="correct" min="1" max="4" required>
+            </div>
+
+            <div>
+                <label for="category">カテゴリ:</label>
+                <input type="text" id="category" name="category">
+            </div>
+
+            <div>
+                <label for="rationale">解説:</label>
+                <textarea id="rationale" name="rationale"></textarea>
+            </div>
+
+            <div>
+                <label for="reference">参照URL:</label>
+                <input type="text" id="reference" name="reference">
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button type="submit" class="btn">登録</button>
+            </div>
+        </form>
+
+        <p style="margin-top: 20px;"><a href="{{ url_for('admin') }}">管理者トップに戻る</a></p>
+    </div>
+</body>
+</html>

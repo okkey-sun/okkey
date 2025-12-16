@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>クイズ編集 (ID: {{ question.id }})</title>
+    <style>
+        body { font-family: sans-serif; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        textarea { height: 100px; }
+        .choices label { margin-top: 5px; font-weight: normal; }
+        .btn-group { margin-top: 20px; }
+        .btn { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-edit { background-color: #ffc107; }
+        .btn-submit { background-color: #28a745; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>クイズ編集 (ID: {{ question.id }})</h2>
+        
+        <form id="editForm" method="POST" action="{{ url_for('edit_question', id=question.id) }}">
+            <div>
+                <label for="question">問題文:</label>
+                <textarea id="question" name="question" readonly>{{ question.question }}</textarea>
+            </div>
+
+            <div class="choices">
+                <label>選択肢:</label>
+                <label for="choice1">1:</label>
+                <input type="text" id="choice1" name="choice1" value="{{ question.choice1 }}" readonly>
+                <label for="choice2">2:</label>
+                <input type="text" id="choice2" name="choice2" value="{{ question.choice2 }}" readonly>
+                <label for="choice3">3:</label>
+                <input type="text" id="choice3" name="choice3" value="{{ question.choice3 }}" readonly>
+                <label for="choice4">4:</label>
+                <input type="text" id="choice4" name="choice4" value="{{ question.choice4 }}" readonly>
+            </div>
+
+            <div>
+                <label for="correct">正解の選択肢番号 (1-4):</label>
+                <input type="number" id="correct" name="correct" min="1" max="4" value="{{ question.correct }}" readonly>
+            </div>
+
+            <div>
+                <label for="category">カテゴリ:</label>
+                <input type="text" id="category" name="category" value="{{ question.category }}" readonly>
+            </div>
+
+            <div>
+                <label for="rationale">解説:</label>
+                <textarea id="rationale" name="rationale" readonly>{{ question.rationale }}</textarea>
+            </div>
+
+            <div>
+                <label for="reference">参照URL:</label>
+                <input type="text" id="reference" name="reference" value="{{ question.reference }}" readonly>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" id="editBtn" class="btn btn-edit">編集</button>
+                <button type="submit" id="submitBtn" class="btn btn-submit" disabled>登録</button>
+            </div>
+        </form>
+
+        <p style="margin-top: 20px;"><a href="{{ url_for('admin_questions') }}">クイズ一覧に戻る</a></p>
+    </div>
+
+    <script>
+        const editBtn = document.getElementById('editBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const form = document.getElementById('editForm');
+        const inputs = form.querySelectorAll('input, textarea');
+
+        editBtn.addEventListener('click', () => {
+            inputs.forEach(input => {
+                input.readOnly = false;
+                input.style.backgroundColor = '#fff';
+            });
+            submitBtn.disabled = false;
+            editBtn.disabled = true;
+            editBtn.textContent = '編集中...';
+        });
+    </script>
+</body>
+</html>
