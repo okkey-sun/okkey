@@ -1,81 +1,79 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>クイズ新規登録</title>
-    <style>
-        body { font-family: sans-serif; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        label { display: block; margin-top: 10px; font-weight: bold; }
-        input[type="text"], input[type="number"], textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        textarea { height: 100px; }
-        .choices label { margin-top: 5px; font-weight: normal; }
-        .btn { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; background-color: #28a745; color: white; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>クイズ新規登録</h2>
-        
-        <form method="POST" action="{{ url_for('new_question') }}">
-            <div>
-                <label for="question">問題文:</label>
-                <textarea id="question" name="question" required></textarea>
-            </div>
+{% extends 'admin_base.html' %}
 
-            <div class="choices">
-                <label>選択肢:</label>
-                <label for="choice1">1:</label>
-                <input type="text" id="choice1" name="choice1" required>
-                <label for="choice2">2:</label>
-                <input type="text" id="choice2" name="choice2" required>
-                <label for="choice3">3:</label>
-                <input type="text" id="choice3" name="choice3" required>
-                <label for="choice4">4:</label>
-                <input type="text" id="choice4" name="choice4" required>
-            </div>
+{% block title %}クイズ新規登録{% endblock %}
 
-            <div>
-                <label for="correct">正解の選択肢番号 (1-4):</label>
-                <select id="correct" name="correct" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2>クイズ新規登録</h2>
             </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('new_question') }}">
+                    <div class="mb-3">
+                        <label for="question" class="form-label">問題文:</label>
+                        <textarea id="question" name="question" class="form-control" rows="3" required></textarea>
+                    </div>
 
-            <div>
-                <label for="category">カテゴリ:</label>
-                <select id="category" name="category">
-                    {% for i in range(1, 17) %}
-                    <option value="section_{{ i }}">第{{ i }}章</option>
-                    {% endfor %}
-                </select>
+                    <div class="mb-3">
+                        <label class="form-label">選択肢:</label>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">1</span>
+                            <input type="text" id="choice1" name="choice1" class="form-control" required>
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">2</span>
+                            <input type="text" id="choice2" name="choice2" class="form-control" required>
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">3</span>
+                            <input type="text" id="choice3" name="choice3" class="form-control" required>
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">4</span>
+                            <input type="text" id="choice4" name="choice4" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="correct" class="form-label">正解の選択肢番号:</label>
+                            <select id="correct" name="correct" class="form-select" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="category" class="form-label">カテゴリ:</label>
+                            <select id="category" name="category" class="form-select">
+                                {% for i in range(1, 17) %}
+                                <option value="section_{{ i }}">第{{ i }}章</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="rationale" class="form-label">解説:</label>
+                        <textarea id="rationale" name="rationale" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="reference" class="form-label">参照URL:</label>
+                        <input type="text" id="reference" name="reference" class="form-control">
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('admin_questions') }}" class="btn btn-secondary me-md-2">キャンセル</a>
+                        <button type="submit" class="btn btn-primary">登録</button>
+                    </div>
+                </form>
             </div>
-
-            <div>
-                <label for="rationale">解説:</label>
-                <textarea id="rationale" name="rationale"></textarea>
-            </div>
-
-            <div>
-                <label for="reference">参照URL:</label>
-                <input type="text" id="reference" name="reference">
-            </div>
-
-            <div style="margin-top: 20px;">
-                <button type="submit" class="btn">登録</button>
-            </div>
-        </form>
-
-        <p style="margin-top: 20px;"><a href="{{ url_for('admin') }}">管理者トップに戻る</a></p>
+        </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}
+

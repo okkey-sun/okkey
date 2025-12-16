@@ -1,114 +1,112 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>クイズ編集 (ID: {{ question.id }})</title>
-    <style>
-        body { font-family: sans-serif; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        label { display: block; margin-top: 10px; font-weight: bold; }
-        input[type="text"], input[type="number"], textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-        }
-        textarea { height: 100px; }
-        .choices label { margin-top: 5px; font-weight: normal; }
-        .btn-group { margin-top: 20px; }
-        .btn { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
-        .btn-edit { background-color: #ffc107; }
-        .btn-submit { background-color: #28a745; color: white; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>クイズ編集 (ID: {{ question.id }})</h2>
-        
-        <form id="editForm" method="POST" action="{{ url_for('edit_question', id=question.id) }}">
-            <div>
-                <label for="question">問題文:</label>
-                <textarea id="question" name="question" readonly>{{ question.question }}</textarea>
-            </div>
+{% extends 'admin_base.html' %}
 
-            <div class="choices">
-                <label>選択肢:</label>
-                <label for="choice1">1:</label>
-                <input type="text" id="choice1" name="choice1" value="{{ question.choice1 }}" readonly>
-                <label for="choice2">2:</label>
-                <input type="text" id="choice2" name="choice2" value="{{ question.choice2 }}" readonly>
-                <label for="choice3">3:</label>
-                <input type="text" id="choice3" name="choice3" value="{{ question.choice3 }}" readonly>
-                <label for="choice4">4:</label>
-                <input type="text" id="choice4" name="choice4" value="{{ question.choice4 }}" readonly>
-            </div>
+{% block title %}クイズ編集 (ID: {{ question.id }}){% endblock %}
 
-            <div>
-                <label for="correct">正解の選択肢番号 (1-4):</label>
-                <select id="correct" name="correct" disabled>
-                    {% for i in range(1, 5) %}
-                    <option value="{{ i }}" {% if question.correct == i %}selected{% endif %}>{{ i }}</option>
-                    {% endfor %}
-                </select>
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2>クイズ編集 (ID: {{ question.id }})</h2>
             </div>
+            <div class="card-body">
+                <form id="editForm" method="POST" action="{{ url_for('edit_question', id=question.id) }}">
+                    <div class="mb-3">
+                        <label for="question" class="form-label">問題文:</label>
+                        <textarea id="question" name="question" class="form-control" rows="3" required>{{ question.question }}</textarea>
+                    </div>
 
-            <div>
-                <label for="category">カテゴリ:</label>
-                <select id="category" name="category" disabled>
-                    {% for i in range(1, 17) %}
-                    <option value="section_{{ i }}" {% if question.category == 'section_' + i|string %}selected{% endif %}>第{{ i }}章</option>
-                    {% endfor %}
-                </select>
+                    <div class="mb-3">
+                        <label class="form-label">選択肢:</label>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">1</span>
+                            <input type="text" id="choice1" name="choice1" class="form-control" value="{{ question.choice1 }}" required>
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">2</span>
+                            <input type="text" id="choice2" name="choice2" class="form-control" value="{{ question.choice2 }}" required>
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">3</span>
+                            <input type="text" id="choice3" name="choice3" class="form-control" value="{{ question.choice3 }}" required>
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">4</span>
+                            <input type="text" id="choice4" name="choice4" class="form-control" value="{{ question.choice4 }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="correct" class="form-label">正解の選択肢番号:</label>
+                            <select id="correct" name="correct" class="form-select" required>
+                                {% for i in range(1, 5) %}
+                                <option value="{{ i }}" {% if question.correct == i %}selected{% endif %}>{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="category" class="form-label">カテゴリ:</label>
+                            <select id="category" name="category" class="form-select">
+                                {% for i in range(1, 17) %}
+                                <option value="section_{{ i }}" {% if question.category == 'section_' + i|string %}selected{% endif %}>第{{ i }}章</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="rationale" class="form-label">解説:</label>
+                        <textarea id="rationale" name="rationale" class="form-control" rows="3">{{ question.rationale }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="reference" class="form-label">参照URL:</label>
+                        <input type="text" id="reference" name="reference" class="form-control" value="{{ question.reference }}">
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                         <a href="{{ url_for('admin_questions') }}" class="btn btn-secondary me-md-2">戻る</a>
+                        <button type="button" id="editBtn" class="btn btn-warning">編集</button>
+                        <button type="submit" id="submitBtn" class="btn btn-primary">登録</button>
+                    </div>
+                </form>
             </div>
-
-            <div>
-                <label for="rationale">解説:</label>
-                <textarea id="rationale" name="rationale" readonly>{{ question.rationale }}</textarea>
-            </div>
-
-            <div>
-                <label for="reference">参照URL:</label>
-                <input type="text" id="reference" name="reference" value="{{ question.reference }}" readonly>
-            </div>
-
-            <div class="btn-group">
-                <button type="button" id="editBtn" class="btn btn-edit">編集</button>
-                <button type="submit" id="submitBtn" class="btn btn-submit" disabled>登録</button>
-            </div>
-        </form>
-
-        <p style="margin-top: 20px;"><a href="{{ url_for('admin_questions') }}">クイズ一覧に戻る</a></p>
+        </div>
     </div>
+</div>
+{% endblock %}
 
-    <script>
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
         const editBtn = document.getElementById('editBtn');
         const submitBtn = document.getElementById('submitBtn');
         const form = document.getElementById('editForm');
         const elements = form.querySelectorAll('input, textarea, select');
 
-        // Initially disable submit button
-        submitBtn.disabled = true;
-
-        // Set initial state for elements
-        elements.forEach(el => {
-            if (el.tagName.toLowerCase() !== 'button') {
-                el.disabled = true;
-            }
-        });
-
-        editBtn.addEventListener('click', () => {
+        function setFormDisabled(isDisabled) {
             elements.forEach(el => {
                 if (el.tagName.toLowerCase() !== 'button') {
-                    el.disabled = false;
-                    el.style.backgroundColor = '#fff';
+                    el.disabled = isDisabled;
                 }
             });
-            submitBtn.disabled = false;
-            editBtn.disabled = true;
-            editBtn.textContent = '編集中...';
+            submitBtn.disabled = isDisabled;
+            editBtn.disabled = !isDisabled;
+            if(!isDisabled) {
+                editBtn.textContent = '編集中...';
+            } else {
+                editBtn.textContent = '編集';
+            }
+        }
+
+        // Initial state: disabled
+        setFormDisabled(true);
+
+        editBtn.addEventListener('click', () => {
+            setFormDisabled(false);
         });
-    </script>
-</body>
-</html>
+    });
+</script>
+{% endblock %}
+
