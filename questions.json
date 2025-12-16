@@ -1033,5 +1033,450 @@
         "category": "section_4",
         "rationale": "Python では switch 文の代わりに if / elif / else を使うと説明されています。",
         "reference": "https://docs.python.org/ja/3/tutorial/controlflow.html"
+    },
+    {
+        "question": "Pythonのリストに新しい要素を末尾に追加するためのメソッドはどれですか？",
+        "choices": ["add()", "append()", "extend()", "insert()"],
+        "correct": 2,
+        "category": "section_5",
+        "rationale": "append() メソッドは、リストの末尾に1つの要素を追加します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=list.append(x)%20リストの末尾にアイテムを一つ追加します。"
+    },
+    {
+        "question": "リストの末尾の要素を取り出して削除するメソッドはどれですか？",
+        "choices": ["remove()", "delete()", "pop()", "clear()"],
+        "correct": 3,
+        "category": "section_5",
+        "rationale": "pop() メソッドは、デフォルトでリストの末尾の要素を削除して返します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=list.pop([i])%20リストの指定した位置にある要素を削除し、その要素を返します。インデックスが指定されなかった場合は、リストの末尾の要素を削除して返します。"
+    },
+    {
+        "question": "リストの特定の値と等しい最初の要素を削除するメソッドはどれですか？",
+        "choices": ["pop()", "remove()", "del()", "clear()"],
+        "correct": 2,
+        "category": "section_5",
+        "rationale": "remove() メソッドは、指定した値と等しい最初の要素を削除します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=list.remove(x)%20リストから値%20x%20と等しい最初の要素を削除します。"
+    },
+    {
+        "question": "リスト内の要素をインプレースで並び替えるメソッドはどれですか？",
+        "choices": ["sorted()", "order()", "sort()", "reverse()"],
+        "correct": 3,
+        "category": "section_5",
+        "rationale": "sort() メソッドは、新しいリストを作らずに元のリストを並び替えます。`sorted()`は新しいリストを返します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=list.sort(%2A%2A%2C%20key=None%2C%20reverse=False)%20リスト内のアイテムをインプレースにソートします。"
+    },
+    {
+        "question": "リストをインプレースで逆順にするメソッドはどれですか？",
+        "choices": ["reversed()", "invert()", "reverse()", "sort(reverse=True)"],
+        "correct": 3,
+        "category": "section_5",
+        "rationale": "reverse() メソッドは、リストの要素をその場で逆順にします。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=list.reverse()%20リストの要素をインプレースで逆順にします。"
+    },
+    {
+        "question": "list.sort() メソッドの戻り値は何ですか？",
+        "choices": ["並び替えられた新しいリスト", "True", "None", "元のリストのコピー"],
+        "correct": 3,
+        "category": "section_5",
+        "rationale": "リストを直接変更するメソッドは、新しい値を返さず、慣例として None を返します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=ソートはインプレース、つまりリスト自身を変更して行われます。リストを変更するメソッドは、慣例として%20None%20を返します。"
+    },
+    {
+        "question": "リストをスタック（LIFO）として使う場合、適切な操作の組み合わせはどれですか？",
+        "choices": ["insert(0, x) と pop()", "append() と pop()", "append() と pop(0)", "extend() と remove()"],
+        "correct": 2,
+        "category": "section_5",
+        "rationale": "append() で末尾に追加し（プッシュ）、pop() で末尾から取り出す（ポップ）ことで LIFO のスタックになります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=リストは、スタックとして使うのに便利なメソッドをいくつか持っています。要素をスタックのトップに追加するには%20append()%20を使い、スタックのトップから要素を取り出すには、明示的なインデックスなしで%20pop()%20を使います。"
+    },
+    {
+        "question": "キュー（FIFO）として効率的にリストを扱うために推奨されるクラスはどれですか？",
+        "choices": ["list", "queue.Queue", "collections.deque", "array.array"],
+        "correct": 3,
+        "category": "section_5",
+        "rationale": "標準のリストは先頭からの挿入や削除のコストが高いため、`collections.deque`（デック）が両端での高速な追加・削除操作を提供し、キューに適しています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=リストをキューとして実装する場合、append()%20と%20pop(0)%20を使います。しかし、先頭からの挿入や削除は遅いので、効率の良い実装が必要であれば、%20collections.deque%20を使う方がよいでしょう。"
+    },
+    {
+        "question": "リスト内包表記の基本的な構文として正しいものはどれですか？",
+        "choices": [
+            "[x for x in list if condition]",
+            "(x for x in list if condition)",
+            "{x for x in list if condition}",
+            "x for x in list if condition"
+        ],
+        "correct": 1,
+        "category": "section_5",
+        "rationale": "リスト内包表記は角括弧 `[]` を使って新しいリストを生成します。括弧がない形式は構文エラーになり、丸括弧 `()` はジェネレータ式、波括弧 `{}` はセットまたは辞書内包表記になります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=リスト内包表記は、リストを作成するための簡潔な方法です。新しいシーケンスを作成するのに、よく使われます。"
+    },
+    {
+        "question": "[x**2 for x in range(4)] の結果はどれですか？",
+        "choices": [
+            "[1, 4, 9, 16]",
+            "[0, 1, 4, 9]",
+            "[0, 1, 4, 9, 16]",
+            "[1, 2, 3, 4]"
+        ],
+        "correct": 2,
+        "category": "section_5",
+        "rationale": "`range(4)`は `0, 1, 2, 3` を生成し、それぞれの2乗は `0, 1, 4, 9` です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=>>>%20squares%20%3D%20%5Bx%2A%2A2%20for%20x%20in%20range(10)%5D"
+    },
+    {
+        "question": "タプル(tuple)の特徴として正しいものはどれですか？",
+        "choices": [
+            "可変(mutable)である",
+            "不変(immutable)である",
+            "キーで要素にアクセスする",
+            "要素を削除できる"
+        ],
+        "correct": 2,
+        "category": "section_5",
+        "rationale": "タプルは不変型であり、作成後に要素を変更することはできません。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=タプルは不変であり、通常はリストのように要素を挿入・削除できません。"
+    },
+    {
+        "question": "1要素のタプルを作成する正しい構文はどれですか？",
+        "choices": ["(1)", "(1,)", "[1]", "{1}"],
+        "correct": 2,
+        "category": "section_5",
+        "rationale": "1要素のタプルでは、括弧だけでなく末尾にカンマ `,` が必要です。カンマがない `(1)` は単に括弧で囲まれた整数として扱われます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=1%20要素のタプルを作成する最も簡単な方法は、値の後ろにカンマを付けて書くことです%3A"
+    },
+    {
+        "question": "集合(set)の特徴として正しいものはどれですか？",
+        "choices": [
+            "順序が保持される",
+            "重複した要素を持てる",
+            "重複しない要素の集合である",
+            "インデックスで要素にアクセスできる"
+        ],
+        "correct": 3,
+        "category": "section_5",
+        "rationale": "集合(set)は、順序を持たず、重複しない要素の集まりです。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=集合(set)は、重複しない要素からなる順序のないコレクションです。"
+    },
+    {
+        "question": "空の集合(set)を作成する正しい方法はどれですか？",
+        "choices": ["{}", "[]", "()", "set()"],
+        "correct": 4,
+        "category": "section_5",
+        "rationale": "`{}` は空の辞書を作るため、空の集合を作るには組み込み関数 `set()` を使います。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=空の集合は%20set()%20で作成しなければなりません。{}%20は空の辞書を作成します。"
+    },
+    {
+        "question": "集合 a と b の和集合を求める演算子はどれですか？",
+        "choices": ["&", "|", "-", "^"],
+        "correct": 2,
+        "category": "section_5",
+        "rationale": "`|` 演算子（パイプライン）は、2つの集合の和集合（どちらか一方または両方に含まれる要素）を表します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=a%20%7C%20b%20%E9%9B%86%E5%90%88%20a%20%E3%81%A8%20b%20%E3%81%AE%E5%92%8C%E9%9B%86%E5%90%88"
+    },
+    {
+        "question": "辞書(dictionary)の特徴として正しいものはどれですか？",
+        "choices": [
+            "要素は順序付きで保存される",
+            "キーと値の組を持つ",
+            "インデックス番号でアクセスする",
+            "重複したキーを許可する"
+        ],
+        "correct": 2,
+        "category": "section_5",
+        "rationale": "辞書はキーと値をペアとして管理するデータ構造であり、キーによって値にアクセスします。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=辞書は、キーと値の組の集合であり、キーによってインデックス付けされます。"
+    },
+    {
+        "question": "辞書からすべてのキーと値のペアを、同時に取得するメソッドはどれですか？",
+        "choices": ["keys()", "values()", "items()", "pairs()"],
+        "correct": 3,
+        "category": "section_5",
+        "rationale": "items() メソッドは、辞書から (キー, 値) の組をタプルのリストとして返します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=辞書内のキーと対応する値を取り出すには、items()%20メソッドを使います。"
+    },
+    {
+        "question": "`for`文でシーケンスの要素と、そのインデックスを同時に取得するために使う関数はどれですか？",
+        "choices": ["range()", "zip()", "enumerate()", "index()"],
+        "correct": 3,
+        "category": "section_5",
+        "rationale": "`enumerate()` を使うと、要素とそのインデックスを同時にループ処理で取得できます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=シーケンスをループするとき、要素だけでなくインデックスも必要になることがよくあります。組み込み関数%20enumerate()%20が使えます。"
+    },
+    {
+        "question": "複数のシーケンスを並行して同時にループ処理するために使う関数はどれですか？",
+        "choices": ["map()", "enumerate()", "zip()", "filter()"],
+        "correct": 3,
+        "category": "section_5",
+        "rationale": "`zip()` は、複数のイテラブル（シーケンス）から要素をまとめて取り出し、タプルとしてペアにします。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=複数のシーケンスを同時にループ処理するには、%20zip()%20関数を使います。"
+    },
+    {
+        "question": "2つの変数が、値が等しいかどうかではなく、同じオブジェクトを参照しているか（同一性）を比較する演算子はどれですか？",
+        "choices": ["==", "!=", "is", "in"],
+        "correct": 3,
+        "category": "section_5",
+        "rationale": "`is` 演算子は、2つの変数がメモリ上の同じオブジェクトを参照しているか（オブジェクトの同一性）を比較します。`==` は値が等しいか（等価性）を比較します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/datastructures.html#:~:text=is%20演算子は、二つの変数が同じオブジェクトを参照しているかどうかを決定します。"
+    },
+    {
+        "question": "Pythonにおいて、定義（関数や変数）をファイルに書いておき、スクリプトやインタプリタ上で再利用するためのファイルを何と呼びますか？",
+        "choices": [
+            "スクリプト",
+            "ライブラリ",
+            "モジュール",
+            "パッケージ"
+        ],
+        "correct": 3,
+        "category": "section_6",
+        "rationale": "定義をファイルに書いておき、他のプログラムで利用できるようにしたファイルをモジュール（module）と呼びます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=このファイルを%20モジュール%20(module)%20と呼びます。"
+    },
+    {
+        "question": "モジュール内の関数を呼び出すために必要な、基本的な`import`の構文として正しいものはどれですか？（例: `fibo.py`内に`fib`関数がある場合）",
+        "choices": [
+            "`import fibo.fib`",
+            "`from fibo import *`",
+            "`import fibo` の後で `fibo.fib()` を呼び出す",
+            "`fibo.import(fib)`"
+        ],
+        "correct": 3,
+        "category": "section_6",
+        "rationale": "`import fibo`を実行すると、モジュール名`fibo`が名前空間に追加され、関数は`fibo.fib()`のようにモジュール名を使ってアクセスします。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=関数にはモジュール名を使ってアクセスします"
+    },
+    {
+        "question": "`from module import *`というインポート形式が、一般的にPythonプログラマーに推奨されない主な理由は何ですか？",
+        "choices": [
+            "インポート処理が非常に遅くなるため",
+            "モジュール内のコードが実行されなくなるため",
+            "未知の名前が現在の名前空間に読み込まれ、定義済みの名前を上書きしてしまう可能性があるため",
+            "パッケージ内のサブモジュールをインポートできなくなるため"
+        ],
+        "correct": 3,
+        "category": "section_6",
+        "rationale": "この形式は、アンダースコアで始まるものを除いてすべての名前をインポートするため、名前の衝突（上書き）や可読性の低下を招く可能性があります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=未知の名前がインタープリターに読み込まれ、定義済みの名前を上書きしてしまう可能性があるからです。"
+    },
+    {
+        "question": "モジュール`m`をインポートし、それを`alias`という別名で現在の名前空間で使えるようにする正しい構文はどれですか？",
+        "choices": [
+            "`import m as alias`",
+            "`m import as alias`",
+            "`from m import alias`",
+            "`import alias from m`"
+        ],
+        "correct": 1,
+        "category": "section_6",
+        "rationale": "モジュール名の後に`as`を続けることで、インポートされたモジュールを別名で束縛することができます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=import%20fibo%20as%20fib"
+    },
+    {
+        "question": "Pythonモジュールがスクリプトとして直接実行された場合、そのモジュールのグローバル変数`__name__`にはどのような値が設定されますか？",
+        "choices": [
+            "モジュール名（例: `'fibo'`）",
+            "モジュールのファイルパス",
+            "`'__main__'`",
+            "空文字列 (`''`)"
+        ],
+        "correct": 3,
+        "category": "section_6",
+        "rationale": "モジュールがスクリプトとして実行されたとき、`__name__`には`'__main__'`が設定され、これを利用してスクリプト/モジュール両用コードを作成できます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=__name__%20に%20__main__%20が設定されている点を除いて"
+    },
+    {
+        "question": "モジュールの読み込みを高速化するため、Pythonが生成するコンパイル済みファイル（`.pyc`ファイル）は通常どのディレクトリにキャッシュされますか？",
+        "choices": [
+            "モジュールソースファイルと同じディレクトリ",
+            "`sys.temp`が指す一時ディレクトリ",
+            "`__pycache__`",
+            "`Python/Compiled`ディレクトリ"
+        ],
+        "correct": 3,
+        "category": "section_6",
+        "rationale": "Pythonはコンパイル済みの各モジュールを`__pycache__`ディレクトリのファイルとしてキャッシュします。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=Python%20はコンパイル済みの各モジュールを%20__pycache__%20ディレクトリの%20module.version.pyc%20ファイルとしてキャッシュします。"
+    },
+    {
+        "question": "Pythonインタープリタがモジュールを検索する際、組み込みモジュールと`sys.path`のディレクトリのほかに、最も最初に検索する場所はどこですか？",
+        "choices": [
+            "PYTHONPATH環境変数に指定されたディレクトリ",
+            "標準ライブラリのディレクトリ",
+            "入力されたスクリプトのあるディレクトリ（またはファイルが指定されなかったときはカレントディレクトリ）",
+            "ホームディレクトリ"
+        ],
+        "correct": 3,
+        "category": "section_6",
+        "rationale": "`sys.path`は、スクリプトのあるディレクトリ、PYTHONPATH、インストール方法に依存したデフォルトパスの順で初期化されます。検索パスの最も先頭にくるのはスクリプトのあるディレクトリです。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=入力されたスクリプトのあるディレクトリ%20(あるいはファイルが指定されなかったときはカレントディレクトリ)。"
+    },
+    {
+        "question": "Pythonのモジュール検索パスのリストを格納しているモジュールと変数の組み合わせとして正しいものはどれですか？",
+        "choices": [
+            "`os.path`",
+            "`sys.path`",
+            "`pathlib.Path`",
+            "`os.environ`"
+        ],
+        "correct": 2,
+        "category": "section_6",
+        "rationale": "モジュール検索パスは、`sys`モジュール内にあるリスト変数`sys.path`に格納されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=spam.py%20という名前のファイルを%20sys.path%20にあるディレクトリのリストから探します。"
+    },
+    {
+        "question": "モジュールを修正した後、インタープリタを再起動させずに、その場でモジュールを再読み込みするために使用する関数はどれですか？",
+        "choices": [
+            "`module.reload()`",
+            "`importlib.refresh()`",
+            "`importlib.reload()`",
+            "`sys.reimport()`"
+        ],
+        "correct": 3,
+        "category": "section_6",
+        "rationale": "実行効率上の理由からモジュールは1セッションに1回だけインポートされます。手直ししてテストしたい場合は、`import importlib; importlib.reload(modulename)`を使います。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=例えば%20import%20importlib%3B%20importlib.reload(modulename)%20のように%20importlib.reload()%20を使ってください。"
+    },
+    {
+        "question": "組み込み関数`dir()`を引数なしで実行した場合、どのような名前のリストが表示されますか？",
+        "choices": [
+            "現在ロードされているすべての標準モジュールの名前",
+            "現在のローカルな名前空間で定義されている名前",
+            "カレントディレクトリにあるすべてのファイル名",
+            "最後にインポートしたモジュール内の名前"
+        ],
+        "correct": 2,
+        "category": "section_6",
+        "rationale": "`dir()`関数は、引数がない場合、現在のローカルな名前空間で定義されている名前のリストを返します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=引数を与えられていない場合、関数は現在のローカルな名前空間で定義されている名前のリストを返します。"
+    },
+    {
+        "question": "モジュール`fibo`に対して`dir(fibo)`を実行した場合、表示される名前のリストに含まれない可能性が高いものはどれですか？",
+        "choices": [
+            "モジュール内で定義された関数名",
+            "モジュール内で定義された変数名",
+            "モジュールがインポートした他のモジュール名",
+            "現在のスクリプト内で定義されたローカル変数名"
+        ],
+        "correct": 4,
+        "category": "section_6",
+        "rationale": "`dir(modulename)`は、そのモジュール内で定義または利用可能になった属性（関数、変数、インポートされたモジュールなど）の名前をリストアップします。現在のスクリプトのローカル変数名は含まれません。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=引数を与えられた場合、そのモジュールで定義されている名前のリストを返します。"
+    },
+    {
+        "question": "標準ライブラリのモジュール名と、あなたが作成したモジュールが同じ名前だった場合、どちらが優先してインポートされますか？",
+        "choices": [
+            "常に標準ライブラリのモジュール",
+            "OSの環境変数で指定されたモジュール",
+            "あなたが作成した（スクリプトのあるディレクトリにある）モジュール",
+            "ファイルサイズが小さい方のモジュール"
+        ],
+        "correct": 3,
+        "category": "section_6",
+        "rationale": "スクリプトファイルを含むディレクトリが検索パスの先頭（標準ライブラリパスよりも前）に追加されるため、同じ名前であればローカルなスクリプトが優先されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=ライブラリのディレクトリにあるファイルよりも、そのディレクトリにある同じ名前のスクリプトが優先してインポートされます。"
+    },
+    {
+        "question": "コンパイル済みPythonファイル（`.pyc`）の命名規則に含まれる要素はどれですか？",
+        "choices": [
+            "モジュールの作成日時",
+            "モジュールの実行回数",
+            "コンパイルされたファイルのフォーマットを表すバージョン番号",
+            "プロセッサのコア数"
+        ],
+        "correct": 3,
+        "category": "section_6",
+        "rationale": "ファイル名は`module.version.pyc`の形式で、`version`はコンパイルされたファイルのフォーマット（Pythonのバージョン番号）を表し、異なるバージョン間の共存を可能にします。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=ここで%20version%20はコンパイルされたファイルのフォーマットを表すもので、一般的には%20Python%20のバージョン番号です。"
+    },
+    {
+        "question": "Pythonにおけるパッケージの定義として正しいものはどれですか？",
+        "choices": [
+            "単一の`.pyc`ファイル",
+            "関数定義だけを含む`.py`ファイル",
+            "モジュールを構造化してまとめる方法を提供するディレクトリ",
+            "インターネットからダウンロードされるすべてのサードパーティライブラリ"
+        ],
+        "correct": 3,
+        "category": "section_6",
+        "rationale": "パッケージは、モジュールの名前空間をドット付きモジュール名を使って構造化し、モジュールをまとめる方法を提供するディレクトリ構造です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=パッケージとは、Python%20のモジュールの名前空間をドット付きモジュール名を使って構造化する方法です。"
+    },
+    {
+        "question": "ディレクトリをパッケージとして認識させるために、Python 3.3以降のほとんどのケースで必須ではないものの、慣習的にパッケージディレクトリに配置される特別なファイルはどれですか？",
+        "choices": [
+            "`setup.py`",
+            "`README.md`",
+            "`__main__.py`",
+            "`__init__.py`"
+        ],
+        "correct": 4,
+        "category": "section_6",
+        "rationale": "Python 3.3以降、`__init__.py`ファイルがなくてもパッケージとして扱われますが、初期化コードを含めるために配置するのが一般的です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=パッケージディレクトリには、通常%20__init__.py%20というファイルが収められています。"
+    },
+    {
+        "question": "`import sound.effects.echo`という構文でインポートした場合、現在の名前空間で`echo`モジュールにアクセスするための正しい方法はどれですか？",
+        "choices": [
+            "`echo.function()`",
+            "`sound.effects.echo.function()`",
+            "`sound.echo.function()`",
+            "`function()`"
+        ],
+        "correct": 2,
+        "category": "section_6",
+        "rationale": "ドット付きモジュール名の形式でインポートした場合、アクセスするには完全なパッケージ名を使います。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=この操作は、パッケージ%20sound%20にあるサブパッケージ%20effects%20のモジュール%20echo%20を取り込みます。これには%20sound.effects.echo.echofilt()%20のようにしてアクセスする必要があります。"
+    },
+    {
+        "question": "パッケージ`sound`からモジュール`echo`をインポートし、現在の名前空間で`echo`という名前だけでアクセスできるようにする正しい構文はどれですか？",
+        "choices": [
+            "`import sound.effects.echo`",
+            "`from sound.effects import echo`",
+            "`import echo from sound.effects`",
+            "`from sound import echo`"
+        ],
+        "correct": 2,
+        "category": "section_6",
+        "rationale": "`from package.subpackage import module`という形式を使えば、`module`をローカル名前空間に直接取り込むことができます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=from%20sound.effects%20import%20echo"
+    },
+    {
+        "question": "パッケージから`*`をインポート（`from sound.effects import *`）したとき、パッケージの作者が意図的にインポートを制限するために定義できる特別な変数はどれですか？",
+        "choices": [
+            "`__ALL__`",
+            "`__exports__`",
+            "`__members__`",
+            "`__all__`"
+        ],
+        "correct": 4,
+        "category": "section_6",
+        "rationale": "パッケージの`__init__.py`ファイルで`__all__`リストを定義することで、`from package import *`でインポートされるモジュール名を制御できます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=インポートしたいモジュールを、パッケージの%20__init__.py%20で定義されるリスト変数%20__all__%20を使い、明示的に指定します。"
+    },
+    {
+        "question": "パッケージ内のモジュール`filters`から同じパッケージ内のモジュール`echo`をインポートする場合、推奨される（パッケージ内をベースにした）構文はどれですか？",
+        "choices": [
+            "`import echo`",
+            "`import sound.effects.echo`",
+            "`from . import echo`",
+            "`from .. import echo`"
+        ],
+        "correct": 3,
+        "category": "section_6",
+        "rationale": "相対インポート（`from . import echo`）を使用すると、現在のパッケージ内のモジュールを指すため、パッケージ名を変更してもインポートが壊れません。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=例えば、filters%20モジュールから%20echo%20モジュールを使うとすると、from%20.%20import%20echo%20と書くことができます。"
+    },
+    {
+        "question": "モジュール内の実行文（関数定義以外の文）は、Pythonインタープリタの1セッション中に何回実行されますか？",
+        "choices": [
+            "インポート文が書かれた回数だけ実行される",
+            "最初にモジュール名が見つかったとき、1回だけ実行される",
+            "モジュール内の関数が呼び出されるたびに実行される",
+            "インタプリタが再起動されるたびに実行される"
+        ],
+        "correct": 2,
+        "category": "section_6",
+        "rationale": "モジュールをインポートしたとき、その実行文はモジュールを初期化するために『最初に』インポートされたときにだけ実行されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=これらの実行文は、インポート文の中で%20最初に%20モジュール名が見つかったときにだけ実行されます。"
     }
 ]

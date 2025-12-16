@@ -7,8 +7,10 @@ def import_json(json_file):
     print(f"JSON 読み込み中: {json_file}")
     with app.app_context():
 
-        db.drop_all()
+        # テーブルが存在しない場合に備えて create_all を呼び出す
         db.create_all()
+        # usersテーブルは維持し、questionsテーブルのデータのみを削除
+        db.session.query(Question).delete()
 
         with open(json_file, "r", encoding="utf-8") as f:
             data = json.load(f)
