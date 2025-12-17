@@ -32,8 +32,16 @@
 <body>
     <div class="container">
         <div class="welcome-header">
-            <h4>{{ user }} さん、ようこそ。</h4>
+            <h4>
+                {% if user.nickname %}
+                    {{ user.nickname }}
+                {% else %}
+                    {{ user.email }}
+                {% endif %}
+                さん、ようこそ。
+            </h4>
             <a href="/logout" class="btn btn-outline-secondary btn-sm">ログアウト</a>
+            <a href="/mypage" class="btn btn-outline-primary btn-sm">マイページ</a>
         </div>
 
         <h2 class="text-center mb-4">メニュー</h2>
@@ -63,7 +71,7 @@
                     </div>
                 </div>
             </a>
-            {% if user == "admin@example.com" %}
+            {% if user.email == "admin@example.com" %}
             <a href="/admin" class="card-link">
                 <div class="card h-100 text-center bg-light">
                     <div class="card-body">
