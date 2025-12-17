@@ -1478,5 +1478,2142 @@
         "category": "section_6",
         "rationale": "モジュールをインポートしたとき、その実行文はモジュールを初期化するために『最初に』インポートされたときにだけ実行されます。",
         "reference": "https://docs.python.org/ja/3/tutorial/modules.html#:~:text=これらの実行文は、インポート文の中で%20最初に%20モジュール名が見つかったときにだけ実行されます。"
+    },
+    {
+        "question": "Python 3で導入され、最も推奨される、式を埋め込んで文字列のフォーマットを行う方法はどれですか？",
+        "choices": [
+            "str.format() メソッド",
+            "printf形式（%演算子）",
+            "フォーマット済み文字列リテラル (f-string)",
+            "string.Template モジュール"
+        ],
+        "correct": 3,
+        "category": "section_7",
+        "rationale": "フォーマット済み文字列リテラル（f-string）は、文字列の頭に `f` または `F` を付け、式を `{expression}` と書くことで、簡潔かつ強力なフォーマットを提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=フォーマット済み文字リテラル%20(短くして%20f%2Dstring%20とも呼びます)"
+    },
+    {
+        "question": "f-string内で、変数`value`の前に`f`、後ろに`:4d`と記述した場合、`:4d`が指定するものは何ですか？",
+        "choices": [
+            "小数点以下4桁の表示",
+            "フィールド幅の最小値を4文字に指定",
+            "値を16進数で表示",
+            "4桁の数値としてゼロ詰め表示"
+        ],
+        "correct": 2,
+        "category": "section_7",
+        "rationale": "コロン（:）の後ろに整数をつけると、そのフィールドの最小の文字幅を指定できます。これは縦を揃えるのに便利です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=':'%20の後ろに整数をつけると、そのフィールドの最小の文字幅を指定できます。"
+    },
+    {
+        "question": "f-string内で、`{value!r}`のように`!r`を付ける修飾子は、フォーマットする前に値をどの組み込み関数で変換することを意味しますか？",
+        "choices": [
+            "str()",
+            "ascii()",
+            "repr()",
+            "format()"
+        ],
+        "correct": 3,
+        "category": "section_7",
+        "rationale": "`!r`は、値を`repr()`で変換（インタープリタが読める表現）してから文字列に埋め込みます。`!s`は`str()`、`!a`は`ascii()`を適用します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text='!r'%20は%20repr()%20を適用します"
+    },
+    {
+        "question": "文字列の`str.format()`メソッドにおいて、キーワード引数`food='spam'`を渡した場合、書式文字列内でその値を参照する正しい方法はどれですか？",
+        "choices": [
+            "`{food}`",
+            "`{0}`",
+            "`{spam}`",
+            "`$food`"
+        ],
+        "correct": 1,
+        "category": "section_7",
+        "rationale": "`str.format()`にキーワード引数が渡された場合、その値はキーワード引数の名前（この場合は`food`）によって参照されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=str.format()%20メソッドにキーワード引数が渡された場合、その値はキーワード引数の名前によって参照されます。"
+    },
+    {
+        "question": "デバッグ目的で変数をすばやく表示したいとき、インタープリタに読める表現（引用符とバックスラッシュが追加された表現）を返す関数はどれですか？",
+        "choices": [
+            "str()",
+            "format()",
+            "print()",
+            "repr()"
+        ],
+        "correct": 4,
+        "category": "section_7",
+        "rationale": "`repr()`関数は、インタープリタに読める（または同値となる構文がない場合は`SyntaxError`になるような）表現を返すためのものです。`str()`は人間が読める表現を返します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=repr()%20関数はインタープリタに読める%20(%E3%81%82%E3%82%8B%E3%81%84%E3%81%AF%E5%90%8C%E5%80%A4%E3%81%A8%E3%81%AA%E3%82%8B%E6%A7%8B%E6%96%87%E3%81%8C%E3%81%AA%E3%81%84%E5%A0%B4%E5%90%88%E3%81%AF%E5%BF%85%E3%81%9A%20SyntaxError%20%E3%81%AB%E3%81%AA%E3%82%8B%E3%82%88%E3%81%86%E3%81%AA)%20%E8%A1%A8%E7%8F%BE%E3%82%92%E8%BF%94%E3%81%99%E3%81%9F%E3%82%81%E3%81%AE%E3%82%82%E3%81%AE%E3%81%A7%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "数値を右寄せで表示し、左側を空白で埋めて指定された幅に揃える文字列メソッドはどれですか？",
+        "choices": [
+            "str.center()",
+            "str.ljust()",
+            "str.zfill()",
+            "str.rjust()"
+        ],
+        "correct": 4,
+        "category": "section_7",
+        "rationale": "`str.rjust()`メソッドは、指定された幅のフィールド内に文字列が右寄せで入るように左側に空白を追加します。左寄せは`ljust()`、中央寄せは`center()`です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=文字列オブジェクトの%20str.rjust()%20メソッドは、指定された幅のフィールド内に文字列が右寄せで入るように左側に空白を追加します。"
+    },
+    {
+        "question": "数値文字列の左側をゼロ詰めし、正と負の符号を正しく扱う文字列メソッドはどれですか？",
+        "choices": [
+            "str.fill_zeros()",
+            "str.zfill()",
+            "str.rjust('0')",
+            "str.ljust('0')"
+        ],
+        "correct": 2,
+        "category": "section_7",
+        "rationale": "`str.zfill()`メソッドは、数値文字列の左側をゼロ詰めします。このメソッドは正と負の符号を正しく扱います。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=もう一つのメソッド、%20str.zfill()%20は、数値文字列の左側をゼロ詰めします。このメソッドは正と負の符号を正しく扱います"
+    },
+    {
+        "question": "古い文字列書式設定方法として使用され、文字列補間を行う演算子はどれですか？",
+        "choices": [
+            "& 演算子",
+            "% 演算子",
+            "$ 演算子",
+            "@ 演算子"
+        ],
+        "correct": 2,
+        "category": "section_7",
+        "rationale": "`%` 演算子（剰余）は文字列のフォーマットでも使え、この操作は文字列補間として知られています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=%25%20演算子%20(%E5%89%B0%E4%BD%99)%20は文字列のフォーマットでも使えます。"
+    },
+    {
+        "question": "ファイルを読み書きするために、ファイルオブジェクトを返す組み込み関数はどれですか？",
+        "choices": [
+            "file()",
+            "read()",
+            "open()",
+            "create()"
+        ],
+        "correct": 3,
+        "category": "section_7",
+        "rationale": "ファイルを読み書きするには、`open()`関数を使用します。`open()`はfile objectを返します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=open()%20は%20file%20object%20を返します。"
+    },
+    {
+        "question": "`open()`関数でファイルを書き込み専用（既存のファイルがあれば消去される）で開くためのモード引数はどれですか？",
+        "choices": [
+            "`'r'`",
+            "`'a'`",
+            "`'w'`",
+            "`'x'`"
+        ],
+        "correct": 3,
+        "category": "section_7",
+        "rationale": "モード引数`'w'`は書き込み専用（write）を示します。同名の既存のファイルがあれば消去されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=mode%20は、ファイルが読み出し専用なら%20'r'%20、書き込み専用%20(%E5%90%8C%E5%90%8D%E3%81%AE%E6%97%A2%E5%AD%98%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%8C%E3%81%82%E3%82%8C%E3%81%B0%E6%B6%88%E5%8E%BB%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99)..."
+    },
+    {
+        "question": "ファイルの末尾にデータを追加するためのモード引数はどれですか？",
+        "choices": [
+            "`'r+'`",
+            "`'w+'`",
+            "`'a'`",
+            "`'b'`"
+        ],
+        "correct": 3,
+        "category": "section_7",
+        "rationale": "モード引数`'a'`は追加書き込み（append）を示します。ファイルに書き込まれたデータは自動的に末尾に追加されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=追加書き込みなら%20'a'%20(%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E6%9B%B8%E3%81%8D%E8%BE%BC%E3%81%BE%E3%82%8C%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AF%E8%87%AA%E5%8B%95%E7%9A%84%E3%81%AB%E6%9C%AB%E5%B0%BE%E3%81%AB%E8%BF%BD%E5%8A%A0%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99)"
+    },
+    {
+        "question": "テキストモード（デフォルト）とバイナリモードを区別するために、バイナリモードで使用するモード修飾子はどれですか？",
+        "choices": [
+            "`'t'`",
+            "`'b'`",
+            "`'x'`",
+            "`'u'`"
+        ],
+        "correct": 2,
+        "category": "section_7",
+        "rationale": "モードに`'b'`を付けるとバイナリモード（バイナリデータとして読み書きする）になり、これはテキストデータ（文字列）ではなくバイトデータとして扱われます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=バイナリデータとして読み書きするなら%20'b'%20をつけます。"
+    },
+    {
+        "question": "ファイルオブジェクトの`write()`メソッドが返す値は何ですか？",
+        "choices": [
+            "書き込まれた文字列またはバイト列",
+            "書き込みが成功したかどうかを示すブール値",
+            "ファイルオブジェクト自身",
+            "書き込まれた文字（またはバイト）の数"
+        ],
+        "correct": 4,
+        "category": "section_7",
+        "rationale": "`write()`メソッドは書き込まれた文字数（またはバイト数）を返します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=f.write(string)%20ファイルに%20string%20の内容を書き込み、書き込んだ文字数を返します。"
+    },
+    {
+        "question": "ファイルオブジェクトから、ファイルの最後まで、すべての内容を単一の文字列として読み込むメソッドはどれですか？",
+        "choices": [
+            "`f.read(size)`",
+            "`f.readline()`",
+            "`f.readlines()`",
+            "`f.read()`"
+        ],
+        "correct": 4,
+        "category": "section_7",
+        "rationale": "引数なしの`f.read()`はファイルの最後まで読み込み、その内容を文字列として返します。`f.read(size)`は指定されたバイト数だけ読み込みます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=f.read(size)%20ファイルの最後まで、何らかのサイズのデータを読み込みます。"
+    },
+    {
+        "question": "ファイルオブジェクトをループ処理（for line in f:）することで、一度に一行ずつ読み込む場合、ループ内で取得されるのは何ですか？",
+        "choices": [
+            "ファイルのすべての内容を含む単一の文字列",
+            "行を含むリスト",
+            "改行文字を含む単一の行文字列",
+            "改行文字を含まない行文字列"
+        ],
+        "correct": 3,
+        "category": "section_7",
+        "rationale": "ファイルオブジェクトをループ処理することで、一度に一行ずつ読み込むことができます。この方法は効率的で、取得される各行文字列には末尾に改行文字が含まれています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=ファイルオブジェクトをループ処理することで、ファイルの行を一行ずつ読み込むことができます。これはメモリ効率が良く、高速で、コードもシンプルになります。"
+    },
+    {
+        "question": "ファイル操作（読み書き）を確実に行い、処理が完了した後にファイルを自動的に閉じるために推奨される構文はどれですか？",
+        "choices": [
+            "`try...finally`",
+            "`if...else`",
+            "`with`文",
+            "`file.close()`を処理の最後に記述"
+        ],
+        "correct": 3,
+        "category": "section_7",
+        "rationale": "`with`文は、ファイルオブジェクトの利用が完了したら、それが例外で終了したかどうかに関わらず、ファイルを確実に閉じることを保証します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=with%20f%3A%0A%20%20%20%20read%20data...%20のように%20with%20文を使うと、ファイルオブジェクトの利用が完了したら、それが例外で終了したかどうかに関わらず、ファイルを確実に閉じることを保証します。"
+    },
+    {
+        "question": "ファイルオブジェクトの現在位置（次の読み書きが行われる位置）を取得するメソッドはどれですか？",
+        "choices": [
+            "`f.position()`",
+            "`f.tell()`",
+            "`f.seek()`",
+            "`f.cursor()`"
+        ],
+        "correct": 2,
+        "category": "section_7",
+        "rationale": "`f.tell()`は、ファイルオブジェクトの現在位置を、ファイル先頭からのバイト数で返します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=f.tell()%20ファイルオブジェクトの現在位置を返します。この位置は、ファイル先頭からのバイト数です。"
+    },
+    {
+        "question": "ファイルオブジェクトの現在位置を、指定されたバイト数の位置に設定するメソッドはどれですか？",
+        "choices": [
+            "`f.move()`",
+            "`f.tell()`",
+            "`f.seek(offset, whence)`",
+            "`f.locate()`"
+        ],
+        "correct": 3,
+        "category": "section_7",
+        "rationale": "`f.seek(offset, whence)`は、ファイルの位置を指定されたバイト数の位置に設定します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=f.seek(offset%2C%20whence=0)%20ファイルの位置を指定されたバイト数の位置に設定します。"
+    },
+    {
+        "question": "Pythonのオブジェクト（リスト、辞書など）をファイルに保存し、後で読み込むために使用するモジュールはどれですか？",
+        "choices": [
+            "`os`",
+            "`sys`",
+            "`json`",
+            "`io`"
+        ],
+        "correct": 3,
+        "category": "section_7",
+        "rationale": "`json`モジュールは、Pythonのデータ構造（リスト、辞書など）を、人間が読める形式のJSON表現に変換してファイルに保存したり、読み込んだりするために使用されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=json%20による構造化されたデータの保存"
+    },
+    {
+        "question": "JSONファイルにPythonオブジェクトを書き込むために、`json`モジュールで使われる関数はどれですか？",
+        "choices": [
+            "`json.load(f)`",
+            "`json.write(obj, f)`",
+            "`json.dump(obj, f)`",
+            "`json.store(obj, f)`"
+        ],
+        "correct": 3,
+        "category": "section_7",
+        "rationale": "`json.dump(obj, f)`は、オブジェクト`obj`をファイルオブジェクト`f`に書き込みます。`json.load(f)`はファイルから読み込みます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=json.dump(x%2C%20f)%20はオブジェクトをファイルに書き込みます。"
+    },
+    {
+        "question": "JSONファイルからデータを読み込み、Pythonオブジェクトに復元するために、`json`モジュールで使われる関数はどれですか？",
+        "choices": [
+            "`json.read(f)`",
+            "`json.dump(obj, f)`",
+            "`json.load(f)`",
+            "`json.restore(f)`"
+        ],
+        "correct": 3,
+        "category": "section_7",
+        "rationale": "`json.load(f)`は、ファイルオブジェクト`f`から読み込まれたJSON文字列をデコードし、Pythonオブジェクトに復元します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/inputoutput.html#:~:text=json.load(f)%20はファイルをデコードし、Python%20オブジェクトを復元します。"
+    },
+    {
+        "question": "Pythonのエラーのうち、コードの実行前に発生し、主に文法の誤りによって引き起こされるものは何と呼ばれますか？",
+        "choices": [
+            "例外 (Exception)",
+            "ランタイムエラー (Runtime Error)",
+            "構文エラー (Syntax Error)",
+            "論理エラー (Logical Error)"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "構文エラー（Syntax Error）は、コードが文法的に正しくないために、パーサによってコード実行前に検出されるエラーです。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=エラーには%20(%E5%B0%91%E3%81%AA%E3%81%8F%E3%81%A8%E3%82%82)%20%E4%BA%8C%E3%81%A4%E3%81%AE%E3%81%AF%E3%81%A3%E3%81%8D%E3%82%8A%E7%95%B0%E3%81%AA%E3%82%8B%E7%A8%AE%E9%A1%9E%E3%81%8C%E3%81%82%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82%E3%81%9D%E3%82%8C%E3%81%AF%20%E6%A7%8B%E6%96%87%E3%82%A8%E3%83%A9%E3%83%BC%20(syntax%20error)%20%E3%81%A8%20%E4%BE%8B%E5%A4%96%20(exception)%20%E3%81%A7%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "文や式が構文的に正しくても、実行中に検出されるエラーで、常に致命的とは限らないものは何と呼ばれますか？",
+        "choices": [
+            "警告 (Warning)",
+            "構文エラー (Syntax Error)",
+            "例外 (Exception)",
+            "トレースバック (Traceback)"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "実行中に検出されたエラーは例外（exception）と呼ばれ、プログラムで処理することが可能です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=%E5%AE%9F%E8%A1%8C%E4%B8%AD%E3%81%AB%E6%A4%9C%E5%87%BA%E3%81%95%E3%82%8C%E3%81%9F%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AF%20%E4%BE%8B%E5%A4%96%20(exception)%20%E3%81%A8%E5%91%BC%E3%81%B0%E3%82%8C%E3%80%81%E5%B8%B8%E3%81%AB%E8%87%B4%E5%91%BD%E7%9A%84%E3%81%A8%E3%81%AF%E9%99%90%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82"
+    },
+    {
+        "question": "`try`文の実行中に例外が発生しなかった場合、どの節が実行されますか？",
+        "choices": [
+            "`except`節",
+            "`except`節と`finally`節",
+            "`else`節（あれば）と`finally`節（あれば）",
+            "`try`節だけ"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "例外が発生しなければ、`except`節をスキップし、`else`節（存在する場合）が実行され、最後に`finally`節（存在する場合）が実行されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=%E4%BD%95%E3%82%82%E4%BE%8B%E5%A4%96%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%AA%E3%81%91%E3%82%8C%E3%81%B0%E3%80%81%20except%20%E7%AF%80%20%E3%82%92%E3%82%B9%E3%82%AD%E3%83%83%E3%83%97%E3%81%97%E3%81%A6%20try%20%E6%96%87%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%82%92%E7%B5%82%E3%81%88%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "例外ハンドラで、特定の例外を捕捉し、その例外インスタンスを`err`という変数に紐付ける正しい構文はどれですか？",
+        "choices": [
+            "`except ZeroDivisionError as err:`",
+            "`except ZeroDivisionError with err:`",
+            "`except ZeroDivisionError, err:`",
+            "`catch ZeroDivisionError err:`"
+        ],
+        "correct": 1,
+        "category": "section_8",
+        "rationale": "`as`キーワードを使って、例外インスタンスをexcept節の変数に紐付けます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=except%E7%AF%80%E3%81%AF%E4%BE%8B%E5%A4%96%E5%90%8D%E3%81%AE%E5%BE%8C%E3%81%AB%E5%A4%89%E6%95%B0%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82%E3%81%9D%E3%81%AE%E5%A4%89%E6%95%B0%E3%81%AF%E4%BE%8B%E5%A4%96%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%AB%E7%B4%90%E4%BB%98%E3%81%91%E3%82%89%E3%82%8C"
+    },
+    {
+        "question": "一つの`try`文で複数の異なる例外を処理したい場合、それらを一つの`except`節で指定する正しい方法はどれですか？",
+        "choices": [
+            "カンマで区切る (`except E1, E2:`)",
+            "タプルで囲む (`except (E1, E2):`)",
+            "論理和でつなぐ (`except E1 or E2:`)",
+            "複数の`except`節を記述する"
+        ],
+        "correct": 2,
+        "category": "section_8",
+        "rationale": "複数の例外を指定する場合、丸括弧で囲ったタプルという形で指定できます。複数の`except`節を記述することも可能です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=except%20%E7%AF%80%20%E3%81%A7%E3%81%AF%E4%B8%B8%E6%8B%AC%E5%BC%A7%E3%81%A7%E5%9B%B2%E3%81%A3%E3%81%9F%E3%82%BF%E3%83%97%E3%83%AB%E3%81%A8%E3%81%84%E3%81%86%E5%BD%A2%E3%81%A7%E8%A4%87%E6%95%B0%E3%81%AE%E4%BE%8B%E5%A4%96%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "例外処理において、`try`節で例外が全く送出されなかったときに実行されるオプションの節はどれですか？",
+        "choices": [
+            "`finally`",
+            "`with`",
+            "`else`",
+            "`catch`"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "`try...except`文には、オプションで`else`節を設けることができます。`else`節は`try`節で全く例外が送出されなかったときに実行されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=try%20...%20except%20%E6%96%87%E3%81%AB%E3%81%AF%E3%80%81%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A7%20else%20%E7%AF%80%20(else%20clause)%20%E3%82%92%E8%A8%AD%E3%81%91%E3%82%8B%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "`try`、`except`、`else`、のいずれの節で例外が発生したかどうかにかかわらず、常に実行される節はどれですか？",
+        "choices": [
+            "`always`節",
+            "`finally`節",
+            "`ensure`節",
+            "`else`節"
+        ],
+        "correct": 2,
+        "category": "section_8",
+        "rationale": "`finally`節は、`try`文の中で行われたクリーンアップ動作（リソースの解放など）を定義するために使われ、例外の有無にかかわらず常に実行されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=finally%20%E7%AF%80%20%E3%81%AF%20try%20%E6%96%87%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AE%9F%E8%A1%8C%E3%81%95%E3%82%8C%E3%80%81%E4%BE%8B%E5%A4%96%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%9F%E3%81%8B%E3%81%A9%E3%81%86%E3%81%8B%E3%81%AB%E3%81%8B%E3%81%8B%E3%82%8F%E3%82%89%E3%81%9A%E3%80%81%E5%B8%B8%E3%81%AB%E5%AE%9F%E8%A1%8C%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "例外ハンドラで基底クラス`B`を捕捉した場合、その派生クラス`C`のインスタンスである例外も捕捉されますか？",
+        "choices": [
+            "はい、例外クラスとその派生クラスのインスタンスはマッチします。",
+            "いいえ、派生クラスの例外は基底クラスでは捕捉できません。",
+            "派生クラスの例外は常に処理されない例外になります。",
+            "捕捉できますが、`as`キーワードを使っている場合に限ります。"
+        ],
+        "correct": 1,
+        "category": "section_8",
+        "rationale": "`except`節内のクラスは、そのクラスまたは派生クラスのインスタンスである例外とマッチします。したがって、基底クラスを指定することで派生クラスの例外も捕捉できます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=except%20%E7%AF%80%20%E5%86%85%E3%81%AE%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AF%E3%80%81%E3%81%9D%E3%81%AE%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%84%E6%B4%BE%E7%94%9F%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%A7%E3%81%82%E3%82%8B%E4%BE%8B%E5%A4%96%E3%81%A8%E3%83%9E%E3%83%83%E3%83%81%E3%81%97%E3%81%BE%E3%81%99"
+    },
+    {
+        "question": "例外ハンドラが複数ある場合、例外を捕捉するハンドラはどのように選択されますか？",
+        "choices": [
+            "最も派生度の高い例外クラスを捕捉するハンドラが優先される",
+            "最も広い例外クラス（例: `Exception`）を捕捉するハンドラが優先される",
+            "最初に一致した`except`節が駆動される",
+            "すべての`except`節が順次実行される"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "Pythonの例外処理では、`try`節内で例外が発生した後、最初に一致した`except`節だけが実行されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=多くとも%E4%B8%80%E3%81%A4%E3%81%AE%E3%83%8F%E3%83%B3%E3%83%89%E3%83%A9%E3%81%97%E3%81%8B%E5%AE%9F%E8%A1%8C%E3%81%95%E3%82%8C%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82"
+    },
+    {
+        "question": "例外が処理されたかどうかを判定したいだけで、その例外を処理するつもりがなければ、例外を再送出させるために使う文はどれですか？",
+        "choices": [
+            "`raise err`",
+            "`raise` (引数なし)",
+            "`rethrow`",
+            "`continue`"
+        ],
+        "correct": 2,
+        "category": "section_8",
+        "rationale": "単純な形式の`raise`文（引数なし）を使って、現在捕捉されている例外を再送出させることができます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=%E5%8D%98%E7%B4%94%E3%81%AA%E5%BD%A2%E5%BC%8F%E3%81%AE%20raise%20%E6%96%87%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E4%BE%8B%E5%A4%96%E3%82%92%E5%86%8D%E9%80%81%E5%87%BA%E3%81%95%E3%81%9B%E3%82%8B%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99"
+    },
+    {
+        "question": "独自の例外を作成する場合、通常どの組み込み例外クラスを継承するのが最も適切ですか？",
+        "choices": [
+            "`BaseException`",
+            "`NameError`",
+            "`Exception`",
+            "`RuntimeError`"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "`Exception`は、致命的でない例外すべての基底クラスです。ユーザー定義例外も、通常はこのクラスを継承します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=Exception%20は、致命的でない例外すべての基底クラスです。"
+    },
+    {
+        "question": "`try...except`文で例外を捕捉した後、元のトレースバック情報を含めて、新たな例外を送出する際に使用する構文はどれですか？",
+        "choices": [
+            "`raise NewError from OldError`",
+            "`raise NewError`",
+            "`raise NewError as OldError`",
+            "`rethrow NewError`"
+        ],
+        "correct": 1,
+        "category": "section_8",
+        "rationale": "`from`句を使用することで、元の例外を新しい例外の`__cause__`属性に設定し、例外の連鎖を明確にすることができます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=except%20%E7%AF%80%E3%81%AE%E4%B8%AD%E3%81%A7%E6%9C%AA%E5%87%A6%E7%90%86%E3%81%AE%E4%BE%8B%E5%A4%96%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%9F%E5%A0%B4%E5%90%88%E3%80%81%E3%81%9D%E3%81%AE%E6%9C%AA%E5%87%A6%E7%90%86%E3%81%AE%E4%BE%8B%E5%A4%96%E3%81%AF%E5%87%A6%E7%90%86%E3%81%95%E3%82%8C%E3%81%9F%E4%BE%8B%E5%A4%96%E3%81%AE%E3%82%A8%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%AB%E5%90%AB%E3%81%BE%E3%82%8C%E3%81%BE%E3%81%99"
+    },
+    {
+        "question": "`except`節内で未処理の例外が発生した場合、Pythonは例外の連鎖をどのように表示しますか？",
+        "choices": [
+            "元の例外のみを表示する",
+            "新しい例外のみを表示し、元の例外は無視する",
+            "処理された例外と未処理の例外の両方をトレースバックメッセージに含める",
+            "トレースバックは表示せず、エラーメッセージだけを表示する"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "except節の中で新たな例外が発生した場合、そのトレースバックは元の（処理された）例外のトレースバックに続けて表示され、例外の連鎖が示されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=except%20%E7%AF%80%E3%81%AE%E4%B8%AD%E3%81%A7%E6%9C%AA%E5%87%A6%E7%90%86%E3%81%AE%E4%BE%8B%E5%A4%96%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%9F%E5%A0%B4%E5%90%88%E3%80%81%E3%81%9D%E3%81%AE%E6%9C%AA%E5%87%A6%E7%90%86%E3%81%AE%E4%BE%8B%E5%A4%96%E3%81%AF%E5%87%A6%E7%90%86%E3%81%95%E3%82%8C%E3%81%9F%E4%BE%8B%E5%A4%96%E3%81%AE%E3%82%A8%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%AB%E5%90%AB%E3%81%BE%E3%82%8C%E3%81%BE%E3%81%99"
+    },
+    {
+        "question": "以下のうち、Pythonの組み込み例外で、通常プログラムを終了させるために使われ、`Exception`クラスのサブクラスではないものはどれですか？",
+        "choices": [
+            "`TypeError`",
+            "`ValueError`",
+            "`KeyboardInterrupt`",
+            "`NameError`"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "`KeyboardInterrupt`（Control-Cなどによる割り込み）や`SystemExit`は、一般的にプログラムが終了することを示すために使われ、`Exception`ではなく`BaseException`の直下のサブクラスです。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=Exception%20%E3%81%AE%E3%82%B5%E3%83%96%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84%E4%BE%8B%E5%A4%96%E3%81%AF%E3%80%81%E4%B8%80%E8%88%AC%E7%9A%84%E3%81%AB%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%8C%E7%B5%82%E4%BA%86%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%82%92%E7%A4%BA%E3%81%99%E3%81%9F%E3%82%81%E3%81%AB%E4%BD%BF%E3%82%8F%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B"
+    },
+    {
+        "question": "Pythonで、例外を発生させるために使用する文はどれですか？",
+        "choices": [
+            "`send Exception('Error')`",
+            "`throw NameError('Error')`",
+            "`raise ValueError('Error')`",
+            "`new Exception('Error')`"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "`raise`文を使って、特定の例外を発生させることができます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=raise%20%E6%96%87%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%80%81%E7%89%B9%E5%AE%9A%E3%81%AE%E4%BE%8B%E5%A4%96%E3%82%92%E7%99%BA%E7%94%9F%E3%81%95%E3%81%9B%E3%82%8B%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "`raise`文で例外クラス（例: `ValueError`）を引数として渡した場合、例外クラスはどのように扱われますか？",
+        "choices": [
+            "クラスオブジェクトがそのまま例外として送出される",
+            "`__call__`メソッドが呼び出される",
+            "引数無しのコンストラクタが呼び出され、暗黙的にインスタンス化される",
+            "エラーとなり、例外として送出できない"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "例外クラスが渡された場合、引数無しのコンストラクタが呼び出され、暗黙的にインスタンス化されてから例外が送出されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=%E4%BE%8B%E5%A4%96%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%8C%E6%B8%A1%E3%81%95%E3%82%8C%E3%81%9F%E5%A0%B4%E5%90%88%E3%81%AF%E3%80%81%E5%BC%95%E6%95%B0%E7%84%A1%E3%81%97%E3%81%AE%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF%E3%81%8C%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%95%E3%82%8C%E3%80%81%E6%9A%97%E9%BB%99%E7%9A%84%E3%81%AB%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E5%8C%96%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99"
+    },
+    {
+        "question": "`try...except`文に`else`節を追加することで、プログラマーが避けられる事態は何ですか？",
+        "choices": [
+            "予期しない`NameError`の捕捉",
+            "`try`節内で例外が送出されないこと",
+            "`try...except`文で保護されたコードから送出されたもの以外の例外を誤って捕捉してしまうこと",
+            "`finally`節の実行順序が変わること"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "追加のコードを`try`節よりも`else`節に書くことで、`try...except`文で保護されたコード以外で発生した例外を誤って捕捉するのを防げます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=なぜなら、そうすることで%20try%20...%20except%20%E6%96%87%E3%81%A7%E4%BF%9D%E8%AD%B7%E3%81%95%E3%82%8C%E3%81%9F%E3%82%B3%E3%83%BC%E3%83%89%E3%81%8B%E3%82%89%E9%80%81%E5%87%BA%E3%81%95%E3%82%8C%E3%81%9F%E3%82%82%E3%81%AE%E4%BB%A5%E5%A4%96%E3%81%AE%E4%BE%8B%E5%A4%96%E3%82%92%E9%81%8E%E3%81%A3%E3%81%A6%E6%8D%95%E6%8D%89%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%86%E3%81%A8%E3%81%84%E3%81%86%E4%BA%8B%E6%85%8B%E3%82%92%E9%81%BF%E3%81%91%E3%82%89%E3%82%8C%E3%82%8B%E3%81%8B%E3%82%89%E3%81%A7%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "以下のコードが実行されたとき、最終的に出力されるものは何ですか？\n```python\ntry:\n  raise ValueError()\nfinally:\n  print(\"Clean up\")\n```",
+        "choices": [
+            "`Clean up` のみ",
+            "`ValueError` と `Clean up`",
+            "`Clean up` と `ValueError`",
+            "エラーなしで終了"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "`finally`節は例外の有無にかかわらず実行されます。例外が送出されても、`finally`節が実行された後に例外が外側へ伝播されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=%E4%BE%8B%E5%A4%96%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%9F%E5%A0%B4%E5%90%88%E3%81%AF%E3%80%81%E3%83%87%E3%83%BC%E3%82%BF%E3%81%8C%20finally%20%E7%AF%80%E3%81%AB%E6%B8%A1%E3%81%95%E3%82%8C%E3%80%81%E3%81%9D%E3%81%AE%E5%BE%8C%E3%81%AB%E4%BE%8B%E5%A4%96%E3%81%8C%E5%86%8D%E9%80%81%E5%87%BA%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99"
+    },
+    {
+        "question": "`with`文で使用されるオブジェクト（ファイルオブジェクトなど）は、何の処理を保証するために使われますか？",
+        "choices": [
+            "リソースがオープンされないこと",
+            "例外が発生しないこと",
+            "リソースが自動的にクローズされること",
+            "例外が常に捕捉されること"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "`with`文は、ファイルを閉じるなどの定義済みクリーンアップ処理を確実に行うための便利な方法です。ファイルオブジェクトの利用が完了したら、それが例外で終了したかどうかに関わらず、ファイルを確実に閉じます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=with%20%E6%96%87%E3%81%A7%E3%81%AF、%E5%AE%9A%E7%BE%A9%E6%B8%88%E3%81%BF%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E5%87%A6%E7%90%86%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E4%BE%BF%E5%88%A9%E3%81%AA%E6%96%B9%E6%B3%95%E3%81%8C%E6%8F%90%E4%BE%9B%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "ユーザー定義の例外クラスを作成する場合、どの組み込み例外クラスの引数を保持する属性を例外インスタンスが持つのが一般的ですか？",
+        "choices": [
+            "`__name__`",
+            "`__str__`",
+            "`args`",
+            "`type`"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "例外インスタンスは、例外の引数（メッセージなど）を保持する`args`属性を持つのが一般的です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=%E3%81%9D%E3%81%AE%E5%A4%89%E6%95%B0%E3%81%AF%E4%BE%8B%E5%A4%96%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%AB%E7%B4%90%E4%BB%98%E3%81%91%E3%82%89%E3%82%8C%E3%80%81%E4%B8%80%E8%88%AC%E7%9A%84%E3%81%AB%E5%BC%95%E6%95%B0%E3%82%92%E4%BF%9D%E6%8C%81%E3%81%99%E3%82%8B%20args%20%E5%B1%9E%E6%80%A7%E3%82%92%E6%8C%81%E3%81%A1%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "致命的ではない例外すべての基底クラスはどれですか？",
+        "choices": [
+            "`BaseException`",
+            "`SystemExit`",
+            "`Exception`",
+            "`RuntimeError`"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "`Exception`は、`BaseException`のサブクラスの一つであり、致命的でない例外すべての基底クラスです。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=BaseException%20はすべての例外に共通する基底クラスです。そのサブクラスの一つである%20Exception%20は、致命的でない例外すべての基底クラスです。"
+    },
+    {
+        "question": "例外処理の良い手法として最も推奨されるのはどれですか？",
+        "choices": [
+            "すべての例外を捕捉するために引数なしの`except:`を使う",
+            "`except Exception as err:`を使って、すべての例外を捕捉する",
+            "処理対象の例外の型をできる限り詳細に書き、予期しない例外はそのまま伝わるようにする",
+            "すべての例外を無視するために`except:`のブロック内で`pass`を使う"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "良い例外処理の手法とは、処理対象の例外の型をできる限り詳細に書き、予期しない例外はそのまま伝わるようにすることです。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=しかし良い例外処理の手法とは、処理対象の例外の型をできる限り詳細に書き、予期しない例外はそのまま伝わるようにすることです。"
+    },
+    {
+        "question": "以下の組み込み例外のうち、コード中の未定義の変数名を参照しようとしたときに発生するエラーはどれですか？",
+        "choices": [
+            "`TypeError`",
+            "`ValueError`",
+            "`NameError`",
+            "`AttributeError`"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "未定義の名前（変数、関数など）を参照しようとすると`NameError`が発生します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=NameError%3A%20name%20'spam'%20is%20not%20defined"
+    },
+    {
+        "question": "例外が発生したときの実行コンテキストを示す、ソースコード行をリストしたメッセージは何の形式で示されますか？",
+        "choices": [
+            "ログファイル",
+            "警告メッセージ",
+            "スタックのトレースバック",
+            "標準出力"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "エラーメッセージの先頭部分では、例外が発生した実行コンテキストを、スタックのトレースバック（stack traceback）の形式で示しています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=%E3%82%A8%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%AE%E5%85%88%E9%A0%AD%E9%83%A8%E5%88%86%E3%81%A7%E3%81%AF%E3%80%81%E4%BE%8B%E5%A4%96%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%9F%E5%AE%9F%E8%A1%8C%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%20(context)%20%E3%82%92%E3%80%81%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AE%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B9%E3%83%90%E3%83%83%E3%82%AF%20(stack%20traceback)%20%E3%81%AE%E5%BD%A2%E5%BC%8F%E3%81%A7%E7%A4%BA%E3%81%97%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "以下のコードで発生する例外はどれですか？\n```python\n'2' + 2\n```",
+        "choices": [
+            "`NameError`",
+            "`ValueError`",
+            "`SyntaxError`",
+            "`TypeError`"
+        ],
+        "correct": 4,
+        "category": "section_8",
+        "rationale": "文字列型と整数型など、互換性のない型同士を結合しようとすると`TypeError`が発生します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=TypeError%3A%20can%20only%20concatenate%20str%20(not%20%22int%22)%20to%20str"
+    },
+    {
+        "question": "例外インスタンスが持つ、例外の詳細情報を含むタプルを保持する属性はどれですか？",
+        "choices": [
+            "`__str__`",
+            "`type`",
+            "`args`",
+            "`msg`"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "例外インスタンスの引数（例外メッセージなど）は、`args`属性にタプルとして格納されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=%E5%BC%95%E6%95%B0%E3%81%AF%20.args%20%E3%81%AB%E6%A0%BC%E7%B4%8D%E3%81%95%E3%82%8C%E3%82%8B"
+    },
+    {
+        "question": "`try...except`文において、`else`節を設ける場合の正しい配置はどれですか？",
+        "choices": [
+            "`try`節の直後",
+            "すべての`except`節の後ろ",
+            "`finally`節の後ろ",
+            "`try`節の前に記述する"
+        ],
+        "correct": 2,
+        "category": "section_8",
+        "rationale": "`else`節を設ける場合、すべての`except`節よりも後ろに置かなければなりません。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=else%20%E7%AF%80%E3%82%92%E8%A8%AD%E3%81%91%E3%82%8B%E5%A0%B4%E5%90%88%E3%80%81%E5%85%A8%E3%81%A6%E3%81%AE%20except%20%E7%AF%80%E3%82%88%E3%82%8A%E3%82%82%E5%BE%8C%E3%82%8D%E3%81%AB%E7%BD%AE%E3%81%8B%E3%81%AA%E3%81%91%E3%82%8C%E3%81%B0%E3%81%AA%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82"
+    },
+    {
+        "question": "Pythonのクラスを使ってユーザー定義例外を作成する場合、コンストラクタで渡された引数を正しく処理するために、どの組み込み例外のコンストラクタを呼び出す必要がありますか？",
+        "choices": [
+            "`raise()`",
+            "継承元の例外クラス（例: `Exception.__init__`）",
+            "`super()`を呼び出す必要はない",
+            "`__base__`クラス"
+        ],
+        "correct": 2,
+        "category": "section_8",
+        "rationale": "例外に引数を格納させるためには、基底クラス（通常は`Exception`）のコンストラクタを呼び出す必要があります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=例外に引数を格納させるためには、基底クラスのコンストラクタに引数を渡すことが必要です。"
+    },
+    {
+        "question": "プログラムのユーザーがControl-Cなどのキー操作で中断させた場合に送出される例外はどれですか？",
+        "choices": [
+            "`SystemExit`",
+            "`IOError`",
+            "`KeyboardInterrupt`",
+            "`InterruptionError`"
+        ],
+        "correct": 3,
+        "category": "section_8",
+        "rationale": "ユーザーがプログラムに割り込みをかけた場合、`KeyboardInterrupt`例外が送出されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/errors.html#:~:text=%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%8C%E7%94%9F%E6%88%90%E3%81%97%E3%81%9F%E5%89%B2%E3%82%8A%E8%BE%BC%E3%81%BF%E3%81%AF%E3%80%81%20KeyboardInterrupt%20%E4%BE%8B%E5%A4%96%E3%81%8C%E9%80%81%E5%87%BA%E3%81%95%E3%82%8C%E3%82%8B%E3%81%93%E3%81%A8%E3%81%A7%E9%80%9A%E7%9F%A5%E3%81%95%E3%82%8C%E3%82%8B%E3%81%A8%E3%81%84%E3%81%86%E3%81%93%E3%81%A8%E3%81%AB%E6%B3%A8%E6%84%8F%E3%81%97%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82"
+    },
+    {
+        "question": "Pythonにおいて、クラスを新規に作成することで、新たに生成されるもののうち、最も本質的なものは何ですか？",
+        "choices": [
+            "新しいモジュール",
+            "新しいオブジェクトの型",
+            "新しいグローバル名前空間",
+            "新しい組み込み関数"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "新規にクラスを作成することで、新しいオブジェクトの「型」が作成され、その型を持つ新しい「インスタンス」が作られます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E6%96%B0%E8%A6%8F%E3%81%AB%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%81%A7%E3%80%81%E6%96%B0%E3%81%97%E3%81%84%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%20%E5%9E%8B%20%E3%82%92%E4%BD%9C%E6%88%90%E3%81%97%E3%80%81%E3%81%9D%E3%81%AE%E5%9E%8B%E3%82%92%E6%8C%81%E3%81%A4%E6%96%B0%E3%81%97%E3%81%84%20%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%20%E3%81%8C%E4%BD%9C%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "Pythonのメソッドを定義する際、その関数宣言でオブジェクト自体を表す第一引数に明示的に含めるべき名前の慣習として最も一般的なものはどれですか？",
+        "choices": [
+            "`this`",
+            "`obj`",
+            "`self`",
+            "`instance`"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "メソッド関数の宣言では、オブジェクト自体を表す第一引数を明示しなければならず、慣習的に`self`という名前が使われます。この引数はメソッド呼び出しの際に暗黙の引数として渡されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E9%96%A2%E6%95%B0%E3%81%AE%E5%AE%A3%E8%A8%80%E3%81%A7%E3%81%AF%E3%80%81%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E8%87%AA%E4%BD%93%E3%82%92%E8%A1%A8%E3%81%99%E7%AC%AC%E4%B8%80%E5%BC%95%E6%95%B0%E3%82%92%E6%98%8E%E7%A4%BA%E3%81%97%E3%81%AA%E3%81%91%E3%82%8C%E3%81%B0%E3%81%AA%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82"
+    },
+    {
+        "question": "Pythonにおいて、名前空間（namespace）を最も正確に定義しているものはどれですか？",
+        "choices": [
+            "ソースコードの特定のテキスト領域",
+            "名前からオブジェクトへの対応付け（マッピング）",
+            "プログラムの実行状態",
+            "ファイルに保存されたデータ構造"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "名前空間とは、名前からオブジェクトへの対応付け（mapping）です。ほとんどの場合、Pythonの辞書として実装されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E5%90%8D%E5%89%8D%E7%A9%BA%E9%96%93%20(namespace)%20%E3%81%A8%E3%81%AF%E3%80%81%E5%90%8D%E5%89%8D%E3%81%8B%E3%82%89%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%B8%E3%81%AE%E5%AF%BE%E5%BF%9C%E4%BB%98%E3%81%91%20(mapping)%20%E3%81%A7%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "Pythonのスコープ（scope）を最も正確に定義しているものはどれですか？",
+        "choices": [
+            "名前からオブジェクトへのマッピング",
+            "オブジェクトの属性の集合",
+            "ある名前空間が直接アクセスできるような、Pythonプログラムのテキスト上の領域",
+            "オブジェクトの現在の状態"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "スコープとは、ある名前空間が直接アクセスできるような、Pythonプログラムのテキスト上の領域です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97%20(scope)%20%E3%81%A8%E3%81%AF%E3%80%81%E3%81%82%E3%82%8B%E5%90%8D%E5%89%8D%E7%A9%BA%E9%96%93%E3%81%8C%E7%9B%B4%E6%8E%A5%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AA%E3%80%81%20Python%20%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E4%B8%8A%E3%81%AE%E9%A0%98%E5%9F%9F%E3%81%A7%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "実行中に名前を修飾なしで（例: `egg`のように）参照した際、Pythonが名前を探しに行くスコープの順序（内側から外側へ）として正しいものはどれですか？",
+        "choices": [
+            "グローバル → 外側 → ローカル → ビルトイン",
+            "ローカル → 外側 → グローバル → ビルトイン",
+            "ビルトイン → グローバル → 外側 → ローカル",
+            "ローカル → グローバル → 外側 → ビルトイン"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "名前の検索は、ローカル (L)、外側 (E)、グローバル (G)、ビルトイン (B) の順（LEGBルール）で行われます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E6%9C%80%E5%88%9D%E3%81%AB%E6%8E%A2%E3%81%95%E3%82%8C%E3%82%8B%E3%80%81%E6%9C%80%E3%82%82%E5%86%85%E5%81%B4%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97%E3%81%AF%E3%80%81%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%AA%E5%90%8D%E5%89%8D%E3%82%92%E6%8C%81%E3%81%A3%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%80%82%E3%80%82%E3%80%82%E4%B8%80%E7%95%AA%E5%A4%96%E5%81%B4%E3%81%AE(%E6%9C%80%E5%BE%8C%E3%81%AB%E6%A4%9C%E7%B4%A2%E3%81%95%E3%82%8C%E3%82%8B)%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97%E3%81%AF%E3%83%93%E3%83%AB%E3%83%88%E3%82%A4%E3%83%B3%E5%90%8D%E3%82%92%E6%8C%81%E3%81%A3%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "クラス定義の中で最初に実行され、インスタンスが作成されたときに初期化処理を行うために定義されるメソッドはどれですか？",
+        "choices": [
+            "`__new__`",
+            "`__init__`",
+            "`__main__`",
+            "`__call__`"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "クラスのインスタンスは、クラス定義内で定義された`__init__()`メソッドを呼び出して作成されます。このメソッドはインスタンスが初期化されるときに実行されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%8C%E5%88%9D%E6%9C%9F%E5%8C%96%E3%81%95%E3%82%8C%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E5%AE%9F%E8%A1%8C%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "クラスを定義した後、そのクラスのインスタンスを作成する正しい構文はどれですか？（例: `MyClass`というクラスがある場合）",
+        "choices": [
+            "`new MyClass()`",
+            "`instance = MyClass.new()`",
+            "`instance = MyClass()`",
+            "`instance = MyClass{}`"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "クラスのインスタンス化は、関数呼び出しのようにクラス名に丸括弧を付けて行います。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E5%8C%96%E3%81%AF%E9%96%A2%E6%95%B0%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97%E3%81%AE%E3%82%88%E3%81%86%E3%81%AB%E3%80%81%E3%82%AF%E3%83%A9%E3%82%B9%E5%90%8D%E3%81%AB%E4%B8%B8%E6%8B%AC%E5%BC%A7%E3%82%92%E4%BB%98%E3%81%91%E3%81%A6%E8%A1%8C%E3%81%84%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "クラスインスタンスが持つ、そのインスタンス固有の状態を保持するために使われる属性を何と呼びますか？",
+        "choices": [
+            "クラス変数",
+            "インスタンス変数",
+            "静的変数",
+            "グローバル変数"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "インスタンス変数は、インスタンスごとに異なったデータを持つことを意図しています。これは通常、`__init__()`メソッド内で定義されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E3%81%9D%E3%82%8C%E3%81%9E%E3%82%8C%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%AF%E8%87%AA%E8%BA%AB%E3%81%AE%E7%8A%B6%E6%85%8B%E3%82%92%E4%BF%9D%E6%8C%81%E3%81%99%E3%82%8B%E5%B1%9E%E6%80%A7%E3%82%92%E6%8C%81%E3%81%A6%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "クラス内では定義されているものの、インスタンス変数の代わりに、クラスのすべてのインスタンスで共有されることを意図した属性を何と呼びますか？",
+        "choices": [
+            "ローカル変数",
+            "クラス変数",
+            "プライベート変数",
+            "メソッド変数"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "クラス変数は、そのクラスの全てのインスタンス間で共有され、クラスオブジェクト自身に束縛されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%AF%E3%83%A9%E3%82%B9%E5%A4%89%E6%95%B0%20%E3%81%AF%E3%80%81%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E5%85%A8%E3%81%A6%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%A7%E5%85%B1%E6%9C%89%E3%81%95%E3%82%8C%E3%82%8B%E3%81%93%E3%81%A8%E3%82%92%E6%84%8F%E5%9B%B3%E3%81%97%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "Pythonのクラスにおける継承のメカニズムは、複数の基底クラスを持つことができますか？",
+        "choices": [
+            "いいえ、単一継承のみサポートされています。",
+            "はい、多重継承が可能です。",
+            "特定の組み込み型を継承する場合のみ可能です。",
+            "可能ですが、その場合は抽象クラスを使用する必要があります。"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "Pythonのクラスの継承メカニズムは、複数の基底クラスを持つことができる多重継承をサポートしています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E7%B6%99%E6%89%B1%E3%83%A1%E3%82%AB%E3%83%8B%E3%82%BA%E3%83%A0%E3%81%AF%E3%80%81%E8%A4%87%E6%95%B0%E3%81%AE%E5%9F%BA%E5%BA%95%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%92%E6%8C%81%E3%81%A4%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%80%81%E6%B4%BE%E7%94%9F%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%A7%E5%9F%BA%E5%BA%95%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E4%BB%BB%E6%84%8F%E3%81%AE%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%82%92%E3%82%AA%E3%83%BC%E3%83%90%E3%83%A9%E3%82%A4%E3%83%89%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "派生クラスで基底クラスのメソッドをオーバーライドした後、オーバーライドされた基底クラスのメソッドを呼び出すために使用される組み込み関数はどれですか？",
+        "choices": [
+            "`parent()`",
+            "`base()`",
+            "`super()`",
+            "`root()`"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "`super()`関数を使用すると、基底クラスのメソッドを同じ名前で呼び出すことができます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%A7%E3%81%AF%E3%80%81%E5%9F%BA%E5%BA%95%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%82%92%E5%90%8C%E3%81%98%E5%90%8D%E5%89%8D%E3%81%A7%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%99%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "クラス内のメソッドがインスタンス属性にアクセスするために使用する表記法として正しいものはどれですか？（例: `self`インスタンスの`data`属性にアクセス）",
+        "choices": [
+            "`data`",
+            "`self.data`",
+            "`@data`",
+            "`data@self`"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "オブジェクトのメンバを参照するには、`self.data`のように、オブジェクト自体を表す第一引数（`self`）を使って明示的に参照する必要があります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%83%A1%E3%83%B3%E3%83%90%E3%82%92%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%8B%E3%82%89%E5%8F%82%E7%85%A7%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E7%9F%AD%E7%B8%AE%E3%81%97%E3%81%9F%E8%A8%98%E6%B3%95%E3%81%AF%E4%BD%BF%E3%81%88%E3%81%BE%E3%81%9B%E3%82%93%3A%20%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E9%96%A2%E6%95%B0%E3%81%AE%E5%AE%A3%E8%A8%80%E3%81%A7%E3%81%AF%E3%80%81%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E8%87%AA%E4%BD%93%E3%82%92%E8%A1%A8%E3%81%99%E7%AC%AC%E4%B8%80%E5%BC%95%E6%95%B0%E3%82%92%E6%98%8E%E7%A4%BA%E3%81%97%E3%81%AA%E3%81%91%E3%82%8C%E3%81%B0%E3%81%AA%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82"
+    },
+    {
+        "question": "Pythonのクラスにおいて、外部からの偶発的な変更を防ぐために、名前の前にアンダースコアを二つ（`__`）付けて定義される変数（プライベート変数）は、完全に隠蔽されますか？",
+        "choices": [
+            "はい、アクセスは完全に不可能です。",
+            "いいえ、命名規則により隠蔽されているだけで、特定の名前を使えばアクセス可能です。",
+            "クラス内でのみアクセス可能です。",
+            "デバッグモードでのみアクセス可能です。"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "Pythonは真のプライベート変数を強制しません。アンダースコア二つで始まる変数は、外部からのアクセスを困難にするための命名規則（name mangling）によって隠蔽されますが、特定の形式でアクセスすることは可能です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=Python%20では、真の「プライベートな」クラス変数を強制することはできません。"
+    },
+    {
+        "question": "メソッドオブジェクトが呼び出されたとき、Pythonが行う操作として正しいものはどれですか？",
+        "choices": [
+            "メソッドの第一引数を省略し、自動的に`None`を渡す",
+            "メソッドの第一引数を、インスタンスオブジェクト自身で埋める",
+            "メソッドをクラスオブジェクト上で呼び出す",
+            "メソッドを静的メソッドとして呼び出す"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "メソッドを呼び出すと、そのメソッドの第一引数はインスタンスオブジェクト自身で埋められます。`x.f()`は、`MyClass.f(x)`とまったく同じです。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%82%92%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%99%E3%81%A8%E3%80%81%E3%81%9D%E3%81%AE%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%AE%E7%AC%AC%E4%B8%80%E5%BC%95%E6%95%B0%E3%81%AF%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E8%87%AA%E8%BA%AB%E3%81%A7%E5%9F%8B%E3%82%81%E3%82%89%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "Pythonにおける「属性（attribute）」という言葉が使われる対象として最も広い範囲を指しているものはどれですか？",
+        "choices": [
+            "ドットに続く名前すべて（例: `z.real`の`real`）",
+            "クラス内で定義されたメソッドのみ",
+            "インスタンス変数のみ",
+            "ローカル変数のみ"
+        ],
+        "correct": 1,
+        "category": "section_9",
+        "rationale": "属性という言葉は、ドットに続く名前すべてに対して使われます（例: `z.real`、モジュール内のグローバル名も厳密には属性参照）。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%81%A8%E3%81%93%E3%82%8D%E3%81%A7%E3%80%81%20%E5%B1%9E%E6%80%A7%20%E3%81%A8%E3%81%84%E3%81%86%E8%A8%80%E8%91%89%E3%81%AF%E3%80%81%E3%83%89%E3%83%83%E3%83%88%E3%81%AB%E7%B6%9A%E3%81%8F%E5%90%8D%E5%89%8D%E3%81%99%E3%81%B9%E3%81%A6%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99"
+    },
+    {
+        "question": "Pythonのオブジェクトにおいて、同一のオブジェクトに複数の名前が割り当てられる機能は何として知られていますか？",
+        "choices": [
+            "カプセル化 (Encapsulation)",
+            "別名づけ (Alias)",
+            "多態性 (Polymorphism)",
+            "継承 (Inheritance)"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "オブジェクトには個体性があり、同一のオブジェクトに複数の名前を割り当てることができ、この機能は他の言語では別名づけ（alias）として知られています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E5%90%8C%E4%B8%80%E3%81%AE%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AB(%E8%A4%87%E6%95%B0%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97%E3%81%8B%E3%82%89)%20%E8%A4%87%E6%95%B0%E3%81%AE%E5%90%8D%E5%89%8D%E3%82%92%E5%89%B2%E3%82%8A%E5%BD%93%E3%81%A6%E3%82%8B%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82%E3%81%93%E3%81%AE%E6%A9%9F%E8%83%BD%E3%81%AF%E4%BB%96%E3%81%AE%E8%A8%80%E8%AA%9E%E3%81%A7%E3%81%AF%E5%88%A5%E5%90%8D%E3%81%A5%E3%81%91(alias)%20%E3%81%A8%E3%81%97%E3%81%A6%E7%9F%A5%E3%82%89%E3%82%8C%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "関数の外側で定義された変数に再束縛（値を変更）するために、ローカルスコープの外側のスコープを指定するのに使われる文はどれですか？",
+        "choices": [
+            "`global`",
+            "`nonlocal`",
+            "`extern`",
+            "`local`"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "`nonlocal`文は、特定の変数が外側の（enclosing）スコープに存在し、そこで再束縛されることを指示できます。`global`はモジュールのグローバルスコープを指定します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E6%9C%80%E5%86%85%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97%E3%81%AE%E5%A4%96%E5%81%B4%E3%81%AB%E3%81%82%E3%82%8B%E5%A4%89%E6%95%B0%E3%81%AB%E5%86%8D%E6%9D%9F%E7%B8%9B%E3%81%99%E3%82%8B%E3%81%AB%E3%81%AF%E3%80%81%20nonlocal%20%E6%96%87%E3%81%8C%E4%BD%BF%E3%81%88%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "クラス定義は、ローカルスコープの中にどのような要素を新しく作成しますか？",
+        "choices": [
+            "新しいグローバルスコープ",
+            "新しいモジュール",
+            "もう一つ名前空間",
+            "新しいビルトインスコープ"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "クラス定義では、ローカルスコープの中に、クラスメンバー（属性やメソッド）を格納するためのもう一つの名前空間が置かれます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%9A%E7%BE%A9%E3%81%A7%E3%81%AF%E3%80%81%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97%E3%81%AE%E4%B8%AD%E3%81%AB%E3%82%82%E3%81%86%E4%B8%80%E3%81%A4%E5%90%8D%E5%89%8D%E7%A9%BA%E9%96%93%E3%81%8C%E7%BD%AE%E3%81%8B%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "クラスからインスタンスを作成し、そのインスタンスが初期化されるときに自動的に呼び出されるメソッドはどれですか？",
+        "choices": [
+            "`__call__`",
+            "`__main__`",
+            "`__new__`",
+            "`__init__`"
+        ],
+        "correct": 4,
+        "category": "section_9",
+        "rationale": "インスタンスが作成された後、`__init__()`が初期化のために呼び出されます。`__new__`はインスタンス作成（メモリ確保）を担当しますが、チュートリアルでは`__init__`が初期化メソッドとして説明されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%8C%E5%88%9D%E6%9C%9F%E5%8C%96%E3%81%95%E3%82%8C%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E5%AE%9F%E8%A1%8C%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "Pythonクラスの通常のメンバー（データメンバーやメソッド）について、C++の用語で言えば、プライベート変数に関する例外を除き、デフォルトでどのようなアクセスレベルですか？",
+        "choices": [
+            "protected",
+            "private",
+            "public",
+            "friend"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "C++の用語で言えば、通常のクラスメンバは（プライベート変数に書かれている例外を除いて）publicであり、誰でもアクセス可能です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=C%2B%2B%20%E3%81%AE%E7%94%A8%E8%AA%9E%E3%81%A7%E8%A8%80%E3%81%88%E3%81%B0%E3%80%81%E9%80%9A%E5%B8%B8%E3%81%AE%E3%82%AF%E3%83%A9%E3%82%B9%E3%83%A1%E3%83%B3%E3%83%90%20(%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A1%E3%83%B3%E3%83%90%E3%82%82%E5%90%AB%E3%82%80)%20%E3%81%AF%20(%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E5%A4%89%E6%95%B0%20%E3%81%AB%E6%9B%B8%E3%81%8B%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E4%BE%8B%E5%A4%96%E3%82%92%E9%99%A4%E3%81%84%E3%81%A6)%20public%20%E3%81%A7%E3%81%82%E3%82%8A"
+    },
+    {
+        "question": "Pythonでオブジェクトを反復処理（ループ）できるようにするために、クラスに実装する必要がある2つの主要な特殊メソッドはどれですか？",
+        "choices": [
+            "`__call__`と`__main__`",
+            "`__new__`と`__init__`",
+            "`__iter__`と`__next__`",
+            "`__get__`と`__set__`"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "反復プロトコルを実装するために、オブジェクトは`__iter__`メソッド（イテレータオブジェクトを返す）と、イテレータオブジェクトは`__next__`メソッド（次の要素を返す）を定義する必要があります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%A4%E3%83%86%E3%83%AC%E3%83%BC%E3%82%BF%20(iterator)"
+    },
+    {
+        "question": "イテレータの`__next__()`メソッドがそれ以上要素がないことを通知するために送出する例外はどれですか？",
+        "choices": [
+            "`StopIteration`",
+            "`IndexError`",
+            "`ValueError`",
+            "`EndOfIteration`"
+        ],
+        "correct": 1,
+        "category": "section_9",
+        "rationale": "`__next__()`メソッドは、次の要素がない場合、`StopIteration`例外を送出する必要があります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=__next__()%20%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%AF%E3%80%81%E3%82%82%E3%81%AF%E3%82%84%E3%80%81%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99%E3%81%B9%E3%81%8D%E8%A6%81%E7%B4%A0%E3%81%8C%E3%81%AA%E3%81%84%E5%A0%B4%E5%90%88%E3%80%81%20StopIteration%20%E4%BE%8B%E5%A4%96%E3%82%92%E9%80%81%E5%87%BA%E3%81%97%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "以下のうち、Pythonの関数の定義内で、一時停止と再開を可能にするキーワードはどれですか？",
+        "choices": [
+            "`pause`",
+            "`return`",
+            "`yield`",
+            "`resume`"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "`yield`キーワードを含む関数はジェネレータとなり、その関数は値を一時停止して送出（yield）し、後に状態を保ったまま再開できます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AC%E3%83%BC%E3%82%BF%20(generator)"
+    },
+    {
+        "question": "`yield`キーワードを含む関数が呼び出されたとき、返されるオブジェクトは何ですか？",
+        "choices": [
+            "計算結果のリスト",
+            "ジェネレータ・イテレータ",
+            "最終的な単一の結果",
+            "クラスオブジェクト"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "`yield`を含む関数を呼び出すと、その関数は実行を開始せず、ジェネレータ・イテレータ（ジェネレータオブジェクト）を返します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%81%93%E3%81%AE%E3%82%88%E3%81%86%E3%81%AA%E9%96%A2%E6%95%B0%E3%81%8C%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%95%E3%82%8C%E3%82%8B%E3%81%A8%E3%80%81%E5%AE%9F%E8%A1%8C%E3%82%92%E9%96%8B%E5%A7%8B%E3%81%9B%E3%81%9A%E3%80%81%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AC%E3%83%BC%E3%82%BF%E3%83%BB%E3%82%A4%E3%83%86%E3%83%AC%E3%83%BC%E3%82%BF%E3%82%92%E8%BF%94%E3%81%97%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "ジェネレータ式を作成する正しい構文はどれですか？",
+        "choices": [
+            "`[expression for item in iterable]`",
+            "`{expression for item in iterable}`",
+            "`(expression for item in iterable)`",
+            "`generator(expression for item in iterable)`"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "ジェネレータ式は、リスト内包表記に似ていますが、角括弧`[]`の代わりに丸括弧`()`を使用します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AC%E3%83%BC%E3%82%BF%E5%BC%8F%20(generator%20expression)"
+    },
+    {
+        "question": "ローカルスコープの外側にある変数に代入を行った場合（`global`や`nonlocal`を宣言せずに）、Pythonが取る動作として正しいものはどれですか？",
+        "choices": [
+            "エラーを発生させる",
+            "外側のスコープの変数を変更する",
+            "単に新しいローカル変数を作成する",
+            "値を無視する"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "`global`や`nonlocal`と宣言されなかった変数に対する書き込みは、最も内側のスコープで新しいローカル変数を作成し、外部のスコープの値は変化しません。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=nonlocal%20%E3%81%A8%E5%AE%A3%E8%A8%80%E3%81%95%E3%82%8C%E3%81%AA%E3%81%8B%E3%81%A3%E3%81%9F%E5%A4%89%E6%95%B0%E3%81%AF%E3%80%81%E5%85%A8%E3%81%A6%E8%AA%AD%E3%81%BF%E5%87%BA%E3%81%97%E5%B0%82%E7%94%A8%E3%81%A8%E3%81%AA%E3%82%8A%E3%81%BE%E3%81%99%20(%E3%81%9D%E3%81%AE%E3%82%88%E3%81%86%E3%81%AA%E5%A4%89%E6%95%B0%E3%81%AB%E5%AF%BE%E3%81%99%E3%82%8B%E6%9B%B8%E3%81%8D%E8%BE%BC%E3%81%BF%E3%81%AF%E3%80%81%E5%8D%98%E3%81%AB%20%E6%96%B0%E3%81%97%E3%81%84%20%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E5%A4%89%E6%95%B0%E3%82%92%E3%82%82%E3%81%A3%E3%81%A8%E3%82%82%E5%86%85%E5%81%B4%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97%E3%81%A7%E4%BD%9C%E6%88%90%E3%81%97%E3%80%81%E5%A4%96%E9%83%A8%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97%E3%81%AE%E5%80%A4%E3%81%AF%E5%A4%89%E5%8C%96%E3%81%97%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82)"
+    },
+    {
+        "question": "クラスインスタンスからメソッドが呼び出されたとき、そのメソッドの第一引数（`self`）は、**明示的に**呼び出し時に渡す必要がありますか？",
+        "choices": [
+            "はい、常に明示的に渡す必要があります。",
+            "いいえ、自動的に渡されるため、明示的に渡す必要はありません。",
+            "静的メソッドの場合は渡す必要があります。",
+            "クラス変数にアクセスする場合のみ渡す必要があります。"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "メソッドの第一引数は、メソッド呼び出しの際に暗黙の引数として渡されるため、呼び出し側が明示的に渡す必要はありません。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E7%AC%AC%E4%B8%80%E5%BC%95%E6%95%B0%E3%81%AE%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AF%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97%E3%81%AE%E9%9A%9B%E3%81%AB%E6%9A%97%E9%BB%99%E3%81%AE%E5%BC%95%E6%95%B0%E3%81%A8%E3%81%97%E3%81%A6%E6%B8%A1%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "Pythonのクラスが実行時に生成され、生成後に変更できるという特性は、Pythonのどのような性質に基づいていますか？",
+        "choices": [
+            "静的な性質",
+            "動的な性質",
+            "オブジェクト指向の性質",
+            "コンパイル型の性質"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "クラス機構はPythonの動的な性質に従うように設計されており、クラスは実行時に生成され、生成後に変更することができます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AF%E5%AE%9F%E8%A1%8C%E6%99%82%E3%81%AB%E7%94%9F%E6%88%90%E3%81%95%E3%82%8C%E3%80%81%E7%94%9F%E6%88%90%E5%BE%8C%E3%81%AB%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "ジェネレータが生成する値は、どのように消費（使用）されますか？",
+        "choices": [
+            "ジェネレータをリストに変換する",
+            "値を送出するまで、ジェネレータは一時停止したまま",
+            "ジェネレータ関数が呼び出された直後にすべての値が計算される",
+            "値を消費するには`return`文が必要"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "ジェネレータは、`yield`文で一時停止し、必要に応じて値を生成（送出）し、再開します。すべての値が事前に計算されるわけではありません。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97%E5%81%B4%E3%81%AF%E3%80%81%E3%82%82%E3%81%AF%E3%82%84%E3%80%81%E5%80%A4%E3%82%92%E5%BF%85%E8%A6%81%E3%81%A8%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E3%80%81%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AC%E3%83%BC%E3%82%BF%E3%82%92%E5%86%8D%E9%96%8B%E3%81%97%E3%81%BE%E3%81%99"
+    },
+    {
+        "question": "Pythonのクラス定義の最後に、クラス名に丸括弧をつけて別のクラス名（例: `class DerivedClassName(BaseClassName):`）を指定することで何が行われますか？",
+        "choices": [
+            "クラスのインスタンス化",
+            "クラスの型キャスト",
+            "クラスの継承",
+            "クラスのモジュール化"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "クラス定義の構文で、クラス名の後に丸括弧で別のクラス名を指定することは、そのクラスからの継承を示します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%9A%E7%BE%A9%E3%81%AE%E6%A7%8B%E6%96%87"
+    },
+    {
+        "question": "モジュール内のグローバルな名前空間は、いつ作成されますか？",
+        "choices": [
+            "Pythonインタプリタが起動するとき",
+            "モジュール内の関数が呼び出されたとき",
+            "モジュール定義が読み込まれたとき",
+            "モジュール内のクラスがインスタンス化されたとき"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "モジュールのグローバルな名前空間は、モジュール定義が読み込まれたときに作成されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E3%81%AA%E5%90%8D%E5%89%8D%E7%A9%BA%E9%96%93%E3%81%AF%E3%80%81%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E5%AE%9A%E7%BE%A9%E3%81%8C%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BE%E3%82%8C%E3%81%9F%E3%81%A8%E3%81%8D%E3%81%AB%E4%BD%9C%E6%88%90%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "関数のローカルな名前空間は、いつ削除されますか？",
+        "choices": [
+            "Pythonインタプリタが終了するとき",
+            "関数が呼び出される前",
+            "関数が呼び出されたとき",
+            "関数から戻ったときや、関数内で例外が処理されずに送出されたとき"
+        ],
+        "correct": 4,
+        "category": "section_9",
+        "rationale": "関数のローカルな名前空間は、関数が呼び出されたときに作成され、関数から戻ったときや、関数内で例外が送出され、かつ関数内で処理されなかった場合に削除されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E9%96%A2%E6%95%B0%E3%81%AE%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%AA%E5%90%8D%E5%89%8D%E7%A9%BA%E9%96%93%E3%81%AF%E3%80%81%E9%96%A2%E6%95%B0%E3%81%8C%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%95%E3%82%8C%E3%81%9F%E3%81%A8%E3%81%8D%E3%81%AB%E4%BD%9C%E6%88%90%E3%81%95%E3%82%8C%E3%80%81%E9%96%A2%E6%95%B0%E3%81%8B%E3%82%89%E6%88%BB%E3%81%A3%E3%81%9F%E3%81%A8%E3%81%8D%E3%82%84%E3%80%81%E9%96%A2%E6%95%B0%E5%86%85%E3%81%A7%E4%BE%8B%E5%A4%96%E3%81%8C%E9%80%81%E5%87%BA%E3%81%95%E3%82%8C%E3%80%81%E3%81%8B%E3%81%A4%E9%96%A2%E6%95%B0%E5%86%85%E3%81%A7%E5%87%A6%E7%90%86%E3%81%95%E3%82%8C%E3%81%AA%E3%81%8B%E3%81%A3%E3%81%9F%E5%A0%B4%E5%90%88%E3%81%AB%E5%89%8A%E9%99%A4%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "クラスからインスタンスを作成する際、クラスオブジェクトはどのような役割を果たしますか？",
+        "choices": [
+            "クラスメソッドのみを提供する",
+            "インスタンスを生成するためのテンプレートとして機能する",
+            "データのみを保持し、機能は提供しない",
+            "プログラムが終了するまでメモリにロードされない"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "クラスオブジェクトは、インスタンスオブジェクトを生成するためのファクトリとして機能します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AF%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E7%94%9F%E6%88%90%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%81%A8%E3%81%97%E3%81%A6%E6%A9%9F%E8%83%BD%E3%81%97%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "`yield`キーワードを含む関数がジェネレータ・イテレータを返した後、次の要素を取得するために使用される組み込み関数はどれですか？",
+        "choices": [
+            "`next()`",
+            "`get()`",
+            "`iter()`",
+            "`generate()`"
+        ],
+        "correct": 1,
+        "category": "section_9",
+        "rationale": "ジェネレータ・イテレータは、組み込み関数`next()`を使って呼び出されることで実行を再開し、次の値を生成します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%81%9D%E3%81%AE%E5%BE%8C%E3%80%81%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AC%E3%83%BC%E3%82%BF%E3%83%BB%E3%82%A4%E3%83%86%E3%83%AC%E3%83%BC%E3%82%BF%E3%81%AF%E3%80%81%E7%B5%84%E3%81%BF%E8%BE%BC%E3%81%BF%E9%96%A2%E6%95%B0%20next()%20%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%95%E3%82%8C%E3%82%8B%E3%81%93%E3%81%A8%E3%81%A7%E3%80%81%E9%80%81%E4%BF%A1%E3%81%99%E3%82%8B%E5%80%A4%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%BE%E3%81%A7%E5%AE%9F%E8%A1%8C%E3%82%92%E5%86%8D%E9%96%8B%E3%81%97%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "モジュール内のグローバルな名前空間は、Pythonの実行中のどこまで残りますか？",
+        "choices": [
+            "モジュール内の関数が全て実行されるまで",
+            "クラスのインスタンスがすべて削除されるまで",
+            "インタプリタが終了するまで",
+            "`del`文で明示的に削除されるまで"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "通常、モジュールの名前空間は、インタプリタが終了するまで残ります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E9%80%9A%E5%B8%B8%E3%80%81%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E5%90%8D%E5%89%8D%E7%A9%BA%E9%96%93%E3%81%AF%E3%80%81%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%97%E3%83%AA%E3%82%BF%E3%81%8C%E7%B5%82%E4%BA%86%E3%81%99%E3%82%8B%E3%81%BE%E3%81%A7%E6%AE%8B%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "オブジェクトの属性に対する代入は、どのような操作として説明されますか？",
+        "choices": [
+            "データのコピー",
+            "オブジェクトのメモリの再割り当て",
+            "オブジェクトを名前に束縛すること",
+            "属性の値を削除すること"
+        ],
+        "correct": 3,
+        "category": "section_9",
+        "rationale": "Pythonでは、代入はデータをコピーしません。オブジェクトを名前に束縛するだけです。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E4%BB%A3%E5%85%A5%E3%81%AF%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E3%82%B3%E3%83%94%E3%83%BC%E3%81%97%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E5%90%8D%E5%89%8D%E3%81%AB%E6%9D%9F%E7%B8%9B%E3%81%99%E3%82%8B%E3%81%A0%E3%81%91%E3%81%A7%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "クラスインスタンスの属性を`del`文で削除した場合、どのような操作が行われますか？",
+        "choices": [
+            "属性に格納されていたデータが物理的に消去される",
+            "属性に対する値の拘束がインスタンスの名前空間から取り除かれる",
+            "属性が`None`に設定される",
+            "基底クラスの同名の属性が削除される"
+        ],
+        "correct": 2,
+        "category": "section_9",
+        "rationale": "`del x`は、ローカルスコープの名前空間から`x`に対する拘束を取り除きます。インスタンス属性の場合も同様に、インスタンスの名前空間からその名前とオブジェクトの関連付けが解除されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E5%89%8A%E9%99%A4%E3%82%82%E5%90%8C%E6%A7%98%E3%81%A7%E3%80%81%20del%20x%20%E3%81%AF%E3%80%81%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97%E3%81%AE%E5%90%8D%E5%89%8D%E7%A9%BA%E9%96%93%E3%81%8B%E3%82%89%20x%20%E3%81%AB%E5%AF%BE%E3%81%99%E3%82%8B%E6%8B%98%E6%9D%9F%E3%82%92%E5%8F%96%E3%82%8A%E9%99%A4%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "クラス定義内でメソッドが定義されたとき、メソッドオブジェクトとして機能するものは何ですか？",
+        "choices": [
+            "クラス内に定義された通常の関数",
+            "クラスインスタンスのコピー",
+            "クラスのグローバル変数",
+            "組み込み関数`method()`"
+        ],
+        "correct": 1,
+        "category": "section_9",
+        "rationale": "クラス内に定義された通常の関数は、そのクラスのインスタンスに対して呼び出されると、メソッドオブジェクトとして機能します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/classes.html#:~:text=%E3%82%AF%E3%83%A9%E3%82%B9%E5%86%85%E3%81%AB%E5%AE%9A%E7%BE%A9%E3%81%95%E3%82%8C%E3%81%9F%E9%80%9A%E5%B8%B8%E3%81%AE%E9%96%A2%E6%95%B0%E3%81%AF%E3%80%81%E3%81%9D%E3%81%AE%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%95%E3%82%8C%E3%82%8B%E3%81%A8%E3%80%81%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A8%E3%81%97%E3%81%A6%E6%A9%9F%E8%83%BD%E3%81%97%E3%81%BE%E3%81%99%E3%80%82"
+    },
+    {
+        "question": "OSとのインターフェースを提供し、カレントディレクトリの変更やディレクトリの作成などを行うためのモジュールはどれですか？",
+        "choices": ["sys", "os", "shutil", "pathlib"],
+        "correct": 2,
+        "category": "section_10",
+        "rationale": "os モジュールは、オペレーティングシステムに依存した様々な機能を利用するための関数を提供しています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=os%20モジュールは、オペレーティングシステムとやり取りする関数を数十個提供しています。"
+    },
+    {
+        "question": "ファイルのコピーや移動など、ファイルやディレクトリに対する高レベルな操作を提供しているモジュールはどれですか？",
+        "choices": ["os", "glob", "shutil", "sys"],
+        "correct": 3,
+        "category": "section_10",
+        "rationale": "shutil モジュールは、ファイルのコピー（shutil.copyfile）や移動（shutil.move）など、日常的なファイル管理タスクに適したインターフェースを提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=日常的なファイル管理タスクには、%20shutil%20モジュールが提供する高レベルなインターフェースが使いやすいでしょう。"
+    },
+    {
+        "question": "ワイルドカード（*など）を使ってディレクトリからファイルの一覧を作成するのに便利なモジュールはどれですか？",
+        "choices": ["os", "glob", "re", "math"],
+        "correct": 2,
+        "category": "section_10",
+        "rationale": "glob モジュールは、ディレクトリのワイルドカード検索からファイルリストを作成するための関数を提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=glob%20モジュールは、ディレクトリのワイルドカード検索からファイルリストを作成するための関数を提供します。"
+    },
+    {
+        "question": "コマンドライン引数をリストとして取得するために使用する変数はどれですか？",
+        "choices": ["os.argv", "sys.args", "sys.argv", "env.argv"],
+        "correct": 3,
+        "category": "section_10",
+        "rationale": "コマンドライン引数は、sys モジュールの argv 属性にリストとして格納されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=これらの引数は%20sys%20モジュールの%20argv%20属性にリストとして格納されます。"
+    },
+    {
+        "question": "スクリプトを途中で終了させるために最も一般的に使われる関数はどれですか？",
+        "choices": ["os.exit()", "sys.exit()", "break", "stop()"],
+        "correct": 2,
+        "category": "section_10",
+        "rationale": "sys.exit() を呼び出すことで、実行中のスクリプトを終了させることができます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=スクリプトを終了させる最も直接的な方法は%20sys.exit()%20です。"
+    },
+    {
+        "question": "正規表現を使って複雑な文字列処理を行うためのモジュールはどれですか？",
+        "choices": ["str", "string", "re", "regex"],
+        "correct": 3,
+        "category": "section_10",
+        "rationale": "re モジュールは、高度な文字列処理のための正規表現ツールを提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=re%20モジュールは、高度な文字列処理のための正規表現ツールを提供します。"
+    },
+    {
+        "question": "浮動小数点演算のためにCライブラリの関数（sin, log, sqrtなど）へのアクセスを提供するモジュールはどれですか？",
+        "choices": ["random", "math", "decimal", "statistics"],
+        "correct": 2,
+        "category": "section_10",
+        "rationale": "math モジュールは、浮動小数点演算のための下位のCライブラリ関数へのアクセスを提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=math%20モジュールは、浮動小数点演算のための下位の%20C%20ライブラリ関数へのアクセスを提供します。"
+    },
+    {
+        "question": "ランダムな要素の選択や、乱数の生成を行うためのモジュールはどれですか？",
+        "choices": ["math", "chance", "random", "statistics"],
+        "correct": 3,
+        "category": "section_10",
+        "rationale": "random モジュールは、乱数に基づいた選択を行うためのツールを提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=random%20モジュールは、乱数に基づいた選択を行うためのツールを提供します。"
+    },
+    {
+        "question": "URLからデータを取得するなど、インターネット上のプロトコルを処理するための最も基本的なモジュールはどれですか？",
+        "choices": ["smtplib", "urllib.request", "http.server", "socket"],
+        "correct": 2,
+        "category": "section_10",
+        "rationale": "urllib.request は URL からデータを取得するためのモジュールです。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=urllib.request%20は%20URL%20からデータを取得するためのものです"
+    },
+    {
+        "question": "日付や時刻を操作するためのモジュールはどれですか？",
+        "choices": ["time", "calendar", "datetime", "clock"],
+        "correct": 3,
+        "category": "section_10",
+        "rationale": "datetime モジュールは、日付や時刻を操作するためのクラスを提供しています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=datetime%20モジュールは、日付や時刻を操作するためのクラスを提供しています。"
+    },
+    {
+        "question": "データの圧縮やアーカイブ（zip, gzipなど）を直接サポートするモジュールの例として正しいものはどれですか？",
+        "choices": ["zlib", "compress", "archive", "shutil"],
+        "correct": 1,
+        "category": "section_10",
+        "rationale": "Pythonは zlib, gzip, bz2, lzma, zipfile, tarfile といったデータ圧縮・アーカイブモジュールを直接サポートしています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=一般的なデータ圧縮やアーカイブ形式は、zlib、gzip、bz2、lzma、zipfile、および%20tarfile%20の各モジュールで直接サポートされています。"
+    },
+    {
+        "question": "作成した小さなコードの実行時間を測定し、パフォーマンスを計測するために適したモジュールはどれですか？",
+        "choices": ["profile", "datetime", "timeit", "timer"],
+        "correct": 3,
+        "category": "section_10",
+        "rationale": "timeit モジュールは、短いコード片の実行時間を計測して、パフォーマンスの差を確認するのに役立ちます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=timeit%20モジュールは、パフォーマンスのわずかな差を素早く計測できます。"
+    },
+    {
+        "question": "関数のドキュメンテーション文字列（docstring）の中にテストを記述し、それを実行するためのモジュールはどれですか？",
+        "choices": ["unittest", "pytest", "doctest", "assert"],
+        "correct": 3,
+        "category": "section_10",
+        "rationale": "doctest モジュールは、ドキュメント内の例が正しいかどうかをスキャンして検証します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=doctest%20モジュールは、モジュールをスキャンし、プログラムのドキュメンテーション文字列に組み込まれたテストを検証するためのツールを提供します。"
+    },
+    {
+        "question": "より包括的で高度なユニットテストを作成するための、標準ライブラリのモジュールはどれですか？",
+        "choices": ["doctest", "unittest", "testcase", "check"],
+        "correct": 2,
+        "category": "section_10",
+        "rationale": "unittest モジュールは、別のファイルに詳細なテストセットを作成するための機能を提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=unittest%20モジュールは、%20doctest%20モジュールほど楽ではありませんが、別のファイルに詳細なテストセットを記述することができます。"
+    },
+    {
+        "question": "数値データの平均、中央値、分散などの基本的な統計指標を計算するためのモジュールはどれですか？",
+        "choices": ["math", "random", "statistics", "decimal"],
+        "correct": 3,
+        "category": "section_10",
+        "rationale": "statistics モジュールは、数値データの基本的な統計的性質を計算します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=statistics%20モジュールは、数値データの基本的な統計的なプロパティを計算します。"
+    },
+    {
+        "question": "デフォルトの浮動小数点数（float）では不正確になるような、正確な十進演算（会計ソフトなど）が必要な場合に使用するモジュールはどれですか？",
+        "choices": ["math", "decimal", "fractions", "precise"],
+        "correct": 2,
+        "category": "section_10",
+        "rationale": "decimal モジュールは、人間が手計算するのと同じように正確な十進浮動小数点演算を提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=decimal%20モジュールは%20Decimal%20データ型を提供し、10%20進浮動小数点演算に使用されます。"
+    },
+    {
+        "question": "os.pathモジュールに似た機能を持ちつつ、パスを文字列ではなくオブジェクトとして直感的に操作できるモダンなモジュールはどれですか？",
+        "choices": ["os", "glob", "pathlib", "shutil"],
+        "correct": 3,
+        "category": "section_10",
+        "rationale": "pathlib モジュールは、ファイルシステムのパスを、異なるオペレーティングシステム間で適切に解釈されるオブジェクトとして提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=ファイルやディレクトリの操作には、%20pathlib%20モジュールがファイルシステムのパスを適切に解釈するクラスを提供しています。"
+    },
+    {
+        "question": "メールを送信するために使用される、SMTPプロトコルを扱うモジュールはどれですか？",
+        "choices": ["urllib", "smtplib", "poplib", "emaillib"],
+        "correct": 2,
+        "category": "section_10",
+        "rationale": "smtplib は、SMTPプロトコルを使ってメールを送信するためのモジュールです。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=smtplib%20はメールを送信するためのものです"
+    },
+    {
+        "question": "大きなデータ構造を「きれいに」整形して表示するためのモジュールはどれですか？",
+        "choices": ["print", "format", "pprint", "repr"],
+        "correct": 3,
+        "category": "section_10",
+        "rationale": "pprint モジュールは、インタープリタが読み込める形式を保ちつつ、複雑なデータ構造を読みやすく表示する機能を備えています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=pprint%20モジュールは、組み込みやユーザー定義のオブジェクトをインタープリタが読み込める形で表示する際に、制御された表示方法を提供します。"
+    },
+    {
+        "question": "文字列内のパターンを検索し、一致した部分を置換するために `re.sub()` を使いました。これはどのモジュールの機能ですか？",
+        "choices": ["string", "os", "re", "math"],
+        "correct": 3,
+        "category": "section_10",
+        "rationale": "re.sub() は正規表現モジュール re の関数で、パターンに一致した箇所の置換を行います。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib.html#:~:text=>>>%20re.sub(r'(\\b%5B%5Ba-z%5D%5D%2B)%20\\1'%2C%20r'\\1'%2C%20'cat%20in%20the%20the%20hat')"
+    },
+    {
+        "question": "エンドユーザーが編集するのに適した、簡潔な構文（$変数名）で文字列置換を行えるクラスを提供しているモジュールはどれですか？",
+        "choices": ["re", "textwrap", "string", "json"],
+        "correct": 3,
+        "category": "section_11",
+        "rationale": "string モジュールの Template クラスを使うと、 $ を使った簡潔な置換が可能です。これは複雑な f-string などをユーザーに見せたくない場合に有用です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=string%20モジュールには、エンドユーザーが編集するのに適した%20Template%20クラスがあります。"
+    },
+    {
+        "question": "バイナリデータ（C言語の構造体など）をPythonのオブジェクトとして扱うための、パック・アンパック機能を提供するモジュールはどれですか？",
+        "choices": ["binary", "struct", "pickle", "ctypes"],
+        "correct": 2,
+        "category": "section_11",
+        "rationale": "struct モジュールは、バイナリ形式で保存されたデータ（ファイルヘッダなど）をPythonで扱うための pack/unpack 関数を提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=struct%20モジュールは、可変長のバイナリデータレコードを処理するための%20pack()%20および%20unpack()%20関数を提供します。"
+    },
+    {
+        "question": "複数のタスクを並行して実行し、アプリケーションの応答性を高めるためのモジュールはどれですか？",
+        "choices": ["multiprocessing", "asyncio", "threading", "parallel"],
+        "correct": 3,
+        "category": "section_11",
+        "rationale": "threading モジュールは、メインプログラムの実行中に他のタスクをバックグラウンドで実行（スレッド化）するために使用されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=threading%20は、メインのプログラムを実行しつつ、タスクをデカップリングするためのテクニックです。"
+    },
+    {
+        "question": "アプリケーションの実行状況を、重要度（DEBUG, INFO, WARNINGなど）に応じて記録・出力するための標準的なモジュールはどれですか？",
+        "choices": ["sys.stderr", "logging", "print", "trace"],
+        "correct": 2,
+        "category": "section_11",
+        "rationale": "logging モジュールは、柔軟なログ記録システムを提供します。出力先を標準エラー、ファイル、メールなどに切り替えることも可能です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=logging%20モジュールは、充実した、柔軟なロギングシステムを提供しています。"
+    },
+    {
+        "question": "循環参照を発生させずにオブジェクトを参照し、メモリが不足した際に自動的に消滅しても構わないような参照を作るためのモジュールはどれですか？",
+        "choices": ["gc", "weakref", "memfree", "refcount"],
+        "correct": 2,
+        "category": "section_11",
+        "rationale": "weakref モジュールは、オブジェクトへの「弱参照」を作成します。これは、キャッシュなどの重いオブジェクトを追跡する際に便利です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=weakref%20モジュールは、オブジェクトを追跡するためのツールを提供しますが、そのオブジェクトに対する参照だけでは、オブジェクトが死なないようにはしません。"
+    },
+    {
+        "question": "リストのようなデータを操作する際、要素の追加・削除を高速に行える、ソート済みリストを維持するためのモジュールはどれですか？",
+        "choices": ["bisect", "heapq", "array", "collections"],
+        "correct": 1,
+        "category": "section_11",
+        "rationale": "bisect モジュールは、ソートされたリストを維持しながら新しい要素を適切な位置に挿入するためのツールを提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=bisect%20モジュールは、ソートされたリストを操作するための関数を提供します。"
+    },
+    {
+        "question": "最小値の取り出しが常に高速（O(1)）で行える「ヒープ」データ構造を実装しているモジュールはどれですか？",
+        "choices": ["bisect", "stack", "heapq", "queue"],
+        "correct": 3,
+        "category": "section_11",
+        "rationale": "heapq モジュールは、通常のリストをヒープとして扱うための関数を提供し、最小要素を効率的に管理できます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=heapq%20モジュールは、通常のリストに基づいたヒープの実装を提供します。"
+    },
+    {
+        "question": "非常に精度の高い浮動小数点演算が必要な場合や、人間にとって直感的な「10進数」計算を優先したい場合に使用するモジュールはどれですか？",
+        "choices": ["math", "decimal", "float", "numpy"],
+        "correct": 2,
+        "category": "section_11",
+        "rationale": "decimal モジュールは Decimal 型を提供します。これは財務計算など、丸め誤差が許されない場面で不可欠です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=decimal%20モジュールは%20Decimal%20データ型を提供し、10%20進浮動小数点演算に使用されます。"
+    },
+    {
+        "question": "モジュールレベルで定義されていない、複雑な型のオブジェクトをシリアライズ（保存可能な形式に変換）するためのモジュールはどれですか？",
+        "choices": ["json", "pickle", "marshal", "struct"],
+        "correct": 2,
+        "category": "section_11",
+        "rationale": "pickle モジュールは、ほぼすべてのPythonオブジェクトをバイトストリームに変換して保存できます。ただし、セキュリティ上の理由から、信頼できないデータには使用しないでください。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=pickle%20モジュールは、任意の%20Python%20オブジェクトを、バイトストリームに変換したり元に戻したりするためのツールです。"
+    },
+    {
+        "question": "多数の整数や浮動小数点数を、通常のリストよりもメモリ効率よく、かつ「型」を指定して保存するためのモジュールはどれですか？",
+        "choices": ["numpy", "array", "struct", "bytes"],
+        "correct": 2,
+        "category": "section_11",
+        "rationale": "array モジュールは、同じ型の数値データのみをコンパクトに保存する array オブジェクトを提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=array%20モジュールは、%20list%20のように振舞う%20array()%20オブジェクトを提供しますが、格納できるのは一種類のデータ型のみで、よりコンパクトに格納されます。"
+    },
+    {
+        "question": "長い文章を表示する際に、指定した幅で改行（折り返し）を入れたり、省略記号を追加したりするためのモジュールはどれですか？",
+        "choices": ["string", "textwrap", "re", "pprint"],
+        "correct": 2,
+        "category": "section_11",
+        "rationale": "textwrap モジュールは、テキストの段落を指定した幅に収まるように整形するための機能を持っています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=textwrap%20モジュールは、テキストの段落を指定した幅に収まるように整形します。"
+    },
+    {
+        "question": "地域化（多言語対応）のために、メッセージの翻訳カタログなどを管理するためのツールを提供しているモジュールはどれですか？",
+        "choices": ["locale", "gettext", "translate", "lang"],
+        "correct": 2,
+        "category": "section_11",
+        "rationale": "gettext モジュールは、GNU gettext ツールセットに基づいた国際化・地域化サービスを提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=gettext%20モジュールは、アプリケーションを国際化するためのツールセットを提供します。"
+    },
+    {
+        "question": "リストの先頭と末尾の両方から高速に要素を追加・削除できる（キューやスタックに適した）データ型を提供するモジュールはどれですか？",
+        "choices": ["collections.deque", "list", "array", "bisect"],
+        "correct": 1,
+        "category": "section_11",
+        "rationale": "collections モジュールの deque（デック）は、両端での挿入・削除が O(1) で行えます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=collections%20モジュールには、リストに似ているが、左側からの追加や取り出しが高速な%20deque()%20オブジェクトがあります。"
+    },
+    {
+        "question": "loggingモジュールにおいて、警告レベルのメッセージを出力するためのメソッドはどれですか？",
+        "choices": ["logging.log()", "logging.warn()", "logging.warning()", "logging.alert()"],
+        "correct": 3,
+        "category": "section_11",
+        "rationale": "logging.debug(), logging.info(), logging.warning(), logging.error(), logging.critical() が標準的なレベル別のメソッドです。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=logging.debug('Debugging%20information')%0Alogging.info('Informational%20message')%0Alogging.warning('Warning%3Aconfig%20file%20%25s%20not%20found'%2C%20'server.conf')"
+    },
+    {
+        "question": "マルチスレッドにおいて、複数のスレッド間でデータを安全にやり取りするために設計された、ロック管理を自動で行うモジュールはどれですか？",
+        "choices": ["threading", "queue", "socket", "multiprocessing"],
+        "correct": 2,
+        "category": "section_11",
+        "rationale": "queue モジュールは、スレッド間でのデータの受け渡しに最適な「スレッドセーフ」なキューを提供します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=queue%20モジュールは、マルチスレッド間で情報を安全に交換するための%20Queue%20オブジェクトを提供します。"
+    },
+    {
+        "question": "decimalモジュールを使って「0.1 + 0.1 + 0.1 - 0.3」を計算した結果は、通常の浮動小数点数（float）の結果とどう違いますか？",
+        "choices": ["どちらも 0.0 になる", "float は 0.0 にならないが、decimal は 0.0 になる", "decimal はエラーになる", "float は 0.0 になるが、decimal は 0.0 にならない"],
+        "correct": 2,
+        "category": "section_11",
+        "rationale": "float（バイナリ浮動小数点）は 0.1 を正確に表現できませんが、Decimal（10進浮動小数点）は 0.1 を正確に表現できるため、結果は正確に 0 になります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=decimal%20モジュールは、期待通りに%2010%20進計算を行います"
+    },
+    {
+        "question": "threading.Threadを使ってスレッドを開始するために呼び出すメソッドはどれですか？",
+        "choices": ["run()", "execute()", "start()", "main()"],
+        "correct": 3,
+        "category": "section_11",
+        "rationale": "Thread オブジェクトを作成した後、 .start() メソッドを呼ぶことで別スレッドの実行が開始されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=thread%20%3D%20AsyncZip(source%2C%20dest)%0Athread.start()"
+    },
+    {
+        "question": "大規模な計算でメモリを節約するために、弱い参照を使ってオブジェクトを管理する場合、オブジェクトがメモリから消去された後にその弱参照にアクセスしようとするとどうなりますか？",
+        "choices": ["エラーが発生する", "None が返される", "最後の値を保持し続ける", "自動的に再生成される"],
+        "correct": 2,
+        "category": "section_11",
+        "rationale": "弱参照が指しているオブジェクトがガベージコレクションによって回収されると、弱参照は自動的に None を返すようになります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=オブジェクトが削除されると、弱参照は自動的に取り除かれます。"
+    },
+    {
+        "question": "特定の地域（国や言語）に応じた、数値や日付の書式を扱うためのモジュールはどれですか？",
+        "choices": ["gettext", "locale", "datetime", "string"],
+        "correct": 2,
+        "category": "section_11",
+        "rationale": "locale モジュールは、国ごとの通貨単位や千の位の区切り文字など、地域固有の文化的な慣習を扱います。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=locale%20モジュールは、文化に依存するデータ形式のデータベースにアクセスします。"
+    },
+    {
+        "question": "JSONとPickleの最大の違いの一つとして、正しい説明はどれですか？",
+        "choices": ["JSONはPython専用である", "Pickleは安全だがJSONは危険である", "PickleはPython固有のオブジェクトを扱えるが、JSONは一般的なデータ型に限られる", "JSONの方がPickleよりも実行速度が速い"],
+        "correct": 3,
+        "category": "section_11",
+        "rationale": "JSONは異なる言語間でのデータ交換に適していますが、PickleはPython特有の複雑なオブジェクトをそのままシリアライズできる代わりに、Python以外での利用は困難です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/stdlib2.html#:~:text=pickle%20モジュールは、任意の%20Python%20オブジェクトを、バイトストリームに変換したり元に戻したりするためのツールです。"
+    },
+    {
+        "question": "Pythonの仮想環境が必要とされる主な理由は何ですか？",
+        "choices": [
+            "Pythonの実行速度を向上させるため",
+            "アプリケーションごとに異なるバージョンのライブラリを隔離して管理するため",
+            "プログラムの構文エラーを自動的に修正するため",
+            "OSの再起動なしにPythonをアップグレードするため"
+        ],
+        "correct": 2,
+        "category": "section_12",
+        "rationale": "アプリケーションによって必要なライブラリのバージョンが異なる場合、システム全体にインストールすると衝突が起こるため、仮想環境で個別に管理します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=Python%20アプリケーションは、しばしば標準ライブラリ以外にパッケージやモジュールを利用します。アプリケーションによっては、特定のバージョンのライブラリを必要とする場合があります。"
+    },
+    {
+        "question": "Python 3において、仮想環境を作成するために標準で提供されているモジュールはどれですか？",
+        "choices": ["virtualenv", "venv", "pyenv", "pipenv"],
+        "correct": 2,
+        "category": "section_12",
+        "rationale": "Python 3では、標準ライブラリとして `venv` モジュールが提供されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=仮想環境の作成と管理には、%20venv%20モジュールが使われます。"
+    },
+    {
+        "question": "「tutorial-env」という名前のディレクトリに仮想環境を作成するコマンドとして正しいものはどれですか？",
+        "choices": [
+            "python -m venv tutorial-env",
+            "venv create tutorial-env",
+            "python install venv tutorial-env",
+            "make venv tutorial-env"
+        ],
+        "correct": 1,
+        "category": "section_12",
+        "rationale": "`python -m venv` の後にディレクトリ名を指定することで仮想環境が作成されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=python%20%2Dm%20venv%20tutorial%2Denv"
+    },
+    {
+        "question": "Windowsのコマンドプロンプトで、作成した仮想環境（ディレクトリ名: tutorial-env）を「アクティベート」するためのコマンドはどれですか？",
+        "choices": [
+            "tutorial-env\\Scripts\\activate",
+            "source tutorial-env/bin/activate",
+            "activate tutorial-env",
+            "start tutorial-env"
+        ],
+        "correct": 1,
+        "category": "section_12",
+        "rationale": "Windows（コマンドプロンプト）では `Scripts\\activate` を実行します。`source` コマンドはUnix系（Linux/macOS）で使用します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=tutorial%2Denv%5CScripts%5Cactivate"
+    },
+    {
+        "question": "UnixやmacOSのシェルで、仮想環境（ディレクトリ名: tutorial-env）をアクティベートする際の正しいコマンドはどれですか？",
+        "choices": [
+            "tutorial-env/bin/activate",
+            "source tutorial-env/bin/activate",
+            "python activate tutorial-env",
+            "venv on tutorial-env"
+        ],
+        "correct": 2,
+        "category": "section_12",
+        "rationale": "UnixやmacOSでは、`source` コマンドを使ってアクティベート用スクリプトを読み込みます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=source%20tutorial%2Denv/bin/activate"
+    },
+    {
+        "question": "Pythonのパッケージをインストール、アップグレード、削除するために最も一般的に使われるプログラム（ツール）は何ですか？",
+        "choices": ["npm", "apt", "pip", "gem"],
+        "correct": 3,
+        "category": "section_12",
+        "rationale": "Pythonのパッケージ管理には `pip` が使用されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=パッケージのインストール、アップグレード、除去には、%20pip%20というプログラムを使います。"
+    },
+    {
+        "question": "「requests」というパッケージの最新バージョンをインストールするコマンドはどれですか？",
+        "choices": [
+            "pip get requests",
+            "python install requests",
+            "pip install requests",
+            "pip add requests"
+        ],
+        "correct": 3,
+        "category": "section_12",
+        "rationale": "パッケージのインストールは `pip install <パッケージ名>` で行います。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=pip%20install%20requests"
+    },
+    {
+        "question": "既にインストールされているパッケージ「requests」を、新しいバージョンにアップグレードするコマンドはどれですか？",
+        "choices": [
+            "pip update requests",
+            "pip install --upgrade requests",
+            "pip upgrade requests",
+            "python -m pip refresh requests"
+        ],
+        "correct": 2,
+        "category": "section_12",
+        "rationale": "既存パッケージの更新には `--upgrade`（または `-U`）オプションを使用します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=pip%20install%20%2D%2Dupgrade%20requests"
+    },
+    {
+        "question": "現在仮想環境にインストールされているすべてのパッケージを表示するコマンドはどれですか？",
+        "choices": ["pip list", "pip show", "pip info", "pip all"],
+        "correct": 1,
+        "category": "section_12",
+        "rationale": "`pip list` を実行すると、インストール済みのパッケージとそのバージョンが一覧表示されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=pip%20list%20は、仮想環境にインストールされたすべてのパッケージを表示します。"
+    },
+    {
+        "question": "インストールされているパッケージの情報を、他の環境でも再現可能な形式（requirements形式）で出力するコマンドはどれですか？",
+        "choices": ["pip list --format=req", "pip export", "pip freeze", "pip save"],
+        "correct": 3,
+        "category": "section_12",
+        "rationale": "`pip freeze` はインストール済みパッケージのリストを `パッケージ名==バージョン` の形式で出力します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=pip%20freeze%20は、インストールされたパッケージの同様のリストを出力しますが、%20pip%20install%20が期待する形式で出力します。"
+    },
+    {
+        "question": "「requirements.txt」というファイルに記載されたパッケージ一覧を一括でインストールするコマンドはどれですか？",
+        "choices": [
+            "pip install --file requirements.txt",
+            "pip install -r requirements.txt",
+            "pip apply requirements.txt",
+            "python requirements.txt"
+        ],
+        "correct": 2,
+        "category": "section_12",
+        "rationale": "`-r` オプション（requirements）を使ってファイルを指定します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=pip%20install%20%2Dr%20requirements.txt"
+    },
+    {
+        "question": "仮想環境での作業を終了し、通常のシステム環境に戻るためのコマンドは何ですか？",
+        "choices": ["exit", "stop", "deactivate", "quit"],
+        "correct": 3,
+        "category": "section_12",
+        "rationale": "`deactivate` コマンドを実行することで、仮想環境のアクティベート状態を解除できます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=deactivate"
+    },
+    {
+        "question": "特定のパッケージ（例: requests）をアンインストールするコマンドはどれですか？",
+        "choices": [
+            "pip remove requests",
+            "pip delete requests",
+            "pip uninstall requests",
+            "pip clear requests"
+        ],
+        "correct": 3,
+        "category": "section_12",
+        "rationale": "パッケージの削除は `pip uninstall` です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=pip%20uninstall%20の後ろに%201%20つ以上のパッケージ名を指定すると、それらのパッケージを仮想環境から除去します。"
+    },
+    {
+        "question": "特定のパッケージ（例: requests）の詳しい情報（バージョン、要約、場所など）を表示するコマンドはどれですか？",
+        "choices": ["pip list requests", "pip info requests", "pip show requests", "pip check requests"],
+        "correct": 3,
+        "category": "section_12",
+        "rationale": "`pip show` を使うと、特定のパッケージの詳細情報を確認できます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=pip%20show%20はある特定のパッケージの情報を表示します。"
+    },
+    {
+        "question": "pipがインストールするパッケージを探しに行く、公式の公開リポジトリ（配布場所）の名前は何ですか？",
+        "choices": ["GitHub", "Python Package Index (PyPI)", "Cran", "Conda"],
+        "correct": 2,
+        "category": "section_12",
+        "rationale": "PyPI (Python Package Index) は、Pythonコミュニティによって公開されたパッケージの膨大なリポジトリです。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=Python%20Package%20Index%20(PyPI)%20には、他の%20Python%20ユーザーが公開した数多くのパッケージがあります。"
+    },
+    {
+        "question": "仮想環境のアクティベート後、`python`コマンドを実行すると何が起こりますか？",
+        "choices": [
+            "常に最新のPython 3がインターネット経由で起動する",
+            "システム全体の共通のPythonが起動する",
+            "仮想環境内の特定のバージョンのPythonが起動する",
+            "管理者権限が必要になる"
+        ],
+        "correct": 3,
+        "category": "section_12",
+        "rationale": "仮想環境をアクティベートすると、その環境独自のPython実行ファイルが優先的に使用されるようパスが調整されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=仮想環境をアクティベートすると、シェルの検索パスを変更して、%20python%20と実行したときに、その環境独自の%20Python%20実行ファイルが使われるようになります。"
+    },
+    {
+        "question": "パッケージ「requests」の特定のバージョン（例: 2.6.0）を指定してインストールする構文はどれですか？",
+        "choices": [
+            "pip install requests:2.6.0",
+            "pip install requests==2.6.0",
+            "pip install requests(2.6.0)",
+            "pip install requests.version.2.6.0"
+        ],
+        "correct": 2,
+        "category": "section_12",
+        "rationale": "バージョン指定には `==` を使用します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=pip%20install%20requests%3D%3D2.6.0"
+    },
+    {
+        "question": "仮想環境を作成した後に作成される、仮想環境の名前と同じディレクトリ（例: tutorial-env/）を削除するとどうなりますか？",
+        "choices": [
+            "OSのシステムファイルが壊れる",
+            "仮想環境が削除され、インストールしたパッケージも消える",
+            "Pythonがアンインストールされる",
+            "ディレクトリの中身だけが空になり、仮想環境は維持される"
+        ],
+        "correct": 2,
+        "category": "section_12",
+        "rationale": "仮想環境は単なるディレクトリとして存在しているため、そのディレクトリを削除すれば仮想環境自体が削除されたことになります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=通常はディレクトリを削除するだけで仮想環境を削除できます。"
+    },
+    {
+        "question": "pipを使って、PyPIでキーワード検索を行うコマンドはどれですか？（※最新のpipでは非推奨または削除されている場合がありますが、チュートリアルの文脈で）",
+        "choices": ["pip find", "pip search", "pip query", "pip lookup"],
+        "correct": 2,
+        "category": "section_12",
+        "rationale": "チュートリアルには `pip search` がパッケージを探すコマンドとして記載されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=pip%20search%20を使って%20PyPI%20上のパッケージを検索できます。"
+    },
+    {
+        "question": "仮想環境のディレクトリの中に含まれる「pyvenv.cfg」ファイルの役割は何ですか？",
+        "choices": [
+            "インストールしたパッケージの履歴を記録する",
+            "仮想環境の設定（ベースとなるPythonの場所など）を保持する",
+            "ユーザーのログイン情報を管理する",
+            "プログラムのバックアップを作成する"
+        ],
+        "correct": 2,
+        "category": "section_12",
+        "rationale": "`pyvenv.cfg` には、どのPythonを使用して環境が作られたかなどの設定情報が含まれています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/venv.html#:~:text=pyvenv.cfg"
+    },
+    {
+        "question": "Pythonチュートリアルを読み終えた後、Pythonの標準的なライブラリやオブジェクトについてさらに詳しく調べるための最も公式なリファレンスは何ですか？",
+        "choices": [
+            "Python 語彙集",
+            "Python 標準ライブラリ (Library Reference)",
+            "Python 応用編",
+            "Stack Overflow"
+        ],
+        "correct": 2,
+        "category": "section_13",
+        "rationale": "チュートリアルを終えた後の次のステップとして、標準ライブラリの包括的なガイドである『Python 標準ライブラリ』リファレンスが推奨されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/whatnow.html#:~:text=Python%20標準ライブラリ%20(Library%20Reference)%20は、より完全な%20(ただし簡潔な)%20リファレンスです。"
+    },
+    {
+        "question": "Pythonの言語自体の正確な仕様（構文や意味論など）を専門的に調べるための公式ドキュメントは何ですか？",
+        "choices": [
+            "Python 言語リファレンス (Language Reference)",
+            "Python インストールガイド",
+            "Python FAQ",
+            "Python チュートリアル"
+        ],
+        "correct": 1,
+        "category": "section_13",
+        "rationale": "言語リファレンスは、Pythonという言語自体の形式的な定義（言語の核となる部分の仕様）を提供しています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/whatnow.html#:~:text=Python%20言語リファレンス%20(Language%20Reference)%20は、言語の構文や意味論のより正式な解説です。"
+    },
+    {
+        "question": "何千ものサードパーティ製Pythonパッケージが登録されており、pipなどのツールで利用される公式のリポジトリは何ですか？",
+        "choices": [
+            "GitHub",
+            "Bitbucket",
+            "PyPI (Python Package Index)",
+            "CPAN"
+        ],
+        "correct": 3,
+        "category": "section_13",
+        "rationale": "PyPIはPythonコミュニティが公開したパッケージが集まる巨大なインデックスであり、標準ライブラリ以外の機能が必要な際にまず探すべき場所です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/whatnow.html#:~:text=Python%20Package%20Index%20(PyPI)%20には、他の%20Python%20ユーザーが公開した数多くのパッケージがあります。"
+    },
+    {
+        "question": "特定の科学計算や数値処理のために、多くの拡張機能（NumPy、Pandasなど）を統合して提供している有名なプロジェクトは何ですか？",
+        "choices": [
+            "SciPy",
+            "TensorFlow",
+            "Django",
+            "PyTorch"
+        ],
+        "correct": 1,
+        "category": "section_13",
+        "rationale": "チュートリアルでは、科学計算用の多くの拡張機能を含むプロジェクトとして SciPy が紹介されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/whatnow.html#:~:text=SciPy%20プロジェクトには、科学計算用の多くの拡張が含まれています。"
+    },
+    {
+        "question": "Pythonについて質問を投稿したりコミュニティに助けを求める前に、まず確認すべきだと推奨されているドキュメントは何ですか？",
+        "choices": [
+            "言語リファレンス",
+            "FAQ (Frequently Asked Questions)",
+            "ソースコード",
+            "ライセンス条項"
+        ],
+        "correct": 2,
+        "category": "section_13",
+        "rationale": "重複した質問を避け、既存の知見を素早く得るために、まずはFAQ（よくある質問）を確認するのがPythonコミュニティにおける基本的なマナーです。",
+        "reference": "https://docs.python.org/ja/3/tutorial/whatnow.html#:~:text=質問を投稿する前に、まず%20FAQ%20を確認するようにしてください。"
+    },
+    {
+        "question": "Pythonの対話型インタープリタにおいて、デフォルトでユーザーディレクトリにコマンド履歴（ヒストリ）が保存される際のファイル名は何ですか？",
+        "choices": [
+            ".python_history",
+            ".py_history",
+            "history.txt",
+            ".bash_history"
+        ],
+        "correct": 1,
+        "category": "section_14",
+        "rationale": "Pythonはデフォルトで、ユーザーのホームディレクトリにある `.python_history` という名前のファイルにコマンド履歴を書き込み、次回のセッションでも利用できるようにします。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=デフォルトでは、ヒストリは%20~/.python_history%20に保存されます。"
+    },
+    {
+        "question": "Pythonの対話型インタープリタで、コマンド履歴（ヒストリ）を1つ前に戻って呼び出すための一般的なキー操作はどれですか？",
+        "choices": [
+            "Control-N",
+            "Control-P",
+            "Control-B",
+            "Control-F"
+        ],
+        "correct": 2,
+        "category": "section_14",
+        "rationale": "Unix系環境の readline ライブラリをサポートしている場合、Control-P は一つ前の履歴（Previous）を呼び出します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=Control%2DP%20は、現在の入力行をヒストリから一歩戻したものに置き換えます。"
+    },
+    {
+        "question": "対話モードにおいて、入力された行の編集やヒストリ置換をサポートしているUnix系のライブラリは何ですか？",
+        "choices": [
+            "stdio",
+            "ncurses",
+            "GNU Readline",
+            "POSIX"
+        ],
+        "correct": 3,
+        "category": "section_14",
+        "rationale": "Pythonの対話モードの高度な編集機能は、GNU Readline ライブラリによって実現されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=行編集をサポートしているプラットフォームでは、インタープリタが%20GNU%20Readline%20ライブラリをサポートしていれば"
+    },
+    {
+        "question": "Pythonの対話型シェルで、タブキー（Tab）を押したときに、変数やモジュール名の「補完候補」を表示させるために使われるモジュールはどれですか？",
+        "choices": [
+            "sys",
+            "rlcompleter",
+            "os",
+            "shlex"
+        ],
+        "correct": 2,
+        "category": "section_14",
+        "rationale": "rlcompleter モジュールを readline と組み合わせて使用することで、Pythonの識別子やキーワードの補完が可能になります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=rlcompleter%20モジュールを使うことで、変数やモジュール名の補完ができるようになります。"
+    },
+    {
+        "question": "対話モードを終了（終了コマンド）させるためのショートカットキーとして、Unix系で使われるものはどれですか？",
+        "choices": [
+            "Control-D",
+            "Control-Z",
+            "Control-C",
+            "Control-X"
+        ],
+        "correct": 1,
+        "category": "section_14",
+        "rationale": "Unix系では Control-D（EOF）を送信することでインタープリタを終了できます。Windowsでは Control-Z の後に Enter を押します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=Control%2DD%20を入力すると、インタープリタを終了します。"
+    },
+    {
+        "question": "対話モードにおいて、現在の行の「先頭」へカーソルを移動させるためのショートカットキーはどれですか？",
+        "choices": [
+            "Control-E",
+            "Control-A",
+            "Control-K",
+            "Control-L"
+        ],
+        "correct": 2,
+        "category": "section_14",
+        "rationale": "Readline の標準的なキーバインドでは、Control-A で行頭（Ahead）、Control-E で行末（End）へ移動します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=Control%2DA%20はカーソルをその行の先頭に移動し"
+    },
+    {
+        "question": "Pythonの浮動小数点数（float）は、内部的にどのような基数（進法）で表現されていますか？",
+        "choices": ["10進数", "2進数", "16進数", "8進数"],
+        "correct": 2,
+        "category": "section_15",
+        "rationale": "ほとんどのハードウェア（およびPythonのfloat型）では、浮動小数点数は2進分数として表現されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=浮動小数点数は、コンピュータのハードウェア内では%202%20進数%20(binary)%20分数として表現されています。"
+    },
+    {
+        "question": "10進数の「0.1」を2進分数で正確に表現できない数学的な理由は何ですか？",
+        "choices": [
+            "0.1が負の数ではないため",
+            "10が2の累乗ではないため（分母が2の累乗でない分数は循環小数になる）",
+            "Pythonのメモリ容量が足りないため",
+            "0.1が素数ではないため"
+        ],
+        "correct": 2,
+        "category": "section_15",
+        "rationale": "1/10の分母である10は2の累乗ではありません。このような分数を2進法で表そうとすると、10進法で1/3を表現しようとした時のように、無限に続く循環小数になります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=問題は、%2010%20進数の分数%200.1%20を%202%20進数で正確に表せないことです。"
+    },
+    {
+        "question": "Python 3において「0.1 + 0.2」を計算した際、内部的な近似値の合計として表示される値（丸めなしの場合）はどれですか？",
+        "choices": ["0.3", "0.30000000000000004", "0.30000000000000001", "0.29999999999999999"],
+        "correct": 2,
+        "category": "section_15",
+        "rationale": "0.1と0.2はそれぞれ近似値として保存されており、それらを足し合わせると、0.3に最も近い「表現可能な」浮動小数点数であるこの値になります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=>>>%200.1%20%2B%200.2%0A0.30000000000000004"
+    },
+    {
+        "question": "浮動小数点数を10進数として表示する際、Pythonがデフォルトで行っている「丸め」の処理方針は何ですか？",
+        "choices": [
+            "常に小数点以下2桁で切り捨てる",
+            "常に内部のビット表現をそのまま表示する",
+            "その2進数表現を共有する最短の10進数（近似値）を表示する",
+            "すべての小数を整数に変換して表示する"
+        ],
+        "correct": 3,
+        "category": "section_15",
+        "rationale": "ユーザーが期待する表示（0.100...001を0.1と表示するなど）にするため、Pythonは意味のある最短の10進数を表示します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=その値に最も近い%20(近似的な)%2010%20進数を表示します。"
+    },
+    {
+        "question": "浮動小数点数の「0.1」の正確な値を調べるために、`format(0.1, '.55f')` を実行すると、どのような性質が見て取れますか？",
+        "choices": [
+            "0.1の後に0が54個並ぶ",
+            "0.1の正確な近似値（0.10000000000000000555...）が表示される",
+            "エラーが発生する",
+            "すべてがランダムな数値になる"
+        ],
+        "correct": 2,
+        "category": "section_15",
+        "rationale": "多くの桁数を指定して出力すると、内部的に保存されている実際の2進近似値が、正確な10進数としてどれほど0.1からズレているかが確認できます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=>>>%20format(0.1%2C%20'.55f')"
+    },
+    {
+        "question": "Pythonの `float` 型が従っている、ほとんどのプロセッサで採用されている浮動小数点数演算の標準規格は何ですか？",
+        "choices": ["ISO 9001", "ASCII", "IEEE 754", "RFC 2616"],
+        "correct": 3,
+        "category": "section_15",
+        "rationale": "現代のほぼすべてのコンピュータは IEEE 754 規格に従って浮動小数点演算を行っています。Pythonの float はこれに基づいて実装されています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=今日利用されているほとんどのコンピュータで使われている%20IEEE%20754%20標準に従っています。"
+    },
+    {
+        "question": "不正確な2進浮動小数点を避け、10進数として正確な計算（会計処理など）を行うために推奨されるモジュールはどれですか？",
+        "choices": ["math", "random", "decimal", "fractions"],
+        "correct": 3,
+        "category": "section_15",
+        "rationale": "decimal モジュールは 10 進演算をサポートしており、2進小数による誤差を回避して人間が期待する10進計算を行えます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=別の用途については、%20decimal%20モジュールを見てください。"
+    },
+    {
+        "question": "分数を誤差なく（例: 1/3をそのまま）保持して計算したい場合に適したモジュールはどれですか？",
+        "choices": ["decimal", "math", "fractions", "statistics"],
+        "correct": 3,
+        "category": "section_15",
+        "rationale": "fractions モジュールは有理数をサポートしており、数値を分子と分母のペアとして正確に保持できます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=有理数に基づく計算をサポートする%20fractions%20モジュールがあります。"
+    },
+    {
+        "question": "浮動小数点数 `x` の内部的な表現（ビットパターン）を確認するために、Pythonが提供している便利なメソッドはどれですか？",
+        "choices": ["x.to_bits()", "x.hex()", "x.binary()", "x.to_bytes()"],
+        "correct": 2,
+        "category": "section_15",
+        "rationale": "float.hex() メソッドは、浮動小数点数を16進数形式で表現します。これは2進数のビット表現と正確に対応しており、誤差が生じません。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=float.hex()%20メソッドは、浮動小数点数を%2016%20進数で表現します。"
+    },
+    {
+        "question": "浮動小数点数の「丸め」において、Python 3の `round()` 関数が採用している「偶数への丸め（Bankers' rounding）」の挙動として正しいものはどれですか？",
+        "choices": [
+            "round(0.5) は 1 になる",
+            "round(0.5) は 0 になり、round(1.5) は 2 になる",
+            "常に切り上げる",
+            "常に切り捨てる"
+        ],
+        "correct": 2,
+        "category": "section_15",
+        "rationale": "Python 3の round() は、端数がちょうど0.5の場合、最も近い偶数の方へ丸めます（0.5は0へ、1.5は2へ）。これにより、大量のデータを丸めた際の統計的な偏りを減らせます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=組み込みの%20round()%20関数の振る舞いにも影響を及ぼします。"
+    },
+    {
+        "question": "浮動小数点演算において、計算の「累積誤差」が問題になる典型的な例はどれですか？",
+        "choices": [
+            "100を10回足す",
+            "0.1を10,000回足す",
+            "整数同士の掛け算を繰り返す",
+            "文字列を連結する"
+        ],
+        "correct": 2,
+        "category": "section_15",
+        "rationale": "0.1のような近似値に誤差が含まれる数値を何度も足し合わせると、誤差が蓄積し、大きなズレとなって現れます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=これらの誤差が蓄積されると、深刻な結果を招く可能性があります。"
+    },
+    {
+        "question": "数値 `x` が浮動小数点数の「2進分数」として表現されているということは、具体的にどのような数式の和として表されていることを意味しますか？",
+        "choices": [
+            "J / 2**N (JとNは整数)",
+            "J * 10**N",
+            "J / 3**N",
+            "常に 1/x"
+        ],
+        "correct": 1,
+        "category": "section_15",
+        "rationale": "2進分数は、分母が2の累乗（2, 4, 8, 16...）である分数の和として表現されます。分母が2の累乗でない 1/10 などは正確な 2**N で表せません。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=どんな%202%20進分数も、分母が%202%20の累乗である%20(J%20/%202%5E%5EN%20という形式の)%20分数として表されます。"
+    },
+    {
+        "question": "浮動小数点数の比較において、`x == y` を使うことが推奨されない理由はなぜですか？",
+        "choices": [
+            "計算の処理速度が極端に遅くなるため",
+            "微細な計算誤差により、数学的に等しくても False になることがあるため",
+            "Python 4ではこの演算子が廃止される予定だから",
+            "比較演算子は整数専用だから"
+        ],
+        "correct": 2,
+        "category": "section_15",
+        "rationale": "浮動小数点数には微小な誤差が含まれるため、厳密な一致比較（==）は期待通りの結果にならないことが多いです。代わりに `math.isclose()` などで「許容範囲内か」を確認するのが一般的です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=浮動小数点数の比較を行う場合には注意が必要です。"
+    },
+    {
+        "question": "16進文字列から浮動小数点数を生成する、`float.hex()` の逆の操作を行うメソッドはどれですか？",
+        "choices": ["float.from_bits()", "float.fromhex()", "float.parse_hex()", "float.from_string()"],
+        "correct": 2,
+        "category": "section_15",
+        "rationale": "`float.fromhex()` を使うと、16進数表記の文字列から、誤差のない正確な浮動小数点数オブジェクトを生成できます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=逆の操作として%20float.fromhex()%20があります。"
+    },
+    {
+        "question": "「0.1」のような数値を入力したとき、Pythonインタープリタが内部で最初に行っていることは何ですか？",
+        "choices": [
+            "入力された文字をそのまま保存する",
+            "10進数の 0.1 に最も近い、表現可能な2進分数に変換する",
+            "エラーをチェックして整数に切り上げる",
+            "計算が終わるまで変換を保留する"
+        ],
+        "correct": 2,
+        "category": "section_15",
+        "rationale": "入力の瞬間（コンパイル時または実行時）に、Pythonは10進の入力を2進の近似値へと直ちに変換します。この時点で誤差が生じています。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=0.1%20と入力したとき、インタープリタはそれを最も近い%202%20進分数に変換します。"
+    },
+    {
+        "question": "コンピュータの2進浮動小数点において、正確に表現できる10進数の例はどれですか？",
+        "choices": ["0.1", "0.2", "0.5", "0.3"],
+        "correct": 3,
+        "category": "section_15",
+        "rationale": "0.5 は分数で 1/2 です。分母が2の累乗（2**1）であるため、2進数で正確に 0.1(bin) と表現でき、誤差が生じません。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=例えば、%200.5%20は正確に表現できます。"
+    },
+    {
+        "question": "浮動小数点数の「精度」について、現代の多くのマシンで採用されている倍精度（double precision）は何ビットの精度を持っていますか？（暗黙のビットを含まない仮数部などの詳細を除く、規格全体として）",
+        "choices": ["32ビット", "64ビット", "128ビット", "16ビット"],
+        "correct": 2,
+        "category": "section_15",
+        "rationale": "Pythonの float は通常、IEEE 754 の倍精度（64ビット）で実装されています。これにより、10進数で約15〜17桁の精度が得られます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=今日利用されているほとんどのマシンでは、浮動小数点数は%2064%20ビットの精度を持っており"
+    },
+    {
+        "question": "`math.fsum()` 関数が通常の `sum()` 関数よりも優れている点は何ですか？",
+        "choices": [
+            "整数の足し算が高速である",
+            "浮動小数点数のリストを足し合わせる際、誤差の蓄積を最小限に抑える",
+            "計算結果を自動的に文字列にする",
+            "負の数を無視して計算する"
+        ],
+        "correct": 2,
+        "category": "section_15",
+        "rationale": "math.fsum() は、複数の浮動小数点数を足し合わせる際に、中間的な誤差を追跡することで、最終的な合計の精度を極限まで高めます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=math.fsum()%20関数は、加算の際の精度低下を最小限に抑えます。"
+    },
+    {
+        "question": "「不正確なのはPythonのバグである」という誤解に対し、チュートリアルはどのように説明していますか？",
+        "choices": [
+            "それはコンピュータのハードウェア（2進浮動小数点規格）の性質によるものである",
+            "次期バージョンで修正予定である",
+            "わざと誤差を入れている",
+            "特定のOSだけで発生する問題である"
+        ],
+        "correct": 1,
+        "category": "section_15",
+        "rationale": "これはPythonに限った話ではなく、2進浮動小数点を採用しているすべてのプログラミング言語（C, Java, JavaScript, etc.）とハードウェアに共通する根本的な仕様です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=これは%20Python%20のバグではなく、%2010%20進数の%200.1%20を%202%20進数で正確に表せないことに起因します。"
+    },
+    {
+        "question": "チュートリアルの最後で、浮動小数点を扱うプログラマへのアドバイスとして最も適切なものはどれですか？",
+        "choices": [
+            "浮動小数点数は一切使うべきではない",
+            "浮動小数点数の限界を知り、適切な場面（decimal等）で使い分ける",
+            "誤差は無視して良い",
+            "すべての数値を文字列として保存する"
+        ],
+        "correct": 2,
+        "category": "section_15",
+        "rationale": "float は非常に高速で効率的ですが、誤差が許されない金額計算などには decimal を、有理数には fractions を使うといった「適切な道具の選択」が重要です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/floatingpoint.html#:~:text=結論として、%20float%20の限界を理解しておくことは非常に重要です。"
+    },
+    {
+        "question": "Pythonの対話モードが起動する際に、自動的に特定のスクリプトを実行させるために設定する環境変数はどれですか？",
+        "choices": ["PYTHONPATH", "PYTHONSTARTUP", "PYTHONHOME", "PYTHONEXEC"],
+        "correct": 2,
+        "category": "section_16",
+        "rationale": "PYTHONSTARTUP 環境変数にファイルパスを設定すると、対話モード開始時にそのファイルの内容が実行されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=PYTHONSTARTUP%20という名前の環境変数に"
+    },
+    {
+        "question": "PYTHONSTARTUPファイルで定義された名前（関数や変数）が、対話モードにおいて有効になる名前空間はどこですか？",
+        "choices": ["組み込み名前空間", "ローカル名前空間", "グローバル名前空間", "プライベート名前空間"],
+        "correct": 3,
+        "category": "section_16",
+        "rationale": "スタートアップファイルで定義された名前は、対話モードのグローバル名前空間に読み込まれます。これは対話モードで直接コマンドを打つときにアクセスできる場所です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=対話的なセッションが開始する前に実行され、そこでの名前定義は、対話的なセッションのグローバルな名前空間の中にインポートされたのと同じ状態になります。"
+    },
+    {
+        "question": "PYTHONSTARTUPで指定したファイルは、Pythonスクリプトを非対話的に実行（例：python script.py）する際にも読み込まれますか？",
+        "choices": [
+            "はい、常に読み込まれます",
+            "いいえ、対話モードのときのみ読み込まれます",
+            "設定によって読み込むことが可能です",
+            "インポート時のみ読み込まれます"
+        ],
+        "correct": 2,
+        "category": "section_16",
+        "rationale": "このファイルは対話型セッションを便利にするためのもので、通常のスクリプト実行には影響しません。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=このファイルは、%20Python%20がスクリプトを読み込んで実行するときには読み込まれません。"
+    },
+    {
+        "question": "現在のディレクトリにある特定の初期化ファイルを読み込ませたい場合、PYTHONSTARTUPファイルの中で推奨される記述方法はどれですか？",
+        "choices": [
+            "import .pythonrc.py",
+            "exec(open('.pythonrc.py').read())",
+            "load('.pythonrc.py')",
+            "run .pythonrc.py"
+        ],
+        "correct": 2,
+        "category": "section_16",
+        "rationale": "ファイルの存在を確認した上で、このように中身を読み取って実行（exec）する記述が一般的です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=if%20os.path.isfile('.pythonrc.py')%3A%20exec(open('.pythonrc.py').read())"
+    },
+    {
+        "question": "対話モードのカスタマイズにおいて、一次プロンプト（デフォルトの '>>> '）を定義している変数はどれですか？",
+        "choices": ["sys.ps1", "sys.ps2", "os.prompt", "sys.prompt"],
+        "correct": 1,
+        "category": "section_16",
+        "rationale": "sys.ps1 は、コマンドの入力を待機しているときの最初の文字列（一次プロンプト）を定義します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=sys.ps1%20と%20sys.ps2%20という変数は"
+    },
+    {
+        "question": "対話モードのカスタマイズにおいて、継続行（二次プロンプト）の文字列（デフォルトの '... '）を定義している変数はどれですか？",
+        "choices": ["sys.ps1", "sys.ps2", "sys.sub_prompt", "os.ps2"],
+        "correct": 2,
+        "category": "section_16",
+        "rationale": "sys.ps2 は、if文やfor文などのブロックが続く際の二次プロンプトを定義します。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=sys.ps1%20と%20sys.ps2%20という変数は"
+    },
+    {
+        "question": "対話モードの起動時に、`sys.ps1` などの設定を自動で反映させるために使用される、標準ライブラリのパスにある特別なモジュール名は何ですか？",
+        "choices": ["sitecustomize", "usercustomize", "pythonstartup", "envcustomize"],
+        "correct": 1,
+        "category": "section_16",
+        "rationale": "site-packages ディレクトリに sitecustomize モジュールを作成しておくと、Python起動時に自動的に読み込まれ、グローバルなカスタマイズが可能です。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=sitecustomize%20というモジュールを作成して"
+    },
+    {
+        "question": "カスタマイズされた対話モードを構築する際、ユーザーごとのカスタマイズを行うための特別なモジュール名は何ですか？",
+        "choices": ["usercustomize", "mycustomize", "homecustomize", "localcustomize"],
+        "correct": 1,
+        "category": "section_16",
+        "rationale": "sitecustomize と同様に、ユーザー個別の設定には usercustomize モジュールが使用されます。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=ユーザーごとのカスタマイズには%20usercustomize%20というモジュールが使えます。"
+    },
+    {
+        "question": "Unix系環境において、PYTHONSTARTUPファイルでヒストリファイルを読み込み、終了時に保存する機能を実装するためにインポートすべきモジュールはどれですか？",
+        "choices": ["os", "sys", "readline", "history"],
+        "correct": 3,
+        "category": "section_16",
+        "rationale": "readline モジュールを使用することで、ヒストリファイルの読み書き（read_history_file / write_history_file）が可能になります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=import%20readline"
+    },
+    {
+        "question": "対話モードで `tab` キーによる補完を有効にするために、PYTHONSTARTUPファイルに記述すべき標準的な設定はどれですか？",
+        "choices": [
+            "readline.parse_and_bind(\"tab: complete\")",
+            "sys.enable_tab_completion()",
+            "os.bind_tab()",
+            "import rlcompleter; readline.parse_and_bind(\"tab: complete\")"
+        ],
+        "correct": 4,
+        "category": "section_16",
+        "rationale": "rlcompleter をインポートし、readline でタブキーを「complete」機能に結びつける（bind）ことで、変数やモジュール名の補完が有効になります。",
+        "reference": "https://docs.python.org/ja/3/tutorial/interactive.html#:~:text=import%20rlcompleter%0Areadline.parse_and_bind(\"tab%3A%20complete\")"
     }
 ]
