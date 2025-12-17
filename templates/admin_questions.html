@@ -24,7 +24,7 @@
                         <th scope="row">{{ q.id }}</th>
                         <td>{{ q.question|truncate(80) }}</td>
                         <td>{{ q.category }}</td>
-                        <td>
+                        <td class="text-nowrap">
                             <a href="{{ url_for('edit_question', id=q.id) }}" class="btn btn-sm btn-primary">編集</a>
                         </td>
                     </tr>
