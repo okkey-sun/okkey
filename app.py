@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify, Response
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, Response, flash
+from flask_migrate import Migrate
 from database import db
 from model import Question, User
 import random
@@ -11,9 +12,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///quiz.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["JSON_AS_ASCII"] = False
 db.init_app(app)
+migrate = Migrate(app, db)
 
-with app.app_context():
-    db.create_all()
 
 @app.route("/")
 def login():
@@ -65,7 +65,57 @@ def logout():
 def home():
     if "user" not in session:
         return redirect("/")
-    return render_template("home.html", user=session["user"])
+    user = User.query.filter_by(email=session["user"]).first()
+    return render_template("home.html", user=user)
+
+@app.route("/mypage")
+def mypage():
+    if "user" not in session:
+        return redirect("/")
+    user = User.query.filter_by(email=session["user"]).first()
+    return render_template("mypage.html", user=user)
+
+@app.route('/update_nickname', methods=['POST'])
+def update_nickname():
+    if "user" not in session:
+        return redirect("/")
+    
+    user = User.query.filter_by(email=session["user"]).first()
+    if user:
+        user.nickname = request.form.get('nickname')
+        db.session.commit()
+        flash('ニックネームが更新されました。', 'success')
+    else:
+        flash('ユーザーが見つかりませんでした。', 'error')
+
+    return redirect(url_for('mypage'))
+
+@app.route('/update_password', methods=['POST'])
+def update_password():
+    if 'user' not in session:
+        return redirect('/')
+
+    user = User.query.filter_by(email=session['user']).first()
+    if not user:
+        flash('ユーザーが見つかりませんでした。', 'danger')
+        return redirect(url_for('mypage'))
+
+    current_password = request.form.get('current_password')
+    new_password = request.form.get('new_password')
+    confirm_password = request.form.get('confirm_password')
+
+    if not user.check_password(current_password):
+        flash('現在のパスワードが正しくありません。', 'danger')
+        return redirect(url_for('mypage'))
+
+    if new_password != confirm_password:
+        flash('新しいパスワードが一致しません。', 'danger')
+        return redirect(url_for('mypage'))
+
+    user.set_password(new_password)
+    db.session.commit()
+    flash('パスワードが正常に更新されました。', 'success')
+    return redirect(url_for('mypage'))
 
 @app.route("/material")
 def material():
