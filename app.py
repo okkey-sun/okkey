@@ -14,7 +14,6 @@ app.config["JSON_AS_ASCII"] = False
 db.init_app(app)
 migrate = Migrate(app, db)
 
-
 @app.route("/")
 def login():
     return render_template("login.html")
@@ -40,7 +39,6 @@ def register():
         return redirect(url_for("login"))
 
     return render_template("register.html")
-
 
 @app.route("/try_login", methods=["POST"])
 def try_login():
