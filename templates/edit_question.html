@@ -65,10 +65,17 @@
                         <input type="text" id="reference" name="reference" class="form-control" value="{{ question.reference }}">
                     </div>
 
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                         <a href="{{ url_for('admin_questions') }}" class="btn btn-secondary me-md-2">戻る</a>
-                        <button type="button" id="editBtn" class="btn btn-warning">編集</button>
-                        <button type="submit" id="submitBtn" class="btn btn-primary">登録</button>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <form action="{{ url_for('delete_question', id=question.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('本当にこの問題を削除しますか？');">
+                                <button type="submit" class="btn btn-danger">削除</button>
+                            </form>
+                        </div>
+                        <div>
+                            <a href="{{ url_for('admin_questions') }}" class="btn btn-secondary me-2">戻る</a>
+                            <button type="button" id="editBtn" class="btn btn-warning">編集</button>
+                            <button type="submit" id="submitBtn" class="btn btn-primary">登録</button>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -298,8 +298,40 @@ def admin():
 def admin_questions():
     if not session.get("is_admin"):
         return redirect("/")
-    questions = Question.query.order_by(Question.id).all()
-    return render_template("admin_questions.html", questions=questions)
+
+    page = request.args.get('page', 1, type=int)
+    section = request.args.get('section', 'all')
+
+    query = Question.query.order_by(Question.id)
+
+    if section != 'all':
+        query = query.filter(Question.category == f"section_{section}")
+
+    pagination = query.paginate(page=page, per_page=20, error_out=False)
+    questions = pagination.items
+    total_questions = query.count() # Get total count after filtering
+
+    sections = ["all"] + [str(i) for i in range(1, 17)]
+
+    return render_template(
+        "admin_questions.html",
+        questions=questions,
+        pagination=pagination,
+        sections=sections,
+        selected_section=section,
+        total_questions=total_questions
+    )
+
+@app.route("/admin/question/delete/<int:id>", methods=["POST"])
+def delete_question(id):
+    if not session.get("is_admin"):
+        return redirect("/")
+    
+    question = Question.query.get_or_404(id)
+    db.session.delete(question)
+    db.session.commit()
+    flash('質問が削除されました。', 'success')
+    return redirect(url_for("admin_questions"))
 
 @app.route("/admin/question/<int:id>", methods=["GET", "POST"])
 def edit_question(id):
