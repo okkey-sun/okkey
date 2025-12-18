@@ -23,12 +23,14 @@
         <h2 class="text-center mb-4">特訓講座、模擬試験</h2>
 
         {% if question_options %}
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">問題数を選択してください</h5>
-                    <form id="question-count-select-form" class="row g-3 align-items-center">
+                    <h5 class="card-title">特訓講座</h5>
+                    <p class="card-text">問題数を選択してください</p>
+                    <form id="training-select-form" class="row g-3 align-items-center">
+                        <input type="hidden" name="test_type" value="training">
                         <div class="col-auto">
-                            <select name="num_questions" id="num-questions-select" class="form-select">
+                            <select name="num_questions" id="training-num-questions-select" class="form-select">
                                 {% for text, value in question_options.items() %}
                                     <option value="{{ value }}">{{ text }}</option>
                                 {% endfor %}
@@ -41,11 +43,36 @@
                 </div>
             </div>
 
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">模擬試験</h5>
+                    <p class="card-text">出題モードを選択してください</p>
+                    <form id="mock-exam-select-form" class="row g-3 align-items-center">
+                        <input type="hidden" name="test_type" value="mock_exam">
+                        <div class="col-auto">
+                            <select name="num_questions" id="mock-exam-num-questions-select" class="form-select">
+                                <option value="40_random_mock">模擬試験 40問（完全ランダム）</option>
+                                <option value="40_weakness_mock">模擬試験 40問（苦手克服）</option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">テストを開始</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             <script>
-                document.getElementById('question-count-select-form').addEventListener('submit', function(e) {
+                document.getElementById('training-select-form').addEventListener('submit', function(e) {
                     e.preventDefault();
-                    var num_questions = document.getElementById('num-questions-select').value;
-                    window.location.href = "{{ url_for('practice', num_questions='__NUM__') }}".replace('__NUM__', num_questions);
+                    var num_questions = document.getElementById('training-num-questions-select').value;
+                    window.location.href = "{{ url_for('practice', num_questions='__NUM__', test_type='training') }}".replace('__NUM__', num_questions);
+                });
+
+                document.getElementById('mock-exam-select-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var num_questions = document.getElementById('mock-exam-num-questions-select').value;
+                    window.location.href = "{{ url_for('practice', num_questions='__NUM__', test_type='mock_exam') }}".replace('__NUM__', num_questions);
                 });
             </script>
 
@@ -55,6 +82,7 @@
             </h3>
             <form method="post" action="{{ url_for('submit_practice') }}">
                 <input type="hidden" name="all_q_ids" value="{{ questions | map(attribute='id') | join(',') }}">
+                <input type="hidden" name="test_type" value="{{ test_type }}">
                 
                 {% for q in questions %}
                 <div class="card">

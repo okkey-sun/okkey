@@ -197,6 +197,7 @@ def practice():
         return redirect("/")
     
     num_questions_str = request.args.get('num_questions')
+    test_type = request.args.get('test_type') # Retrieve test_type
 
     if not num_questions_str:
         # Display selection screen
@@ -217,6 +218,8 @@ def practice():
 
     if num_questions_str == 'all':
         num_to_sample = total_available
+    elif num_questions_str in ['40_random_mock', '40_weakness_mock']:
+        num_to_sample = 40
     else:
         num_to_sample = int(num_questions_str)
 
@@ -236,7 +239,8 @@ def practice():
     return render_template(
         "practice_test.html",
         questions=q_list,
-        total=len(q_list)
+        total=len(q_list),
+        test_type=test_type # Pass test_type to the template
     )
 
 @app.route('/submit_practice', methods=['POST'])
@@ -246,6 +250,7 @@ def submit_practice():
 
     results = []
     score = 0
+    test_type = request.form.get('test_type') # Retrieve test_type
     
     # Get all question IDs that were part of the test, preserving order
     all_q_ids = request.form.get('all_q_ids').split(',')
@@ -286,7 +291,7 @@ def submit_practice():
     
     total = len(q_list)
 
-    return render_template('result.html', results=results, score=score, total=total, test_type='practice')
+    return render_template('result.html', results=results, score=score, total=total, test_type=test_type)
 
 @app.route("/admin")
 def admin():
