@@ -405,8 +405,126 @@ def export_questions():
     )
 
 
+@app.route('/admin/users')
+def admin_users():
+    if not session.get("is_admin"):
+        return redirect("/")
+    users = User.query.filter_by(is_admin=False).all()
+    return render_template('admin_users.html', users=users)
 
+@app.route('/admin/user/new', methods=['GET', 'POST'])
+def new_user():
+    if not session.get("is_admin"):
+        return redirect("/")
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        if User.query.filter_by(email=email).first():
+            flash('このメールアドレスは既に使用されています。', 'danger')
+            return redirect(url_for('new_user'))
 
+        new_user = User(email=email, is_admin=False)
+        new_user.set_password(password)
+        db.session.add(new_user)
+        db.session.commit()
+        flash('新しいユーザーが作成されました。', 'success')
+        return redirect(url_for('admin_users'))
+    return render_template('new_user.html')
+
+@app.route('/admin/user/edit/<int:id>', methods=['GET', 'POST'])
+def edit_user(id):
+    if not session.get("is_admin"):
+        return redirect("/")
+    user = User.query.get_or_404(id)
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        if user.email != email and User.query.filter_by(email=email).first():
+            flash('このメールアドレスは既に使用されています。', 'danger')
+            return redirect(url_for('edit_user', id=id))
+
+        user.email = email
+        if password:
+            user.set_password(password)
+        db.session.commit()
+        flash('ユーザー情報が更新されました。', 'success')
+        return redirect(url_for('admin_users'))
+    return render_template('edit_user.html', user=user)
+
+@app.route('/admin/user/delete/<int:id>', methods=['POST'])
+def delete_user(id):
+    if not session.get("is_admin"):
+        return redirect("/")
+    user = User.query.get_or_404(id)
+    db.session.delete(user)
+    db.session.commit()
+    flash('ユーザーが削除されました。', 'success')
+    return redirect(url_for('admin_users'))
+
+@app.route('/admin/admins')
+def admin_admins():
+    if not session.get("is_admin"):
+        return redirect("/")
+    admins = User.query.filter_by(is_admin=True).all()
+    return render_template('admin_admins.html', admins=admins)
+
+@app.route('/admin/admin/new', methods=['GET', 'POST'])
+def new_admin():
+    if not session.get("is_admin"):
+        return redirect("/")
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        if User.query.filter_by(email=email).first():
+            flash('このメールアドレスは既に使用されています。', 'danger')
+            return redirect(url_for('new_admin'))
+
+        new_admin = User(email=email, is_admin=True)
+        new_admin.set_password(password)
+        db.session.add(new_admin)
+        db.session.commit()
+        flash('新しい管理者が作成されました。', 'success')
+        return redirect(url_for('admin_admins'))
+    return render_template('new_admin.html')
+
+@app.route('/admin/admin/edit/<int:id>', methods=['GET', 'POST'])
+def edit_admin(id):
+    if not session.get("is_admin"):
+        return redirect("/")
+    admin = User.query.get_or_404(id)
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        if admin.email != email and User.query.filter_by(email=email).first():
+            flash('このメールアドレスは既に使用されています。', 'danger')
+            return redirect(url_for('edit_admin', id=id))
+
+        admin.email = email
+        if password:
+            admin.set_password(password)
+        db.session.commit()
+        flash('管理者情報が更新されました。', 'success')
+        return redirect(url_for('admin_admins'))
+    return render_template('edit_admin.html', user=admin)
+
+@app.route('/admin/admin/delete/<int:id>', methods=['POST'])
+def delete_admin(id):
+    if not session.get("is_admin"):
+        return redirect("/")
+    admin = User.query.get_or_404(id)
+    # Prevent admin from deleting themselves
+    if admin.email == session.get("user"):
+        flash("自分自身を削除することはできません。", "danger")
+        return redirect(url_for("admin_admins"))
+
+    db.session.delete(admin)
+    db.session.commit()
+    flash('管理者が削除されました。', 'success')
+    return redirect(url_for('admin_admins'))
 
 if __name__ == "__main__":
     app.run(debug=True)

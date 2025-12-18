@@ -20,6 +20,17 @@
                     クイズのエクスポート
                 </a>
             </div>
+            <div class="card-header">
+                <h2>ユーザー管理</h2>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="{{ url_for('admin_users') }}" class="list-group-item list-group-item-action">
+                    ユーザー管理 (admin以外)
+                </a>
+                <a href="{{ url_for('admin_admins') }}" class="list-group-item list-group-item-action">
+                    admin管理
+                </a>
+            </div>
         </div>
     </div>
 </div>

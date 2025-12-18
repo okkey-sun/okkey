@@ -71,7 +71,7 @@
                     </div>
                 </div>
             </a>
-            {% if user.email == "admin@example.com" %}
+            {% if session['is_admin'] %}
             <a href="/admin" class="card-link">
                 <div class="card h-100 text-center bg-light">
                     <div class="card-body">
