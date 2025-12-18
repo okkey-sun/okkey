@@ -25,7 +25,7 @@
         {% if question_options %}
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">特訓講座</h5>
+                    <h5 class="card-title d-inline-block me-2">特訓講座</h5><span class="text-muted">　正解率の低い問題を高頻度で出題します</span>
                     <p class="card-text">問題数を選択してください</p>
                     <form id="training-select-form" class="row g-3 align-items-center">
                         <input type="hidden" name="test_type" value="training">
@@ -45,7 +45,7 @@
 
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">模擬試験</h5>
+                    <h5 class="card-title d-inline-block me-2">模擬試験</h5><span class="text-muted">　完全ランダムと苦手克服（正解率の低い問題）の２つを選べます</span>
                     <p class="card-text">出題モードを選択してください</p>
                     <form id="mock-exam-select-form" class="row g-3 align-items-center">
                         <input type="hidden" name="test_type" value="mock_exam">
