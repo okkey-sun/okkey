@@ -4,7 +4,6 @@ from database import db
 from model import Question, User
 import random
 import json
-import math
 
 app = Flask(__name__)
 app.secret_key = "test123"
@@ -14,111 +13,6 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["JSON_AS_ASCII"] = False
 db.init_app(app)
 migrate = Migrate(app, db)
-
-def generate_special_training_questions(all_questions, num_to_sample):
-    weights = []
-    for q in all_questions:
-        if q.total_count == 0:
-            weight = 5.0
-        else:
-            correct_rate = q.correct_count / q.total_count
-            weight = (1.0 - correct_rate)**2 * math.log(q.total_count + 2)
-            if q.total_count >= 5 and correct_rate <= 0.75:
-                weight *= 3
-        weights.append(weight)
-
-    selected_questions = []
-    if sum(weights) > 0 and len(all_questions) >= num_to_sample:
-        weighted_questions = list(zip(all_questions, weights))
-        
-        while len(selected_questions) < num_to_sample and weighted_questions:
-            questions, current_weights = zip(*weighted_questions)
-            total_weight = sum(current_weights)
-            if total_weight == 0:
-                remaining_to_sample = num_to_sample - len(selected_questions)
-                selected_questions.extend(random.sample(list(questions), remaining_to_sample))
-                break
-            
-            probabilities = [w / total_weight for w in current_weights]
-            
-            chosen_q = random.choices(questions, probabilities, k=1)[0]
-            selected_questions.append(chosen_q)
-            
-            weighted_questions = [item for item in weighted_questions if item[0].id != chosen_q.id]
-            
-    if len(selected_questions) < num_to_sample:
-        remaining_needed = num_to_sample - len(selected_questions)
-        existing_ids = {q.id for q in selected_questions}
-        available_questions = [q for q in all_questions if q.id not in existing_ids]
-        if len(available_questions) >= remaining_needed:
-            selected_questions.extend(random.sample(available_questions, remaining_needed))
-
-    return selected_questions
-
-def generate_exam(all_questions, mode='random'):
-    DISTRIBUTION = {
-        "section_1-3": 4, "section_4": 9, "section_5": 6, "section_6": 2, 
-        "section_7": 2, "section_8": 4, "section_9": 2, "section_10": 4, 
-        "section_11": 2, "section_12-14": 5
-    }
-    
-    grouped_questions = {key: [] for key in DISTRIBUTION.keys()}
-    
-    # This mapping from category to group key can be pre-calculated or stored differently
-    category_to_group = {}
-    for i in range(1, 4): category_to_group[f'section_{i}'] = 'section_1-3'
-    for i in range(4, 12): 
-        if f'section_{i}' in ["section_4", "section_5", "section_6", "section_7", "section_8", "section_9", "section_10", "section_11"]:
-             category_to_group[f'section_{i}'] = f'section_{i}'
-    for i in range(12, 15): category_to_group[f'section_{i}'] = 'section_12-14'
-
-    for q in all_questions:
-        group_key = category_to_group.get(q.category)
-        if group_key:
-            grouped_questions[group_key].append(q)
-
-    exam_questions = []
-    
-    for group, num_to_pick in DISTRIBUTION.items():
-        group_qs = grouped_questions.get(group, [])
-        
-        if len(group_qs) < num_to_pick:
-            exam_questions.extend(group_qs)
-            continue
-
-        if mode == 'random':
-            exam_questions.extend(random.sample(group_qs, num_to_pick))
-        
-        elif mode == 'weakness':
-            weights = []
-            for q in group_qs:
-                if q.total_count == 0:
-                    weight = 10.0
-                else:
-                    correct_rate = q.correct_count / q.total_count
-                    weight = (1.0 - correct_rate)**2 * math.log(q.total_count + 2)
-                weights.append(weight)
-
-            selected_group_questions = []
-            weighted_group_qs = list(zip(group_qs, weights))
-            
-            while len(selected_group_questions) < num_to_pick and weighted_group_qs:
-                questions, current_weights = zip(*weighted_group_qs)
-                total_weight = sum(current_weights)
-                if total_weight == 0:
-                    remaining_to_sample = num_to_pick - len(selected_group_questions)
-                    selected_group_questions.extend(random.sample(list(questions), remaining_to_sample))
-                    break
-
-                probabilities = [w / total_weight for w in current_weights]
-                chosen_q = random.choices(questions, probabilities, k=1)[0]
-                selected_group_questions.append(chosen_q)
-                weighted_group_qs = [item for item in weighted_group_qs if item[0].id != chosen_q.id]
-            
-            exam_questions.extend(selected_group_questions)
-
-    random.shuffle(exam_questions)
-    return exam_questions[:40]
 
 @app.route("/")
 def login():
@@ -270,7 +164,6 @@ def submit_section():
         q_list = Question.query.filter_by(category=category).all()
 
     for q in q_list:
-        q.total_count += 1
         selected_choice_val = request.form.get(f'question_{q.id}')
         
         selected_choice_index = None # 1-based index
@@ -285,7 +178,6 @@ def submit_section():
 
         if is_correct:
             score += 1
-            q.correct_count += 1
         
         results.append({
             'question': q,
@@ -295,7 +187,6 @@ def submit_section():
             'is_correct': is_correct
         })
     
-    db.session.commit()
     total = len(q_list)
 
     return render_template('result.html', results=results, score=score, total=total, test_type='section')
@@ -306,46 +197,102 @@ def practice():
         return redirect("/")
     
     num_questions_str = request.args.get('num_questions')
-    test_type = request.args.get('test_type')
+    test_type = request.args.get('test_type') # Retrieve test_type
 
     if not num_questions_str:
+        # Display selection screen
         options = {
-            "5問": 5, "10問": 10, "20問": 20, "30問": 30, "40問": 40,
-            "50問": 50, "100問": 100, "すべて": "all"
+            "5問": 5,
+            "10問": 10,
+            "20問": 20,
+            "30問": 30,
+            "40問": 40,
+            "50問": 50,
+            "100問": 100,
+            "すべて": "all"
         }
         return render_template("practice_test.html", question_options=options)
 
     all_questions = Question.query.all()
-    q_list = []
+    total_available = len(all_questions)
 
-    if test_type == 'training':
-        num_to_sample = len(all_questions) if num_questions_str == 'all' else int(num_questions_str)
-        num_to_sample = min(num_to_sample, len(all_questions))
-        q_list = generate_special_training_questions(all_questions, num_to_sample)
+    if num_questions_str == 'all':
+        num_to_sample = total_available
+    elif num_questions_str in ['40_random_mock', '40_weakness_mock']:
+        num_to_sample = 40
+    else:
+        num_to_sample = int(num_questions_str)
+
+    # Ensure we don't request more questions than available
+    num_to_sample = min(num_to_sample, total_available)
     
-    elif test_type == 'mock_exam':
-        mode = 'random' if num_questions_str == '40_random_mock' else 'weakness'
-        q_list = generate_exam(all_questions, mode)
-
-    else: # Fallback for old logic or other test types
-        total_available = len(all_questions)
-        if num_questions_str == 'all':
-            num_to_sample = total_available
-        else:
-            num_to_sample = int(num_questions_str)
-        num_to_sample = min(num_to_sample, total_available)
-        if num_to_sample > 0:
-            q_list = random.sample(all_questions, num_to_sample)
-
-    if not q_list:
+    if num_to_sample == 0:
         return "問題がDBにありません"
+
+    # Shuffle all questions if 'all' is selected, otherwise sample
+    if num_questions_str == 'all':
+        q_list = all_questions
+        random.shuffle(q_list)
+    else:
+        q_list = random.sample(all_questions, num_to_sample)
 
     return render_template(
         "practice_test.html",
         questions=q_list,
         total=len(q_list),
-        test_type=test_type
+        test_type=test_type # Pass test_type to the template
     )
+
+@app.route('/submit_practice', methods=['POST'])
+def submit_practice():
+    if 'user' not in session:
+        return redirect('/')
+
+    results = []
+    score = 0
+    test_type = request.form.get('test_type') # Retrieve test_type
+    
+    # Get all question IDs that were part of the test, preserving order
+    all_q_ids = request.form.get('all_q_ids').split(',')
+    
+    # Fetch the questions from the database
+    questions_from_db = Question.query.filter(Question.id.in_(all_q_ids)).all()
+    
+    # The database query does not guarantee order, so we reorder them.
+    # Create a mapping from ID to Question object
+    question_map = {str(q.id): q for q in questions_from_db}
+    
+    # Re-order the questions based on the original ID list
+    q_list = [question_map[qid] for qid in all_q_ids if qid in question_map]
+
+    for q in q_list:
+        selected_choice_val = request.form.get(f'question_{q.id}')
+        
+        selected_choice_index = None # 1-based index
+        user_answer_text = "未回答" # Default for unanswered
+
+        if selected_choice_val is not None:
+            selected_choice_index = int(selected_choice_val)
+            choices = [q.choice1, q.choice2, q.choice3, q.choice4]
+            user_answer_text = choices[selected_choice_index - 1]
+
+        is_correct = (selected_choice_index == q.correct)
+
+        if is_correct:
+            score += 1
+        
+        results.append({
+            'question': q,
+            'user_answer': user_answer_text,
+            'selected_choice_index': selected_choice_index,
+            'correct_choice_index': q.correct,
+            'is_correct': is_correct
+        })
+    
+    total = len(q_list)
+
+    return render_template('result.html', results=results, score=score, total=total, test_type=test_type)
+
 @app.route("/admin")
 def admin():
     if not session.get("is_admin"):
