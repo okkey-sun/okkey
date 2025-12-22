@@ -29,3 +29,5 @@ class Question(db.Model):
     category = db.Column(db.String(50))
     rationale = db.Column(db.Text)
     reference = db.Column(db.String(300))
+    total_count = db.Column(db.Integer, nullable=False, default=0)
+    correct_count = db.Column(db.Integer, nullable=False, default=0)
