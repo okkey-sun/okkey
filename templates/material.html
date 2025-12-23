@@ -10,27 +10,375 @@
             background-color: #f8f9fa;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        h3 {
+            border-bottom: 2px solid #0d6efd;
+            padding-bottom: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        h4 {
+            color: #0d6efd;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        h5 {
+            font-weight: bold;
+            margin-top: 15px;
+            border-left: 4px solid #6c757d;
+            padding-left: 10px;
+        }
+        section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h2>Python 基礎教材</h2>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">変数</li>
-                <li class="list-group-item">リスト</li>
-                <li class="list-group-item">辞書</li>
-                <li class="list-group-item">制御構文</li>
-                <li class="list-group-item">関数</li>
+        <h1 class="mb-4 text-center">Python 基礎教材</h1>
+
+        <!-- 0. このページについて -->
+        <section>
+            <h3>0. このページについて</h3>
+            <p>試験概要のリンク、私が講義受講時にとったノートの概要、理解を深める為に検索したWEBを紹介しています。<br>
+            参考までに載せておきます。</p>
+        </section>
+
+        <!-- 1. 試験概要 -->
+        <section>
+            <h3>1. 試験概要</h3>
+            <h4>🎯 試験概要と学習方法</h4>
+            <ul>
+                <li><strong>試験の概要:</strong> <a href="https://cbt.odyssey-com.co.jp/pythonic-exam/python3basic.html" target="_blank">オデッセイコミュニケーションズ</a></li>
+                <li><strong>試験の特徴:</strong> 8割得点を目標にするために受験者を落とすための試験。掲載されていない問題も出題されることもある。</li>
+                <li><strong>参考にした学習サイト:</strong> <a href="https://qiita.com/search?q=Python3%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E8%AA%8D%E5%AE%9A%E5%9F%BA%E7%A4%8E%E8%A9%A6%E9%A8%93%E5%AF%BE%E5%BF%9C" target="_blank">Qiita Python3エンジニア認定基礎試験対応</a></li>
             </ul>
-        </div>
-        <div class="text-center mt-4">
-            <a href="/home" class="btn btn-secondary">ホームに戻る</a>
+        </section>
+
+        <!-- 2. ノート（基本概念、文法、構文など） -->
+        <section>
+            <h3>2. ノート（基本概念、文法、構文など）</h3>
+            
+            <h4>📚 基本概念</h4>
+            
+            <h5>シーケンス型</h5>
+            <ul>
+                <li>順番のある要素の集まり(リスト、タプル、レンジ、バイナリシーケンス、文字列など)</li>
+            </ul>
+
+            <h5>関数の基礎</h5>
+            <ul>
+                <li><strong>引数:</strong> 関数に渡す値。自分自身を0番目として渡される</li>
+                <li><strong>戻り値(返り値):</strong> 関数を実行して得られる結果</li>
+                <li><strong>変数:</strong> 数値や文字列などの値を格納する「箱」。データを一時的に保管・管理するために使用</li>
+                <li><strong>注意点:</strong> 引数と引き渡す変数名が同名称でも引き渡される</li>
+            </ul>
+
+            <h5>ドット「.」の使い方 (<a href="https://qiita.com/gaku-devlog/items/bad35eaa53b234482a0f" target="_blank">参考サイト</a>)</h5>
+            <ul>
+                <li><strong>変数 or プロパティ:</strong> ()がない</li>
+                <li><strong>関数(メソッド):</strong> ()がある</li>
+                <li>実際にプロパティかどうかは定義を見ないと判断できない</li>
+            </ul>
+
+            <h4>🔢 データ型と構造</h4>
+
+            <h5>タプル</h5>
+            <ul>
+                <li>()で囲むリスト型。要素を変更できない(不変)</li>
+            </ul>
+
+            <h5>辞書</h5>
+            <ul>
+                <li><strong>KeyError:</strong> 存在しないキーを呼び出した場合に発生する例外</li>
+            </ul>
+
+            <h5>集合 (<a href="https://www.sejuku.net/blog/21923" target="_blank">参考サイト</a>)</h5>
+            <ul>
+                <li><strong>a - b:</strong> 差集合(集合aの要素 - 集合bの要素)</li>
+                <li><strong>a | b:</strong> 和集合(aとbのすべての要素)</li>
+                <li><strong>a & b:</strong> 積集合(aかつbの共通部分)</li>
+                <li><strong>a ^ b:</strong> 対称差(積集合を除く部分)</li>
+            </ul>
+
+            <h5>可変(mutable)と不変(immutable) (<a href="https://qiita.com/zhao-xy/items/600d26773787cc7a0856" target="_blank">参考サイト</a>)</h5>
+            <ul>
+                <li><strong>可変オブジェクト:</strong> 作成後も内部の要素を変更できる
+                    <ul>
+                        <li>list(リスト)、dict(辞書)、set(集合)</li>
+                    </ul>
+                </li>
+                <li><strong>不変オブジェクト:</strong> 作成後に内容を変更できない
+                    <ul>
+                        <li>str(文字列)、tuple(タプル)、int(整数型)、float(浮動小数点数型)</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h5>テンソル型 (<a href="https://qiita.com/kotai2003/items/4e65cbe1be99fdd46b39" target="_blank">参考サイト</a>)</h5>
+            <ul>
+                <li>機械学習時にデータを正規化するために、変数を学習用に割り当てるイメージ</li>
+            </ul>
+
+            <h4>⚠️ 例外処理とエラー (<a href="https://qiita.com/baby-0105/items/0e30348589fa0a9d2424" target="_blank">参考サイト</a>)</h4>
+
+            <h5>assert文</h5>
+            <ul>
+                <li>デバッグ作業を容易にするために使用</li>
+                <li>条件式がFalseの場合にAssertionErrorを発生させて停止</li>
+                <li>Trueの場合はそのまま処理が続く</li>
+                <li>if文との違い: assertはFalseの場合は例外を発生させる</li>
+            </ul>
+
+            <h5>except文</h5>
+            <ul>
+                <li>例外処理を受け取る(キャッチする)</li>
+                <li>想定外の処理が起きた時用の処理を用意</li>
+            </ul>
+
+            <h5>raise文</h5>
+            <ul>
+                <li>例外を意図的に発生させたい場合に使用</li>
+                <li>例外が発生する可能性のある箇所に記述</li>
+                <li>raiseで例外を発生させて、exceptでキャッチする</li>
+                <li>例外の連鎖を作成するときに「from」をセットで使う</li>
+            </ul>
+
+            <h5>標準エラー(stderr)</h5>
+            <ul>
+                <li><strong>sys.stderr:</strong> 標準エラーへ読み書きを行うためのファイルオブジェクト</li>
+                <li>プログラムの実行中に発生したエラーや警告などのメッセージを出力する場所</li>
+                <li>通常、コンソールやターミナルに表示される</li>
+                <li>標準出力とは別に出力先を分けることができる(例: 標準出力はファイル、標準エラーは画面)</li>
+            </ul>
+
+            <h4>📦 モジュールとファイル操作</h4>
+
+            <h5>インポート順序</h5>
+            <ul>
+                <li><code>from モジュール名 import 関数名</code></li>
+            </ul>
+
+            <h5>shutil モジュール</h5>
+            <ul>
+                <li>ファイルやディレクトリのコピー、移動、削除、圧縮・解凍など、高水準なファイル操作を行う標準ライブラリ</li>
+                <li>osモジュールよりも高レベルな機能を提供</li>
+                <li>ファイル管理、バックアップ、自動化スクリプトで非常に便利</li>
+            </ul>
+
+            <h5>JSONファイル操作</h5>
+            <ul>
+                <li><strong>ファイルオブジェクトを扱う:</strong> json.load()、json.dump()</li>
+                <li><strong>文字列として扱う:</strong> json.loads()、json.dumps()(関数名に「s」が付く)</li>
+                <li>違いは扱う対象が「文字列」か「ファイルやソケットオブジェクト」か</li>
+            </ul>
+
+            <h5>エンコーディング</h5>
+            <ul>
+                <li>コメントにおける「#」でエンコーディングを指示する場合、#の中で更に#を使ってエンコーディング宣言する</li>
+            </ul>
+
+            <h4>🔧 その他の重要ポイント</h4>
+
+            <h5>同名の優先順位と属性</h5>
+            <ul>
+                <li>インスタンスとクラスで名前がかぶった場合、インスタンスが優先</li>
+                <li>理由: 深いところで上書きされるため</li>
+            </ul>
+
+            <h5>デフォルト引数</h5>
+            <ul>
+                <li>変更できるリスト(可変オブジェクト)は基本的に使わない(問題集P68参照)</li>
+            </ul>
+
+            <h5>MAC、UNIX</h5>
+            <ul>
+                <li>sourceコマンドで使用する</li>
+            </ul>
+
+            <h5>GETとPOST</h5>
+            <ul>
+                <li><strong>GET:</strong> 引数がアドレスで見えてしまうため、セキュリティに懸念がある</li>
+                <li><strong>POST:</strong> 引数が見えないようにしているため、注意が必要</li>
+            </ul>
+
+            <h5>ER図(Entity-Relationship) (<a href="https://www.ntt.com/business/services/rink/knowledge/archive_58.html" target="_blank">参考サイト</a>)</h5>
+            <ul>
+                <li><strong>カーディナリティとオプショナリティの記号:</strong>
+                    <ul>
+                        <li>|| = 必須</li>
+                        <li>○ = オプション</li>
+                        <li>- = 1つ</li>
+                        <li>3本(鳥足) = 複数</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 3. ノート（関数、メソッドなど） -->
+        <section>
+            <h3>3. ノート（関数、メソッドなど）</h3>
+
+            <h4>基本的な出力と型変換</h4>
+            
+            <h5>出力関連</h5>
+            <ul>
+                <li><code>end=""</code> 改行しないで書く</li>
+                <li><code>sep=""</code> 文章の空欄を埋める</li>
+            </ul>
+
+            <h5>エスケープシーケンス</h5>
+            <ul>
+                <li><code>\</code>、<code>\\</code>、<code>\'</code>など通常の表現をキャンセルする</li>
+                <li>改行が入るところで、<code>\</code> を入れると改行がキャンセル</li>
+            </ul>
+
+            <h5>型変換関数</h5>
+            <ul>
+                <li><code>str(x)</code> 文字列(String)型に変換</li>
+                <li><code>float(x)</code> 浮動小数点に型を変換</li>
+                <li><code>int(x)</code> 整数に型を変換</li>
+            </ul>
+
+            <h4>演算子</h4>
+            <p><a href="https://www.tohoho-web.com/python/operators.html#arithmetic" target="_blank">演算子一覧サイト</a></p>
+
+            <h5>比較演算子</h5>
+            <ul>
+                <li><code>==</code> 演算子は2つのオブジェクトが等価で同値であれば True を返す。等価で同じ値かどうか</li>
+                <li><code>!=</code> 演算子は左辺と右辺が異なる場合に True を返す</li>
+                <li><code>is</code> は同じ値(<code>==</code>の結果がTrue)であっても、異なるオブジェクトであれば False を返す。2つのオブジェクトが同一かどうかを判定</li>
+            </ul>
+
+            <h5>算術演算子</h5>
+            <ul>
+                <li><code>+=</code> や <code>*=</code> 。例:<code>x *= 0.8</code> は、xに0.8をかける</li>
+                <li><code>//</code> 小数点以下を切り捨て</li>
+                <li>文字列 * 数字は、数字が小数点ならエラー。整数ならその個数を並べる</li>
+            </ul>
+
+            <h4>リスト・シーケンス操作</h4>
+
+            <h5>基本関数・メソッド</h5>
+            <ul>
+                <li><code>len()</code> 要素の数を調べる</li>
+                <li><code>dir()</code> ()の中に"abc"や30(整数)、3.1などの小数点を入れると、使える関数が一覧で出る</li>
+                <li><code>del</code> リストも関数なので引数である() で囲みそうだが、<code>del[]</code>が正解。命令文なのでこれだけ[]</li>
+                <li><code>list</code> 他のデータをリストに変換する関数としても用いられる</li>
+                <li><code>insert(1, 4)</code> 1番目に4を挿入。場所、要素の順</li>
+                <li><code>remove</code> 最初の要素を削除</li>
+            </ul>
+
+            <h5>ソート・順序</h5>
+            <ul>
+                <li><code>sort</code>はメソッド、<code>sorted</code>は関数で新しいリストを作成して返す</li>
+                <li><code>reversed</code>で降順で表示するのが一番スマート</li>
+            </ul>
+
+            <h5>その他の便利な関数</h5>
+            <ul>
+                <li><code>range</code>数字の範囲指定は、1つ前まで。例:(1, 21)は1から20まで。<a href="https://snowtree-injune.com/2018/08/16/range/#toc5" target="_blank">詳細</a></li>
+                <li><code>zip</code> 2つ以上のシーケンスをペアで返したい場合に指定</li>
+                <li><code>enumerate()</code>関数 要素の値だけでなく、(インデックス番号, 要素の値)とタプルで得られる</li>
+            </ul>
+
+            <h4>文字列操作</h4>
+            <ul>
+                <li><code>split</code>で分割、<code>join</code>で連結</li>
+                <li><code>replace</code> メソッドなので元々を変えないが、<code>s=</code>などで定義を変更</li>
+                <li><code>zfill</code> 右寄せゼロ埋め。一番シンプルなのは文字列strの<code>zfill()</code>メソッドを使う方法</li>
+            </ul>
+
+            <h4>高度な関数</h4>
+
+            <h5>map と filter</h5>
+            <ul>
+                <li><code>map()</code> イテラブル(リストやタプルなど)のすべての要素に組み込み関数やlambda(ラムダ式、無名関数)、defで定義した関数などを適用できる。リストなどの複数の要素に対して全てに指定した関数を適用させることができる関数</li>
+                <li><code>filter</code> リストなどの複数の要素に対して条件が一致しないものを取り出すことができる関数</li>
+            </ul>
+
+            <h5>ジェネレータ</h5>
+            <ul>
+                <li><code>yield</code> ジェネレータを使用してイテレータを作る時に、値を返すのは<code>yield</code>(returnではない)</li>
+            </ul>
+
+            <h4>制御構文</h4>
+
+            <h5>繰り返し(forやwhile構文)</h5>
+            <ul>
+                <li><code>continue</code> 値がxの時はループに戻る</li>
+                <li><code>break</code> 値がxになったらループを抜ける</li>
+            </ul>
+
+            <h4>例外処理</h4>
+
+            <h5>try構文</h5>
+            <ul>
+                <li><code>finally:</code> try-except構文が終わる際に必ず実行される処理</li>
+                <li><code>else</code> ブロック内でエラー(例外)が発生しなかった場合に、elseブロック内の処理が実行される</li>
+            </ul>
+
+            <h5>with構文</h5>
+            <ul>
+                <li>try…except…finallyと長くなるので、with構文で短縮</li>
+                <li>ファイルも自動的に閉じられるのが特色</li>
+            </ul>
+
+            <h4>モジュール</h4>
+
+            <h5>パッケージ管理</h5>
+            <ul>
+                <li><code>pip</code> 複数のモジュールを組み合わせたパッケージをインストールする。例:QRコードなど</li>
+            </ul>
+
+            <h5>ファイル・パターンマッチング</h5>
+            <ul>
+                <li><code>glob</code> ファイルパスのパターンマッチングで、主にファイルパスやファイル名</li>
+                <li><code>re</code> 正規表現で文字列全体のパターンマッチングを行うためのモジュール。主に文字列全体</li>
+            </ul>
+
+            <h5>loggingモジュール</h5>
+            <ul>
+                <li>ログ出力なのか、ユーザ(プログラム実行者)に伝えたい情報としての出力なのかを切り分け</li>
+                <li>ログの種類をErrorやDebugのように、レベル分けが出来る</li>
+                <li>フォーマットを指定すれば、簡単に統一化された出力の仕方ができる</li>
+            </ul>
+        </section>
+
+        <!-- 4. 参考リンク -->
+        <section>
+            <h3>4. 参考リンク</h3>
+            <p>分からない事や詳しく知りたい事のブックマークです。</p>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>カテゴリ</th>
+                            <th>タイトル</th>
+                            <th>URL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>基礎・概念・用語</td>
+                            <td>Webセーフカラー web216 - Web Safe Colors</td>
+                            <td><a href="https://www.colordic.org/s" target="_blank">https://www.colordic.org/s</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="text-center mt-5 mb-5">
+            <a href="/home" class="btn btn-secondary btn-lg">ホームに戻る</a>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
