@@ -1,251 +1,47 @@
-materialのページに、以下の４つのコンテンツを追加してください。
+materialの「4. 参考リンク」について、以下のリストを追加してください。
+カテゴリとタイトルを記入し、URLはリンクとしてタイトルの文字要素にのせてください。
 
-0.このページについて
-試験概要のリンク、私が講義受講時にとったノートの概要、理解を深める為に検索したWEBを紹介しています。
-参考までに載せておきます。
-
-1.試験概要
-　## 🎯 試験概要と学習方法
-- **試験の概要:** [オデッセイコミュニケーションズ](https://cbt.odyssey-com.co.jp/pythonic-exam/python3basic.html)
-- **試験の特徴:** 8割得点を目標にするために受験者を落とすための試験。掲載されていない問題も出題されることもある。
-- **参考にした学習サイト:** [Qiita Python3エンジニア認定基礎試験対応](https://qiita.com/search?q=Python3%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E8%AA%8D%E5%AE%9A%E5%9F%BA%E7%A4%8E%E8%A9%A6%E9%A8%93%E5%AF%BE%E5%BF%9C)
-
-2.ノート（基本概念、文法、構文など）
-## 📚 基本概念
-
-### シーケンス型
-
-- 順番のある要素の集まり(リスト、タプル、レンジ、バイナリシーケンス、文字列など)
-
-### 関数の基礎
-
-- **引数:** 関数に渡す値。自分自身を0番目として渡される
-- **戻り値(返り値):** 関数を実行して得られる結果
-- **変数:** 数値や文字列などの値を格納する「箱」。データを一時的に保管・管理するために使用
-- **注意点:** 引数と引き渡す変数名が同名称でも引き渡される
-
-### ドット「.」の使い方 ([参考サイト](https://qiita.com/gaku-devlog/items/bad35eaa53b234482a0f))
-
-- **変数 or プロパティ:** ()がない
-- **関数(メソッド):** ()がある
-- 実際にプロパティかどうかは定義を見ないと判断できない
-
-## 🔢 データ型と構造
-
-### タプル
-
-- ()で囲むリスト型。要素を変更できない(不変)
-
-### 辞書
-
-- **KeyError:** 存在しないキーを呼び出した場合に発生する例外
-
-### 集合 ([参考サイト](https://www.sejuku.net/blog/21923))
-
-- **a - b:** 差集合(集合aの要素 - 集合bの要素)
-- **a | b:** 和集合(aとbのすべての要素)
-- **a & b:** 積集合(aかつbの共通部分)
-- **a ^ b:** 対称差(積集合を除く部分)
-
-### 可変(mutable)と不変(immutable) ([参考サイト](https://qiita.com/zhao-xy/items/600d26773787cc7a0856))
-
-- **可変オブジェクト:** 作成後も内部の要素を変更できる
-    - list(リスト)、dict(辞書)、set(集合)
-- **不変オブジェクト:** 作成後に内容を変更できない
-    - str(文字列)、tuple(タプル)、int(整数型)、float(浮動小数点数型)
-
-### テンソル型 ([参考サイト](https://qiita.com/kotai2003/items/4e65cbe1be99fdd46b39))
-
-- 機械学習時にデータを正規化するために、変数を学習用に割り当てるイメージ
-
-## ⚠️ 例外処理とエラー ([参考サイト](https://qiita.com/baby-0105/items/0e30348589fa0a9d2424))
-
-### assert文
-
-- デバッグ作業を容易にするために使用
-- 条件式がFalseの場合にAssertionErrorを発生させて停止
-- Trueの場合はそのまま処理が続く
-- if文との違い: assertはFalseの場合は例外を発生させる
-
-### except文
-
-- 例外処理を受け取る(キャッチする)
-- 想定外の処理が起きた時用の処理を用意
-
-### raise文
-
-- 例外を意図的に発生させたい場合に使用
-- 例外が発生する可能性のある箇所に記述
-- raiseで例外を発生させて、exceptでキャッチする
-- 例外の連鎖を作成するときに「from」をセットで使う
-
-### 標準エラー(stderr)
-
-- **sys.stderr:** 標準エラーへ読み書きを行うためのファイルオブジェクト
-- プログラムの実行中に発生したエラーや警告などのメッセージを出力する場所
-- 通常、コンソールやターミナルに表示される
-- 標準出力とは別に出力先を分けることができる(例: 標準出力はファイル、標準エラーは画面)
-
-## 📦 モジュールとファイル操作
-
-### インポート順序
-
-- `from モジュール名 import 関数名`
-
-### shutil モジュール
-
-- ファイルやディレクトリのコピー、移動、削除、圧縮・解凍など、高水準なファイル操作を行う標準ライブラリ
-- osモジュールよりも高レベルな機能を提供
-- ファイル管理、バックアップ、自動化スクリプトで非常に便利
-
-### JSONファイル操作
-
-- **ファイルオブジェクトを扱う:** json.load()、json.dump()
-- **文字列として扱う:** json.loads()、json.dumps()(関数名に「s」が付く)
-- 違いは扱う対象が「文字列」か「ファイルやソケットオブジェクト」か
-
-### エンコーディング
-
-- コメントにおける「#」でエンコーディングを指示する場合、#の中で更に#を使ってエンコーディング宣言する
-
-## 🔧 その他の重要ポイント
-
-### 同名の優先順位と属性
-
-- インスタンスとクラスで名前がかぶった場合、インスタンスが優先
-- 理由: 深いところで上書きされるため
-
-### デフォルト引数
-
-- 変更できるリスト(可変オブジェクト)は基本的に使わない(問題集P68参照)
-
-### MAC、UNIX
-
-- sourceコマンドで使用する
-
-### GETとPOST
-
-- **GET:** 引数がアドレスで見えてしまうため、セキュリティに懸念がある
-- **POST:** 引数が見えないようにしているため、注意が必要
-
-### ER図(Entity-Relationship) ([参考サイト](https://www.ntt.com/business/services/rink/knowledge/archive_58.html))
-
-- **カーディナリティとオプショナリティの記号:**
-    - || = 必須
-    - ○ = オプション
-    - - = 1つ
-    - 3本(鳥足) = 複数
-
-3.ノート（関数、メソッドなど）
-# 基本的な出力と型変換
-
-## 出力関連
-
-- `end=""` 改行しないで書く
-- `sep=""` 文章の空欄を埋める
-
-## エスケープシーケンス
-
-- `\`、`\\`、`\'`など通常の表現をキャンセルする
-- 改行が入るところで、`\` を入れると改行がキャンセル
-
-## 型変換関数
-
-- `str(x)` 文字列(String)型に変換
-- `float(x)` 浮動小数点に型を変換
-- `int(x)` 整数に型を変換
-
-# 演算子
-
-参考:[演算子一覧サイト](https://www.tohoho-web.com/python/operators.html#arithmetic)
-
-## 比較演算子
-
-- `==` 演算子は2つのオブジェクトが等価で同値であれば True を返す。等価で同じ値かどうか
-- `!=` 演算子は左辺と右辺が異なる場合に True を返す
-- `is` は同じ値(`==`の結果がTrue)であっても、異なるオブジェクトであれば False を返す。2つのオブジェクトが同一かどうかを判定
-
-## 算術演算子
-
-- `+=` や `*=` 。例:`x *= 0.8` は、xに0.8をかける
-- `//` 小数点以下を切り捨て
-- 文字列 * 数字は、数字が小数点ならエラー。整数ならその個数を並べる
-
-# リスト・シーケンス操作
-
-## 基本関数・メソッド
-
-- `len()` 要素の数を調べる
-- `dir()` ()の中に"abc"や30(整数)、3.1などの小数点を入れると、使える関数が一覧で出る
-- `del` リストも関数なので引数である() で囲みそうだが、`del[]`が正解。命令文なのでこれだけ[]
-- `list` 他のデータをリストに変換する関数としても用いられる
-- `insert(1, 4)` 1番目に4を挿入。場所、要素の順
-- `remove` 最初の要素を削除
-
-## ソート・順序
-
-- `sort`はメソッド、`sorted`は関数で新しいリストを作成して返す
-- `reversed`で降順で表示するのが一番スマート
-
-## その他の便利な関数
-
-- `range` 数字の範囲指定は、1つ前まで。例:(1, 21)は1から20まで。[詳細](https://snowtree-injune.com/2018/08/16/range/#toc5)
-- `zip` 2つ以上のシーケンスをペアで返したい場合に指定
-- `enumerate()`関数 要素の値だけでなく、(インデックス番号, 要素の値)とタプルで得られる
-
-# 文字列操作
-
-- `split`で分割、`join`で連結
-- `replace` メソッドなので元々を変えないが、`s=`などで定義を変更
-- `zfill` 右寄せゼロ埋め。一番シンプルなのは文字列strの`zfill()`メソッドを使う方法
-
-# 高度な関数
-
-## map と filter
-
-- `map()` イテラブル(リストやタプルなど)のすべての要素に組み込み関数やlambda(ラムダ式、無名関数)、defで定義した関数などを適用できる。リストなどの複数の要素に対して全てに指定した関数を適用させることができる関数
-- `filter` リストなどの複数の要素に対して条件が一致しないものを取り出すことができる関数
-
-## ジェネレータ
-
-- `yield` ジェネレータを使用してイテレータを作る時に、値を返すのは`yield`(returnではない)
-
-# 制御構文
-
-## 繰り返し(forやwhile構文)
-
-- `continue` 値がxの時はループに戻る
-- `break` 値がxになったらループを抜ける
-
-## 例外処理
-
-### try構文
-
-- `finally:` try-except構文が終わる際に必ず実行される処理
-- `else` ブロック内でエラー(例外)が発生しなかった場合に、elseブロック内の処理が実行される
-
-### with構文
-
-- try…except…finallyと長くなるので、with構文で短縮
-- ファイルも自動的に閉じられるのが特色
-
-# モジュール
-
-## パッケージ管理
-
-- `pip` 複数のモジュールを組み合わせたパッケージをインストールする。例:QRコードなど
-
-## ファイル・パターンマッチング
-
-- `glob` ファイルパスのパターンマッチングで、主にファイルパスやファイル名
-- `re` 正規表現で文字列全体のパターンマッチングを行うためのモジュール。主に文字列全体
-
-## loggingモジュール
-
-- ログ出力なのか、ユーザ(プログラム実行者)に伝えたい情報としての出力なのかを切り分け
-- ログの種類をErrorやDebugのように、レベル分けが出来る
-- フォーマットを指定すれば、簡単に統一化された出力の仕方ができる
-
-4.参考リンク: 分からない事や詳しく知りたい事のブックマークです。
 カテゴリ	タイトル	URL
 基礎・概念・用語	Webセーフカラー web216 - Web Safe Colors	https://www.colordic.org/s
+基礎・概念・用語	Python チュートリアル — Python 3.14.0 ドキュメント	https://docs.python.org/ja/3/tutorial/index.html
+基礎・概念・用語	演算子 一覧	https://www.tohoho-web.com/python/operators.html#arithmetic
+基礎・概念・用語	「分かりそう」で「分からない」でも「分かった」気になれるIT用語辞典	https://wa3.i-3-i.info/index.html
+基礎・概念・用語	シェル(Shell)とは？仕組みや種類・シェルスクリプトの実行方法まで解説！	https://udemy.benesse.co.jp/development/system/shell.html
+基礎・概念・用語	Batteries Included ってなに？ 【PyCon JP 2025】｜にしもつ	https://note.com/24motz/n/naf5c6b3b2aa4
+基礎・概念・用語	【Python初心者】ドット（.）の使い方を整理してみた #Python3 - Qiita	https://qiita.com/gaku-devlog/items/bad35eaa53b234482a0f
+データ構造（リスト・タプル・辞書）	Pythonのタプルについてまとめてみた #Python - Qiita	https://qiita.com/keishi04hrikzira/items/167fbfdde101029c08da
+データ構造（リスト・タプル・辞書）	Pythonでリストを多用しがちな新人に贈りたい	https://qiita.com/fujine/items/42cddf1cd13aedc6c4b8
+データ構造（リスト・タプル・辞書）	Pythonのデータが「deque」の使い方 #Python - Qiita	https://qiita.com/ryosuke0825/items/bbc5c0673e6c6c958d66
+データ構造（リスト・タプル・辞書）	dequeの使い方	https://zenn.dev/yuto_mo/articles/3a381c4a4086e7
+データ構造（リスト・タプル・辞書）	空の Tuple は ( , ) ではない #Python - Qiita	https://qiita.com/yyasuda/items/a6505e0573b0ebd52623
+データ構造（リスト・タプル・辞書）	Pythonでリストをソートするsortとsortedの違い | note.nkmk.me	https://note.nkmk.me/python-list-sort-sorted/
+データ構造（リスト・タプル・辞書）	Pythonのmap()でリストの要素に関数・処理を適用 | note.nkmk.me	https://note.nkmk.me/python-map-usage/
+データ構造（リスト・タプル・辞書）	辞書の違いまとめ #list - Qiita	https://qiita.com/yam_dev/items/d3385c39878c351d0320
+データ構造（リスト・タプル・辞書）	【初心者向け】Python リスト内包表記とは？わかりやすく解説！ - AI Academy Media	https://aiacademy.jp/media/?p=1252
+データ構造（リスト・タプル・辞書）	【Python】リスト操作まとめ #Python3 - Qiita	https://qiita.com/ell/items/8057198ef33e554e54a2
+データ構造（リスト・タプル・辞書）	【Python入門】すぐわかる！set型（集合型）の基本まとめ | 侍エンジニアブログ	https://www.sejuku.net/blog/21923
+関数・引数	組み込み関数一覧 — Python 3.14.0 ドキュメント	https://docs.python.org/ja/3/library/functions.html
+関数・引数	【Python初心者】よく使うメソッドまとめ（Python3エンジニア認定基礎試験対応）	https://qiita.com/gaku-devlog/items/d3965dc4e0499b8687e3
+関数・引数	引数と戻り値を根本から理解して関数を使いこなそう！【情報I基礎】Python 10 - YouTube	https://www.youtube.com/watch?v=wlOkT_6Qce4
+関数・引数	【Python 入門】enumerateとforループでPythonの要素とインデックス番号を同時に取得！	https://www.kikagaku.co.jp/kikagaku-blog/python-enumerate/
+関数・引数	Python♪基本：range()の基本的な使い方は完璧に覚えておこう - Snow Tree in June	https://snowtree-injune.com/2018/08/16/range/#toc5
+関数・引数	sys.argvの使い方完全ガイド【Python初心者向け】 | デジタルトレンドナビ	https://dtnavi.tcdigital.jp/cat_system/language_184/
+関数・引数	Pythonの可変長引数（*args, **kwargs）の使い方 | note.nkmk.me	https://note.nkmk.me/python-args-kwargs-usage/
+関数・引数	【初心者向け】Python 可変長引数（*args, **kwargs）とは？わかりやすく解説！	https://aiacademy.jp/media/?p=1496
+クラス・オブジェクト指向 (OOP)	【Python】クラスの使い方を３分でわかりやすく解説 | ビズドットオンライン	https://it-biz.online/python/class-2/#toc3
+クラス・オブジェクト指向 (OOP)	Pythonにおけるselfとinitが何なのか	https://www.reddit.com/r/learnpython/comments/z7ea9b/can_someone_explain_to_me_what_is_self_and_init/?tl=ja
+クラス・オブジェクト指向 (OOP)	Pythonの「__init__」とは？ロボットに例えて解説！ #Python3 - Qiita	https://qiita.com/masaya8028/items/724a8543fe5a80d60a9d
+クラス・オブジェクト指向 (OOP)	Pythonのクラスのselfの使い方とは？ロボットに例えて解説！ #Python3 - Qiita	https://qiita.com/masaya8028/items/58e8eb123be77068643b
+モジュール・システム・ツール	【Python】モジュールとパッケージとライブラリの違い	https://zenn.dev/delacroix/articles/e3f62ca001deb0
+モジュール・システム・ツール	Pythonでのコマンドライン引数処理 - `sys.argv` の使い方 #Python - Qiita	https://qiita.com/yuu_7_ns/items/29d3b83359e3deb38572
+モジュール・システム・ツール	【初心者向け】pytestの基本と使い方を解説 #Python - Qiita	https://qiita.com/Renki/items/825890f7662ea3ca6850
+モジュール・システム・ツール	Pythonでprintを卒業してログ出力をいい感じにする #logging - Qiita	https://qiita.com/FukuharaYohei/items/92795107032c8c0bfd19
+モジュール・システム・ツール	モジュール、パッケージ、ライブラリ、フレームワークの違い	https://zenn.dev/eliri/articles/4e238cb8eb449f
+発展・応用・AI (PyTorch)	Pythonでのバイトデータ処理: struct.packとstruct.unpackの使い方 #PACK - Qiita	https://qiita.com/yuu_7_ns/items/82fd791c7286c5cad43e
+発展・応用・AI (PyTorch)	Pythonにおけるイテレータとジェネレータの使い分けと違い	https://zenn.dev/giba/articles/8f03ba4b1de6b1
+発展・応用・AI (PyTorch)	Pythonの型ヒント(型アノテーション)を活用しよう #初心者向け - Qiita	https://qiita.com/shun_sakamoto/items/65edc36e7f5a6f9d52b8
+発展・応用・AI (PyTorch)	pyTorchのTensor型とは #Python - Qiita	https://qiita.com/mathlive/items/241bfb42d852bb801b96
+発展・応用・AI (PyTorch)	テンソル(Tensor)の理解(1) : Dimension #Python - Qiita	https://qiita.com/kotai2003/items/4e65cbe1be99fdd46b39
+発展・応用・AI (PyTorch)	【Python】最初、混同してしまう「assert, except, raise」文について #Python - Qiita	https://qiita.com/baby-0105/items/0e30348589fa0a9d2424
+Web・データベース・その他	XMLとは？IT初心者にもわかりやすい基礎知識とHTMLとの違い	https://hnavi.co.jp/knowledge/blog/xml/
+Web・データベース・その他	リレーショナルデータベースとは？特徴やメリット等をわかりやすく解説	https://smallit.co.jp/cloud-gunshi/relational-database/#SQL%E3%81%AB%E3%82%88%E3%82%8B%E9%AB%98%E5%BA%A6%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%93%8D%E4%BD%9C
