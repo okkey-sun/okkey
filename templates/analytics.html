@@ -221,19 +221,20 @@
                         y: {
                             type: 'linear',
                             display: true,
-                            position: 'left',
+                            position: 'right',
                             title: { display: true, text: '正解数' },
-                            beginAtZero: true
+                            beginAtZero: true,
+                            max: 40,
+                            grid: {
+                                drawOnChartArea: false
+                            }
                         },
                         y1: {
                             type: 'linear',
                             display: true,
-                            position: 'right',
+                            position: 'left',
                             min: 0,
                             max: 100,
-                            grid: {
-                                drawOnChartArea: false
-                            },
                             title: { display: true, text: '正答率 (%)' }
                         }
                     }
