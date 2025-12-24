@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, Response, flash
 from flask_migrate import Migrate
 from database import db
-from model import Question, User
+from model import Question, User, QuizResult
 import random
 import json
+from datetime import datetime, timedelta
+from sqlalchemy import func, desc
 
 app = Flask(__name__)
 app.secret_key = "test123"
@@ -189,6 +191,23 @@ def submit_section():
     
     total = len(q_list)
 
+    # Save result to DB
+    user_obj = User.query.filter_by(email=session['user']).first()
+    if user_obj:
+        if category == 'all':
+            exam_type_val = "section_all"
+        else:
+            exam_type_val = f"section_{category}"
+            
+        new_result = QuizResult(
+            user_id=user_obj.id,
+            exam_type=exam_type_val,
+            total_questions=total,
+            correct_answers=score
+        )
+        db.session.add(new_result)
+        db.session.commit()
+
     return render_template('result.html', results=results, score=score, total=total, test_type='section')
 
 @app.route("/practice", methods=["GET"])
@@ -220,6 +239,10 @@ def practice():
         num_to_sample = total_available
     elif num_questions_str in ['40_random_mock', '40_weakness_mock']:
         num_to_sample = 40
+        if num_questions_str == '40_random_mock':
+            test_type = 'random'
+        elif num_questions_str == '40_weakness_mock':
+            test_type = 'weakness'
     else:
         num_to_sample = int(num_questions_str)
 
@@ -290,6 +313,18 @@ def submit_practice():
         })
     
     total = len(q_list)
+
+    # Save result to DB
+    user_obj = User.query.filter_by(email=session['user']).first()
+    if user_obj:
+        new_result = QuizResult(
+            user_id=user_obj.id,
+            exam_type=test_type,
+            total_questions=total,
+            correct_answers=score
+        )
+        db.session.add(new_result)
+        db.session.commit()
 
     return render_template('result.html', results=results, score=score, total=total, test_type=test_type)
 
@@ -530,6 +565,108 @@ def delete_admin(id):
     db.session.commit()
     flash('管理者が削除されました。', 'success')
     return redirect(url_for('admin_admins'))
+
+@app.route('/analytics_data')
+def analytics_data():
+    if "user" not in session:
+        return jsonify({})
+    
+    user = User.query.filter_by(email=session["user"]).first()
+    if not user:
+        return jsonify({})
+    
+    now = datetime.now()
+    
+    # 1. Weekly Trend (Last 2 months = approx 8 weeks)
+    weekly_data = []
+    weekly_labels = []
+    
+    # Start from 8 weeks ago
+    start_date = now - timedelta(weeks=8)
+    
+    # Get all results for user in range to minimize DB hits? No, simple query is fine.
+    # Actually, iterate weeks
+    for i in range(8):
+        w_start = start_date + timedelta(weeks=i)
+        w_end = w_start + timedelta(weeks=1)
+        w_label = w_start.strftime('%m/%d')
+        weekly_labels.append(w_label)
+        
+        # Filter results in this week
+        results_week = QuizResult.query.filter(
+            QuizResult.user_id == user.id,
+            QuizResult.timestamp >= w_start,
+            QuizResult.timestamp < w_end
+        ).all()
+        
+        if results_week:
+            total_q = sum(r.total_questions for r in results_week)
+            total_c = sum(r.correct_answers for r in results_week)
+            rate = (total_c / total_q) * 100 if total_q > 0 else 0
+            weekly_data.append(round(rate, 1))
+        else:
+            weekly_data.append(0)
+            
+    # 2. Section Rate (Last 1 month)
+    section_labels = [f"{i}章" for i in range(1, 17)]
+    section_data = [0] * 16
+    
+    start_date_month = now - timedelta(days=30)
+    results_section = QuizResult.query.filter(
+        QuizResult.user_id == user.id,
+        QuizResult.timestamp >= start_date_month,
+        QuizResult.exam_type.like('section_%')
+    ).all()
+    
+    section_sums = {} # key: section_idx (0-15), val: {total_q, total_c}
+    
+    for r in results_section:
+        if r.exam_type == 'section_all':
+            continue 
+        
+        try:
+            sec_num = int(r.exam_type.split('_')[1])
+            if 1 <= sec_num <= 16:
+                idx = sec_num - 1
+                if idx not in section_sums:
+                    section_sums[idx] = {'q': 0, 'c': 0}
+                section_sums[idx]['q'] += r.total_questions
+                section_sums[idx]['c'] += r.correct_answers
+        except:
+            continue
+            
+    for idx, vals in section_sums.items():
+        if vals['q'] > 0:
+            section_data[idx] = round((vals['c'] / vals['q']) * 100, 1)
+            
+    # 3. Random Mock Trend (Last 10)
+    mock_random = QuizResult.query.filter(
+        QuizResult.user_id == user.id,
+        QuizResult.exam_type == 'random'
+    ).order_by(QuizResult.timestamp.desc()).limit(10).all()
+    
+    mock_random.reverse() # Oldest to newest
+    random_labels = [r.timestamp.strftime('%m/%d %H:%M') for r in mock_random]
+    random_scores = [r.correct_answers for r in mock_random]
+    random_rates = [round((r.correct_answers/r.total_questions)*100, 1) if r.total_questions > 0 else 0 for r in mock_random]
+    
+    # 4. Weakness Mock Trend (Last 10)
+    mock_weakness = QuizResult.query.filter(
+        QuizResult.user_id == user.id,
+        QuizResult.exam_type == 'weakness'
+    ).order_by(QuizResult.timestamp.desc()).limit(10).all()
+    
+    mock_weakness.reverse()
+    weakness_labels = [r.timestamp.strftime('%m/%d %H:%M') for r in mock_weakness]
+    weakness_scores = [r.correct_answers for r in mock_weakness]
+    weakness_rates = [round((r.correct_answers/r.total_questions)*100, 1) if r.total_questions > 0 else 0 for r in mock_weakness]
+    
+    return jsonify({
+        'weekly': {'labels': weekly_labels, 'data': weekly_data},
+        'section': {'labels': section_labels, 'data': section_data},
+        'random': {'labels': random_labels, 'scores': random_scores, 'rates': random_rates},
+        'weakness': {'labels': weakness_labels, 'scores': weakness_scores, 'rates': weakness_rates}
+    })
 
 @app.route('/analytics')
 def analytics():

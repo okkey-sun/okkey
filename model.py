@@ -16,6 +16,16 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+class QuizResult(db.Model):
+    __tablename__ = "quiz_results"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    exam_type = db.Column(db.String(50), nullable=False)
+    total_questions = db.Column(db.Integer, nullable=False)
+    correct_answers = db.Column(db.Integer, nullable=False)
+    timestamp = db.Column(db.DateTime, default=db.func.now())
+
 class Question(db.Model):
     __tablename__ = "questions"
 
