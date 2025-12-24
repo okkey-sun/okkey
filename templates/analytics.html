@@ -103,8 +103,8 @@
                 // Use the axis that has 0-100 range. Assuming 'y' or 'y1'.
                 // For mixed charts, rate is on y1 usually.
                 let scale = y;
-                if (chart.options.scales.y1) {
-                     scale = chart.options.scales.y1;
+                if (chart.scales.y1) {
+                     scale = chart.scales.y1;
                 }
                 
                 const yPos = scale.getPixelForValue(70);

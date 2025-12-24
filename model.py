@@ -25,6 +25,7 @@ class QuizResult(db.Model):
     total_questions = db.Column(db.Integer, nullable=False)
     correct_answers = db.Column(db.Integer, nullable=False)
     timestamp = db.Column(db.DateTime, default=db.func.now())
+    details = db.Column(db.Text, nullable=True) # JSON string of result details
 
 class Question(db.Model):
     __tablename__ = "questions"

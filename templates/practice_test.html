@@ -66,13 +66,15 @@
                 document.getElementById('training-select-form').addEventListener('submit', function(e) {
                     e.preventDefault();
                     var num_questions = document.getElementById('training-num-questions-select').value;
-                    window.location.href = "{{ url_for('practice', num_questions='__NUM__', test_type='training') }}".replace('__NUM__', num_questions);
+                    var baseUrl = "{{ url_for('practice') }}";
+                    window.location.href = baseUrl + "?num_questions=" + num_questions + "&test_type=training";
                 });
 
                 document.getElementById('mock-exam-select-form').addEventListener('submit', function(e) {
                     e.preventDefault();
                     var num_questions = document.getElementById('mock-exam-num-questions-select').value;
-                    window.location.href = "{{ url_for('practice', num_questions='__NUM__', test_type='mock_exam') }}".replace('__NUM__', num_questions);
+                    var baseUrl = "{{ url_for('practice') }}";
+                    window.location.href = baseUrl + "?num_questions=" + num_questions + "&test_type=mock_exam";
                 });
             </script>
 

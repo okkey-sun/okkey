@@ -198,12 +198,23 @@ def submit_section():
             exam_type_val = "section_all"
         else:
             exam_type_val = f"section_{category}"
+        
+        # Create details JSON
+        details_list = []
+        for r in results:
+            q = r['question']
+            details_list.append({
+                'q_id': q.id,
+                'category': q.category,
+                'is_correct': r['is_correct']
+            })
             
         new_result = QuizResult(
             user_id=user_obj.id,
             exam_type=exam_type_val,
             total_questions=total,
-            correct_answers=score
+            correct_answers=score,
+            details=json.dumps(details_list)
         )
         db.session.add(new_result)
         db.session.commit()
@@ -256,6 +267,16 @@ def practice():
     if num_questions_str == 'all':
         q_list = all_questions
         random.shuffle(q_list)
+    elif num_questions_str == '40_weakness_mock':
+        # Sort by correct rate (ascending), take first 40
+        # If total_count is 0, treat as rate 0 (very weak/unknown)
+        def get_rate(q):
+            if q.total_count == 0: return 0.0
+            return q.correct_count / q.total_count
+        
+        sorted_q = sorted(all_questions, key=get_rate)
+        q_list = sorted_q[:num_to_sample]
+        random.shuffle(q_list) # Shuffle the selected weak questions
     else:
         q_list = random.sample(all_questions, num_to_sample)
 
@@ -317,11 +338,22 @@ def submit_practice():
     # Save result to DB
     user_obj = User.query.filter_by(email=session['user']).first()
     if user_obj:
+        # Create details JSON
+        details_list = []
+        for r in results:
+            q = r['question']
+            details_list.append({
+                'q_id': q.id,
+                'category': q.category,
+                'is_correct': r['is_correct']
+            })
+            
         new_result = QuizResult(
             user_id=user_obj.id,
             exam_type=test_type,
             total_questions=total,
-            correct_answers=score
+            correct_answers=score,
+            details=json.dumps(details_list)
         )
         db.session.add(new_result)
         db.session.commit()
@@ -612,28 +644,45 @@ def analytics_data():
     section_data = [0] * 16
     
     start_date_month = now - timedelta(days=30)
-    results_section = QuizResult.query.filter(
+    # Get ALL results in last month (including mocks)
+    results_month = QuizResult.query.filter(
         QuizResult.user_id == user.id,
-        QuizResult.timestamp >= start_date_month,
-        QuizResult.exam_type.like('section_%')
+        QuizResult.timestamp >= start_date_month
     ).all()
     
     section_sums = {} # key: section_idx (0-15), val: {total_q, total_c}
     
-    for r in results_section:
-        if r.exam_type == 'section_all':
-            continue 
+    for r in results_month:
+        # If details exist, use details (more accurate for mixed exams)
+        if r.details:
+            try:
+                details = json.loads(r.details)
+                for d in details:
+                    cat = d.get('category') # e.g., "section_1"
+                    if cat and cat.startswith('section_'):
+                        try:
+                            sec_num = int(cat.split('_')[1])
+                            if 1 <= sec_num <= 16:
+                                idx = sec_num - 1
+                                if idx not in section_sums: section_sums[idx] = {'q': 0, 'c': 0}
+                                section_sums[idx]['q'] += 1
+                                if d.get('is_correct'):
+                                    section_sums[idx]['c'] += 1
+                        except: pass
+            except: pass
         
-        try:
-            sec_num = int(r.exam_type.split('_')[1])
-            if 1 <= sec_num <= 16:
-                idx = sec_num - 1
-                if idx not in section_sums:
-                    section_sums[idx] = {'q': 0, 'c': 0}
-                section_sums[idx]['q'] += r.total_questions
-                section_sums[idx]['c'] += r.correct_answers
-        except:
-            continue
+        # Fallback for old records (section tests only) without details
+        elif r.exam_type.startswith('section_') and r.exam_type != 'section_all':
+            try:
+                sec_num = int(r.exam_type.split('_')[1])
+                if 1 <= sec_num <= 16:
+                    idx = sec_num - 1
+                    if idx not in section_sums:
+                        section_sums[idx] = {'q': 0, 'c': 0}
+                    section_sums[idx]['q'] += r.total_questions
+                    section_sums[idx]['c'] += r.correct_answers
+            except:
+                continue
             
     for idx, vals in section_sums.items():
         if vals['q'] > 0:
