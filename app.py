@@ -531,5 +531,13 @@ def delete_admin(id):
     flash('管理者が削除されました。', 'success')
     return redirect(url_for('admin_admins'))
 
+@app.route('/analytics')
+def analytics():
+    if "user" not in session:
+        return redirect("/")
+    
+    user = User.query.filter_by(email=session["user"]).first()
+    return render_template('analytics.html', user=user)
+
 if __name__ == "__main__":
     app.run(debug=True)
