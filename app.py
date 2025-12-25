@@ -78,15 +78,13 @@ def register():
         # パスワード入力はまだ求めない
 
         # 既存ユーザーチェック
-        existing_user = User.query.filter_by(email=email).first()
-        if existing_user:
-            # セキュリティ上は「送信しました」と出すのが良いが、今回はわかりやすくエラー表示
-            return render_template("register.html", error="このメールアドレスは既に登録されています。")
+        user = User.query.filter_by(email=email).first()
 
-        # 新規ユーザー作成（is_active=False, パスワード未設定）
-        new_user = User(email=email, is_active=False)
-        db.session.add(new_user)
-        db.session.commit()
+        if not user:
+            # 新規ユーザー作成（is_active=False, パスワード未設定）
+            new_user = User(email=email, is_active=False)
+            db.session.add(new_user)
+            db.session.commit()
 
         # トークン生成（emailをシリアライズ）
         token = serializer.dumps(email, salt='email-confirm-salt')

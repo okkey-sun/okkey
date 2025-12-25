@@ -26,9 +26,14 @@
 </head>
 <body>
     <div class="container-box">
-        <h2 class="mb-4">認証メールを送信しました</h2>
-        <p>ご入力いただいたメールアドレス宛に確認メールを送信しました。</p>
-        <p>メール内のリンクをクリックして、パスワード設定を完了してください。</p>
+        <h2 class="mb-4">メールを送信しました</h2>
+        <p>ご入力いただいたメールアドレス宛に、お手続き用のメールを送信しました。</p>
+        <p>メール内のリンクをクリックして、<b>パスワードの設定</b>を完了させてください。</p>
+        
+        <div class="alert alert-warning mt-4 small" role="alert">
+            メールが届かない場合は、迷惑メールフォルダをご確認いただくか、入力したアドレスに間違いがないか再度お確かめください。
+        </div>
+
         <div class="mt-4">
             <a href="{{ url_for('login') }}" class="btn btn-outline-primary">ログイン画面へ戻る</a>
         </div>

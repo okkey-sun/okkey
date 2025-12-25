@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新規ユーザー登録</title>
+    <title>アカウント認証｜クイズアプリ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -12,38 +12,57 @@
             justify-content: center;
             height: 100vh;
             background-color: #87ceeb;
+            margin: 0;
         }
         .register-form {
             width: 100%;
             max-width: 400px;
-            padding: 20px;
+            padding: 30px;
             background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        .instruction-box {
+            background-color: #f8f9fa;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 25px;
+            border-left: 4px solid #0d6efd;
         }
     </style>
 </head>
 <body>
     <div class="register-form">
-        <h2 class="text-center mb-4">新規ユーザー登録</h2>
+        <h2 class="text-center mb-4">アカウント認証</h2>
+
+        <div class="instruction-box text-center">
+            <p class="fw-bold mb-2" style="font-size: 1.1rem; color: #333;">
+                新規登録 ・ パスワード再設定
+            </p>
+            <p class="text-muted small mb-0" style="line-height: 1.6;">
+                ご登録のメールアドレスを入力してください。<br>
+                ご本人確認用のメールを送信します。
+            </p>
+        </div>
 
         {% if error %}
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger small" role="alert">
             {{ error }}
         </div>
         {% endif %}
 
         <form action="/register" method="post">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+            <div class="mb-4">
+                <label for="email" class="form-label fw-bold small">メールアドレス</label>
+                <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="example@mail.com" required>
             </div>
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary">確認メールを送信</button>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">認証メールを送信する</button>
             </div>
         </form>
-        <div class="text-center mt-3">
-            <a href="{{ url_for('login') }}">ログインはこちら</a>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('login') }}" class="text-decoration-none small">ログイン画面に戻る</a>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
