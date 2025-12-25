@@ -6,9 +6,10 @@ import random
 import json
 import os
 import smtplib
-from dotenv import load_dotenv
+#load_dotenv関連をコメントアウト
+#from dotenv import load_dotenv
 
-load_dotenv()
+#load_dotenv()
 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
