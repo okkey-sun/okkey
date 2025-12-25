@@ -1,0 +1,15 @@
+2025-12-24 13:18:38,032 WARNING:  * Debugger is active!
+2025-12-24 13:18:38,032 INFO:  * Debugger PIN: 808-124-345
+2025-12-24 13:18:46,231 INFO:  * Detected change in 'c:\\Users\\kic-002\\Documents\\myquest\\app.py', reloading
+2025-12-24 13:18:47,029 WARNING:  * Debugger is active!
+2025-12-24 13:18:47,031 INFO:  * Debugger PIN: 808-124-345
+2025-12-24 13:18:55,219 INFO:  * Detected change in 'c:\\Users\\kic-002\\Documents\\myquest\\app.py', reloading
+2025-12-24 13:18:56,032 WARNING:  * Debugger is active!
+2025-12-24 13:18:56,032 INFO:  * Debugger PIN: 808-124-345
+2025-12-24 13:19:04,251 INFO:  * Detected change in 'c:\\Users\\kic-002\\Documents\\myquest\\app.py', reloading
+2025-12-24 13:19:05,006 WARNING:  * Debugger is active!
+2025-12-24 13:19:05,010 INFO:  * Debugger PIN: 808-124-345
+2025-12-24 13:19:21,830 DEBUG: Practice Route: num_questions=40_weakness_mock, test_type_arg=mock_exam
+2025-12-24 13:19:21,842 DEBUG: Practice Route Final: test_type=weakness, num_to_sample=40
+2025-12-24 13:19:48,417 DEBUG: Submit Practice: test_type=weakness
+2025-12-24 13:20:57,281 INFO:  * Detected change in 'c:\\Users\\kic-002\\Documents\\myquest\\app.py', reloading

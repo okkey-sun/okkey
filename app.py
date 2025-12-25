@@ -4,6 +4,15 @@ from database import db
 from model import Question, User, QuizResult
 import random
 import json
+import os
+import smtplib
+from dotenv import load_dotenv
+
+load_dotenv()
+
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadTimeSignature
 from datetime import datetime, timedelta
 from sqlalchemy import func, desc
 
@@ -16,6 +25,47 @@ app.config["JSON_AS_ASCII"] = False
 db.init_app(app)
 migrate = Migrate(app, db)
 
+# トークン生成用のシリアライザ
+serializer = URLSafeTimedSerializer(app.secret_key)
+
+def send_verification_email(user_email, token_url):
+    """
+    認証メールを送信する関数
+    """
+    sender_email = os.environ.get('MAIL_ADDRESS')
+    password = os.environ.get('MAIL_PASSWORD')
+
+    if not sender_email or not password:
+        print("Error: 環境変数 MAIL_ADDRESS または MAIL_PASSWORD が設定されていません。")
+        return False
+
+    subject = "【重要】登録確認メール"
+    body = f"""
+以下のリンクをクリックして、パスワード設定を完了してください。
+
+{token_url}
+
+リンクの有効期限は24時間です。
+"""
+
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = user_email
+    msg['Subject'] = subject
+    msg.attach(MIMEText(body, 'plain'))
+
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(sender_email, password)
+        server.send_message(msg)
+        server.quit()
+        return True
+    except Exception as e:
+        print(f"Email send error: {e}")
+        return False
+
+
 @app.route("/")
 def login():
     return render_template("login.html")
@@ -24,23 +74,70 @@ def login():
 def register():
     if request.method == "POST":
         email = request.form.get("email")
-        password = request.form.get("password")
+        # パスワード入力はまだ求めない
 
-        # Check if user already exists
+        # 既存ユーザーチェック
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
-            return render_template("login.html", error="ログインに失敗しました")
+            # セキュリティ上は「送信しました」と出すのが良いが、今回はわかりやすくエラー表示
+            return render_template("register.html", error="このメールアドレスは既に登録されています。")
 
-        # Create new user
-        new_user = User(email=email)
-        new_user.set_password(password)
-
+        # 新規ユーザー作成（is_active=False, パスワード未設定）
+        new_user = User(email=email, is_active=False)
         db.session.add(new_user)
         db.session.commit()
 
-        return redirect(url_for("login"))
+        # トークン生成（emailをシリアライズ）
+        token = serializer.dumps(email, salt='email-confirm-salt')
+
+        # 確認用URL生成
+        # 指定されたURL形式を使用
+        confirm_url = f"https://okkey.pythonanywhere.com/confirm/{token}"
+        
+        # デバッグ用：ローカルで確認しやすいようにコンソール出力
+        print(f"DEBUG: Verification URL: {confirm_url}")
+
+        # メール送信
+        if send_verification_email(email, confirm_url):
+            # 案内画面へ
+            return render_template("email_sent.html")
+        else:
+            return render_template("register.html", error="メール送信に失敗しました。管理者にお問い合わせください。")
 
     return render_template("register.html")
+
+@app.route("/confirm/<token>", methods=["GET", "POST"])
+def confirm_email(token):
+    try:
+        # トークン検証（有効期限24時間 = 86400秒）
+        email = serializer.loads(token, salt='email-confirm-salt', max_age=86400)
+    except SignatureExpired:
+        return "<h1>リンクの有効期限が切れています。もう一度登録手続きを行ってください。</h1>"
+    except BadTimeSignature:
+        return "<h1>無効なリンクです。</h1>"
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return "<h1>ユーザーが見つかりません。</h1>"
+
+    if request.method == "POST":
+        password = request.form.get("password")
+        confirm_password = request.form.get("confirm_password")
+
+        if password != confirm_password:
+            return render_template("set_password.html", error="パスワードが一致しません")
+
+        # パスワード設定 & 本登録完了
+        user.set_password(password)
+        user.is_active = True
+        db.session.commit()
+
+        # ログイン画面へリダイレクト（フラッシュメッセージがあれば尚良し）
+        # ここではシンプルにリダイレクト
+        return redirect(url_for("login"))
+
+    # GETリクエスト時はパスワード設定フォームを表示
+    return render_template("set_password.html")
 
 @app.route("/try_login", methods=["POST"])
 def try_login():
@@ -50,6 +147,8 @@ def try_login():
     user = User.query.filter_by(email=email).first()
 
     if user and user.check_password(pw):
+        if not user.is_active:
+             return render_template("login.html", error="メール認証を完了してください")
         session["user"] = user.email
         session["is_admin"] = user.is_admin
         return redirect(url_for("home"))
