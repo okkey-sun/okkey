@@ -5,6 +5,8 @@ from model import Question, User, QuizResult
 import random
 import json
 import os
+from google import genai  # 追加
+from google.genai import types  # 追加
 import smtplib
 #load_dotenv関連をコメントアウト
 #from dotenv import load_dotenv
@@ -18,7 +20,13 @@ from datetime import datetime, timedelta
 from sqlalchemy import func, desc
 
 app = Flask(__name__)
-app.secret_key = "test123"
+# クライアントの初期化（安定版 v1 を指定）
+client = genai.Client(
+    api_key=os.environ.get("GEMINI_API_KEY"),
+    http_options={'api_version': 'v1'}
+)
+# 修正後（環境変数から読み込む。設定がなければ"dev_key"を使うという安全策）
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev_key")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///quiz.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -822,6 +830,56 @@ def analytics():
     
     user = User.query.filter_by(email=session["user"]).first()
     return render_template('analytics.html', user=user)
+
+@app.route("/ai_explain", methods=["POST"])
+def ai_explain():
+    if "user" not in session:
+        return jsonify({"error": "ログインが必要です"}), 401
+    
+    try:
+        data = request.json
+        question_text = data.get("question")
+        # 選択肢はリスト形式で受け取る
+        choices = data.get("choices", [])
+        correct_index = data.get("correct")
+        rationale = data.get("rationale")
+        
+        # AIへの指示（プロンプト）を作成
+        prompt = f"""
+あなたはPythonエンジニア認定基礎試験の専門講師です。
+以下の問題について、初心者にも分かりやすく噛み砕いて解説してください。
+
+【問題】
+{question_text}
+
+【選択肢】
+1. {choices[0] if len(choices) > 0 else 'N/A'}
+2. {choices[1] if len(choices) > 1 else 'N/A'}
+3. {choices[2] if len(choices) > 2 else 'N/A'}
+4. {choices[3] if len(choices) > 3 else 'N/A'}
+
+【正解番号】
+{correct_index}
+
+【公式解説の要約】
+{rationale}
+
+【回答のルール】
+- 専門用語をやさしく、例え話などを使って説明してください。
+- 300文字程度で簡潔に。
+- 最後に応援のメッセージを添えてください。
+"""
+
+        # 疎通テストで成功した最新モデルを使用
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt
+        )
+        
+        return jsonify({"explanation": response.text})
+    except Exception as e:
+        print(f"AI Error: {e}")
+        return jsonify({"error": "AI解説の生成に失敗しました"}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
