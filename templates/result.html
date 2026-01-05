@@ -161,7 +161,11 @@
         {% endfor %}
 
         <div class="text-center">
-            <a href="{{ url_for('practice') }}" class="btn btn-primary">もう一度テストする</a>
+            {% if test_type == 'section' %}
+                <a href="{{ url_for('section_test') }}" class="btn btn-primary">もう一度テストする</a>
+            {% else %}
+                <a href="{{ url_for('practice') }}" class="btn btn-primary">もう一度テストする</a>
+            {% endif %}
             <br><br><a href="/home" class="btn btn-secondary">ホームに戻る</a>
         </div>
 
