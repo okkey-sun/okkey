@@ -66,6 +66,69 @@ def send_verification_email(user_email, token_url):
         print(f"Email send error: {e}")
         return False
 
+def send_contact_email(name, user_email, category, message_body):
+    """
+    お問い合わせメールを管理者に送信する関数
+    """
+    receiver_email = os.environ.get('MAIL_ADDRESS')
+    password = os.environ.get('MAIL_PASSWORD')
+
+    if not receiver_email or not password:
+        print("Error: 環境変数 MAIL_ADDRESS または MAIL_PASSWORD が設定されていません。")
+        return False
+
+    subject = f"【お問い合わせ】{category} ({name}様)"
+    body = f"""
+以下の内容でお問い合わせがありました。
+
+■お名前: {name}
+■Email: {user_email}
+■カテゴリ: {category}
+
+■メッセージ:
+{message_body}
+"""
+
+    msg = MIMEMultipart()
+    msg['From'] = receiver_email
+    msg['To'] = receiver_email  # 管理者宛
+    msg['Reply-To'] = user_email # 返信先はユーザー
+    msg['Subject'] = subject
+    msg.attach(MIMEText(body, 'plain'))
+
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(receiver_email, password)
+        server.send_message(msg)
+        server.quit()
+        return True
+    except Exception as e:
+        print(f"Contact email send error: {e}")
+        return False
+
+@app.route("/support", methods=["GET", "POST"])
+def support():
+    # ログイン中ならemailを初期値として取得
+    email_initial = ""
+    if "user" in session:
+        email_initial = session["user"]
+
+    if request.method == "POST":
+        name = request.form.get("name")
+        email = request.form.get("email")
+        category = request.form.get("category")
+        message = request.form.get("message")
+
+        if send_contact_email(name, email, category, message):
+            flash("お問い合わせを送信しました。確認次第、担当者よりご連絡いたします。", "success")
+        else:
+            flash("送信に失敗しました。しばらく経ってから再度お試しください。", "danger")
+        
+        return redirect(url_for("support"))
+
+    return render_template("support.html", email=email_initial)
+
 
 @app.route("/")
 def login():

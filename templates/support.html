@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ - Python 3 エンジニア認定基礎試験 対策アプリ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: #e7f1ff;
+            color: #0c63e4;
+        }
+        .back-link {
+            text-decoration: none;
+        }
+        .faq-q {
+            font-weight: bold;
+        }
+        .faq-a-wrapper {
+            display: flex;
+            align-items: flex-start;
+        }
+        .faq-label {
+            min-width: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center text-primary mb-4">Python 3 エンジニア認定基礎試験<br>対策アプリ</h1>
+        
+        <div class="card p-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h4 mb-0">お問い合わせ / サポート</h2>
+                <a href="/" class="back-link btn btn-outline-secondary btn-sm">ホームへ戻る</a>
+            </div>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Section 1: FAQ -->
+            <section class="mb-5">
+                <h3 class="h5 border-bottom pb-2 mb-3">よくあるご質問 (FAQ)</h3>
+                <div class="accordion" id="faqAccordion">
+                    <!-- Q1 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading1">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                                <span class="badge bg-primary faq-label me-2">Q1</span>
+                                <span class="faq-q">このアプリは無料ですか？</span>
+                            </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-a-wrapper">
+                                <span class="badge bg-success faq-label me-2">A</span>
+                                <div>基本機能はすべて無料で利用できます。今後、追加機能や有料プランを導入する場合は事前に告知します。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q2 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                <span class="badge bg-primary faq-label me-2">Q2</span>
+                                <span class="faq-q">対応している試験（対象範囲）は何ですか？</span>
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-a-wrapper">
+                                <span class="badge bg-success faq-label me-2">A</span>
+                                <div>「Python 3 エンジニア認定基礎試験」の学習を想定しています。章別・演習形式で学べます。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q3 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                <span class="badge bg-primary faq-label me-2">Q3</span>
+                                <span class="faq-q">推奨環境はありますか？</span>
+                            </button>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-a-wrapper">
+                                <span class="badge bg-success faq-label me-2">A</span>
+                                <div>最新版の Google Chrome / Edge / Safari を推奨しています。スマホでも利用できます。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q4 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading4">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                <span class="badge bg-primary faq-label me-2">Q4</span>
+                                <span class="faq-q">ログインできません（メールアドレス・パスワードが分からない）</span>
+                            </button>
+                        </h2>
+                        <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-a-wrapper">
+                                <span class="badge bg-success faq-label me-2">A</span>
+                                <div>メールアドレスの入力に誤りがないか確認してください。パスワードを忘れた場合は「新規登録、パスワード再設定はこちら」からお手続きください。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q5 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading5">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                                <span class="badge bg-primary faq-label me-2">Q5</span>
+                                <span class="faq-q">登録確認メールが届きません</span>
+                            </button>
+                        </h2>
+                        <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-a-wrapper">
+                                <span class="badge bg-success faq-label me-2">A</span>
+                                <div>迷惑メールフォルダをご確認ください。数分待っても届かない場合は、メールアドレスの誤入力の可能性がありますので、再度ご登録をお願いします。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q6 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading6">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                                <span class="badge bg-primary faq-label me-2">Q6</span>
+                                <span class="faq-q">問題の解説や根拠（参考リンク）は見られますか？</span>
+                            </button>
+                        </h2>
+                        <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading6" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-a-wrapper">
+                                <span class="badge bg-success faq-label me-2">A</span>
+                                <div>問題によっては解説・参考情報を表示しています。順次充実させています。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q7 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading7">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                                <span class="badge bg-primary faq-label me-2">Q7</span>
+                                <span class="faq-q">正答率や学習履歴は保存されますか？</span>
+                            </button>
+                        </h2>
+                        <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="heading7" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-a-wrapper">
+                                <span class="badge bg-success faq-label me-2">A</span>
+                                <div>保存されます。学習の傾向分析（週次推移・章別正答率など）に利用され、analyticsページにて表示されます。傾向と対策としてご活用ください。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q8 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading8">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                                <span class="badge bg-primary faq-label me-2">Q8</span>
+                                <span class="faq-q">章末テストと特訓講座・模擬試験の違いは何ですか？</span>
+                            </button>
+                        </h2>
+                        <div id="collapse8" class="accordion-collapse collapse" aria-labelledby="heading8" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-a-wrapper">
+                                <span class="badge bg-success faq-label me-2">A</span>
+                                <div>章末テストは指定範囲の理解度確認、特訓講座・模擬試験は問題数を選んで実戦形式で解く演習型です。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q9 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading9">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
+                                <span class="badge bg-primary faq-label me-2">Q9</span>
+                                <span class="faq-q">うまく表示されない／ボタンが反応しない</span>
+                            </button>
+                        </h2>
+                        <div id="collapse9" class="accordion-collapse collapse" aria-labelledby="heading9" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-a-wrapper">
+                                <span class="badge bg-success faq-label me-2">A</span>
+                                <div>ページを再読み込みしてください。それでも解決しない場合は、ブラウザのキャッシュ削除や別ブラウザでお試しください。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q10 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading10">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                                <span class="badge bg-primary faq-label me-2">Q10</span>
+                                <span class="faq-q">追加してほしい機能があります</span>
+                            </button>
+                        </h2>
+                        <div id="collapse10" class="accordion-collapse collapse" aria-labelledby="heading10" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-a-wrapper">
+                                <span class="badge bg-success faq-label me-2">A</span>
+                                <div>「お問い合わせ」からご要望をお送りください。今後の改善として検討させていただきます（例：復習モード、苦手分野自動出題、スマホUI改善など）。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q11 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading11">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
+                                <span class="badge bg-primary faq-label me-2">Q11</span>
+                                <span class="faq-q">問題の誤り（正解が違う等）を見つけました</span>
+                            </button>
+                        </h2>
+                        <div id="collapse11" class="accordion-collapse collapse" aria-labelledby="heading11" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-a-wrapper">
+                                <span class="badge bg-success faq-label me-2">A</span>
+                                <div>大変助かります。是非ご指摘ください。「問題ID」や「問題文」をコピペしてご連絡ください。確認して修正させていただきます。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q12 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading12">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse12" aria-expanded="false" aria-controls="collapse12">
+                                <span class="badge bg-primary faq-label me-2">Q12</span>
+                                <span class="faq-q">退会・データ削除はできますか？</span>
+                            </button>
+                        </h2>
+                        <div id="collapse12" class="accordion-collapse collapse" aria-labelledby="heading12" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-a-wrapper">
+                                <span class="badge bg-success faq-label me-2">A</span>
+                                <div>可能です。「お問い合わせ」から登録メールアドレスを添えてその旨ご連絡ください。</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Contact Form -->
+            <section>
+                <h3 class="h5 border-bottom pb-2 mb-3">お問い合わせ・ご要望はこちら</h3>
+                <form action="{{ url_for('support') }}" method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">お名前 <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="山田 太郎">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">メールアドレス <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="email" name="email" required value="{{ email if email else '' }}" placeholder="example@email.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">お問い合わせ種別 <span class="text-danger">*</span></label>
+                        <select class="form-select" id="category" name="category" required>
+                            <option value="" selected disabled>選択してください</option>
+                            <option value="ご意見・ご要望">ご意見・ご要望</option>
+                            <option value="不具合報告">システム不具合の報告</option>
+                            <option value="問題・解説の不備報告">問題・解説の不備報告</option>
+                            <option value="アカウント関連">アカウント・ログイン関連</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">お問い合わせ内容 <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="message" name="message" rows="5" required placeholder="具体的な内容をご記入ください"></textarea>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">送信する</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
