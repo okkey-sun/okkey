@@ -6,16 +6,9 @@
     <title>テスト結果</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .container {
-            max-width: 800px;
-            margin-top: 50px;
-        }
-        .card {
-            margin-bottom: 20px;
-        }
+        body { background-color: #f8f9fa; }
+        .container { max-width: 800px; margin-top: 50px; }
+        .card { margin-bottom: 20px; }
         .choice-item {
             padding: 8px 12px;
             border-radius: 5px;
@@ -25,42 +18,21 @@
             display: flex;
             align-items: center;
         }
-        .choice-item.selected {
-            background-color: #e0f7fa; /* Light blue for selected */
-            border-color: #00bcd4;
-        }
-        .choice-item.correct {
-            background-color: #d4edda; /* Light green for correct */
-            border-color: #28a745;
-        }
-        .choice-item.incorrect {
-            background-color: #f8d7da; /* Light red for incorrect selected */
-            border-color: #dc3545;
-        }
-        .choice-label {
-            flex-grow: 1;
-            padding-left: 5px; /* Small padding between icon and text */
-        }
-        .icon-container {
-            width: 25px; /* Adjust as needed for icon size */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0; /* Prevent shrinking */
-        }
-        .status-icon {
-            font-size: 1.2em;
-            /* Removed margin-left as it's now handled by icon-container */
-        }
-        .status-icon.correct {
-            color: #28a745;
-        }
-        .status-icon.incorrect {
-            color: #dc3545;
-        }
-        .custom-rationale-bg,
-        .custom-reference-bg {
-            background-color: #f5f5f5;
+        .choice-item.selected { background-color: #e0f7fa; border-color: #00bcd4; }
+        .choice-item.correct { background-color: #d4edda; border-color: #28a745; }
+        .choice-item.incorrect { background-color: #f8d7da; border-color: #dc3545; }
+        .choice-label { flex-grow: 1; padding-left: 5px; }
+        .icon-container { width: 25px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
+        .status-icon { font-size: 1.2em; }
+        .status-icon.correct { color: #28a745; }
+        .status-icon.incorrect { color: #dc3545; }
+        .custom-rationale-bg, .custom-reference-bg { background-color: #f5f5f5; }
+        
+        /* AI解説エリアのスタイル */
+        .ai-response-area {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            display: none; /* 初期状態は非表示 */
         }
     </style>
 </head>
@@ -85,77 +57,58 @@
                 </h5>
                 <p class="card-text">{{ res.question.question }}</p>
 
-                                <div class="mb-3">
+                <div class="mb-3">
+                    {% set all_choices = [res.question.choice1, res.question.choice2, res.question.choice3, res.question.choice4] %}
+                    {% for choice_text in all_choices %}
+                        {% set current_choice_index = loop.index %}
+                        {% set is_selected = (current_choice_index == res.selected_choice_index) %}
+                        {% set is_correct_choice = (current_choice_index == res.correct_choice_index) %}
 
-                                    {% set all_choices = [res.question.choice1, res.question.choice2, res.question.choice3, res.question.choice4] %}
-
-                                    {% for choice_text in all_choices %}
-
-                                        {% set current_choice_index = loop.index %}
-
-                                        {% set is_selected = (current_choice_index == res.selected_choice_index) %}
-
-                                        {% set is_correct_choice = (current_choice_index == res.correct_choice_index) %}
-
-                
-
-                                        <div class="choice-item 
-
-                                            {% if is_selected and res.is_correct %}correct{% elif is_selected and not res.is_correct %}incorrect{% elif is_correct_choice and not is_selected %}correct{% endif %}"
-
-                                            >
-
-                                            <div class="icon-container">
-
-                                            {% if is_selected and res.is_correct %}
-
-                                                <span class="status-icon correct">✔</span>
-
-                                            {% elif is_selected and not res.is_correct %}
-
-                                                <span class="status-icon incorrect">✖</span>
-
-                                            {% elif is_correct_choice %}
-
-                                                <span class="status-icon correct">✔</span>
-
-                                            {% endif %}
-
-                                            </div>
-
-                                            <span class="choice-label">{{ choice_text }}</span>
-
-                                        </div>
-
-                                    {% endfor %}
-
-                                </div>
-
-                                {% if res.question.rationale %}
-
-                                <div class="custom-rationale-bg alert mt-3">
-
-                                    <strong>解説:</strong><br>
-
-                                    {{ res.question.rationale }}
-
-                                </div>
-
+                        <div class="choice-item {% if is_selected and res.is_correct %}correct{% elif is_selected and not res.is_correct %}incorrect{% elif is_correct_choice and not is_selected %}correct{% endif %}">
+                            <div class="icon-container">
+                                {% if is_selected and res.is_correct %}
+                                    <span class="status-icon correct">✔</span>
+                                {% elif is_selected and not res.is_correct %}
+                                    <span class="status-icon incorrect">✖</span>
+                                {% elif is_correct_choice %}
+                                    <span class="status-icon correct">✔</span>
                                 {% endif %}
+                            </div>
+                            <span class="choice-label">{{ choice_text }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
 
-                                {% if res.question.reference %}
+                {% if res.question.rationale %}
+                <div class="custom-rationale-bg alert mt-3">
+                    <strong>解説:</strong><br>
+                    {{ res.question.rationale }}
+                </div>
+                {% endif %}
 
-                                <div class="custom-reference-bg alert">
+                <div class="mt-2 mb-3">
+                    <button class="btn btn-warning btn-sm" onclick="askAI(this, {{ loop.index0 }})">
+                        ✨ AI講師に詳しく聞く
+                    </button>
+                    <div id="ai-response-{{ loop.index0 }}" class="ai-response-area alert mt-2">
+                        </div>
+                </div>
 
-                                    <strong>参照URL:</strong><br>
-
-                                    <a href="{{ res.question.reference }}" target="_blank">{{ res.question.reference }}</a>
-
-                                </div>
-
-                                {% endif %}
-
+                {% if res.question.reference %}
+                <div class="custom-reference-bg alert">
+                    <strong>参照URL:</strong><br>
+                    <a href="{{ res.question.reference }}" target="_blank">{{ res.question.reference }}</a>
+                </div>
+                {% endif %}
                 
+                <script type="application/json" id="data-{{ loop.index0 }}">
+                    {
+                        "question": {{ res.question.question|tojson }},
+                        "choices": [{{ res.question.choice1|tojson }}, {{ res.question.choice2|tojson }}, {{ res.question.choice3|tojson }}, {{ res.question.choice4|tojson }}],
+                        "correct": {{ res.question.correct }},
+                        "rationale": {{ res.question.rationale|tojson }}
+                    }
+                </script>
             </div>
         </div>
         {% endfor %}
@@ -167,7 +120,42 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    async function askAI(button, index) {
+        const responseArea = document.getElementById(`ai-response-${index}`);
+        const rawData = document.getElementById(`data-${index}`).textContent;
+        const questionData = JSON.parse(rawData);
+
+        // UIの状態を更新
+        button.disabled = true;
+        button.innerText = "⏳ AIが考え中...";
+        responseArea.style.display = "block";
+        responseArea.innerHTML = '<div class="spinner-border spinner-border-sm text-warning" role="status"></div> わかりやすく解説を作成しています...';
+
+        try {
+            const response = await fetch('/ai_explain', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(questionData)
+            });
+
+            const result = await response.json();
+
+            if (result.explanation) {
+                // 改行をHTMLの改行タグに変換して表示
+                responseArea.innerHTML = `<strong>🤖 AI講師の深掘り解説:</strong><br>${(result.explanation || '').replace(/\n/g, '<br>')}`;
+            } else {
+                responseArea.innerText = "エラー: 解説を生成できませんでした。";
+            }
+        } catch (error) {
+            console.error("AI Error:", error);
+            responseArea.innerText = "通信エラーが発生しました。時間を置いてからお試しください。";
+        } finally {
+            button.disabled = false;
+            button.innerText = "✨ AI講師に詳しく聞く";
+        }
+    }
+    </script>
 </body>
 </html>
-
-
