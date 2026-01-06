@@ -424,23 +424,37 @@ def practice():
     if num_to_sample == 0:
         return "問題がDBにありません"
 
-    # Shuffle all questions if 'all' is selected, otherwise sample
+# Shuffle all questions if 'all' is selected, otherwise sample
     if num_questions_str == 'all':
         q_list = all_questions
         random.shuffle(q_list)
+
     elif num_questions_str == '40_weakness_mock':
-        # Sort by correct rate (ascending), take first 40
-        # If total_count is 0, treat as rate 0 (very weak/unknown)
+        # 模擬試験（苦手克服）用のロジック
         def get_rate(q):
             if q.total_count == 0: return 0.0
             return q.correct_count / q.total_count
         
         sorted_q = sorted(all_questions, key=get_rate)
         q_list = sorted_q[:num_to_sample]
-        random.shuffle(q_list) # Shuffle the selected weak questions
-    else:
-        q_list = random.sample(all_questions, num_to_sample)
+        random.shuffle(q_list) # 出題順はランダム
 
+    else:
+        # 【特訓講座（5問～100問）のロジック変更】
+        # 1. 正答率計算（未回答は0.0として最優先）
+        def get_rate(q):
+            if q.total_count == 0: return 0.0
+            return q.correct_count / q.total_count
+        
+        # 2. 正答率が低い順にソート
+        sorted_q = sorted(all_questions, key=get_rate)
+        
+        # 3. 指定された問題数だけ、苦手な上位からピックアップ
+        q_list = sorted_q[:num_to_sample]
+        
+        # 4. ピックアップした問題の出題順序をランダムにする
+        random.shuffle(q_list)
+        
     return render_template(
         "practice_test.html",
         questions=q_list,
