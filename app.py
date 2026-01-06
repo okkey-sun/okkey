@@ -18,7 +18,7 @@ from datetime import datetime, timedelta
 from sqlalchemy import func, desc
 
 app = Flask(__name__)
-app.secret_key = "test123"
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'dev_key_123')
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///quiz.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
