@@ -30,12 +30,13 @@ graph TD
     B -->|メール送信| C[仮登録完了]
     C -->|リンククリック| D[パスワード設定]
     
-    %% 矢印を左側から上へ戻す設定
     D -.->|設定完了| A
     
     %% ログイン前のみのアクセス
     A -->|お問い合わせはこちら| H[お問い合わせ]
-    
+
+    A -->|このサイトについて| O[サイト説明]
+
     %% メイン機能（ログイン後）
     A -->|認証成功| E[ホーム画面]
     
@@ -71,7 +72,8 @@ graph TD
 | `/submit_practice` | `result.html` | 実践モードの結果表示・採点処理 | 要ログイン(POST) |
 | `/analytics` | `analytics.html` | 学習分析ダッシュボード | 要ログイン |
 | `/analytics_data` | (JSON) | 分析用データを返すAPI | 要ログイン |
-| `/support` | `support.html` | お問い合わせフォーム | 全員（ログイン時はEmail自動入力） |
+| `/support` | `support.html` | お問い合わせフォーム | 全員 |
+| `/about` | `about.html` | サイト説明、注意事項 | 全員 |
 | `/admin` | `admin.html` | 管理画面トップ | 要管理者権限 |
 | `/admin/questions` | `admin_questions.html` | 問題一覧・検索・削除 | 要管理者権限 |
 | `/admin/question/new` | `new_question.html` | 新規問題作成 | 要管理者権限 |
