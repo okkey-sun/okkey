@@ -22,71 +22,7 @@
 
 ---
 
-## 2. 技術構成
-現状のコードベースに基づく技術スタックは以下の通りです。
-
-- **言語**: Python
-- **Webフレームワーク**: Flask
-- **データベース**: SQLite (ファイル名: `quiz.db`)
-- **ORM**: SQLAlchemy (Flask-SQLAlchemy)
-- **マイグレーション**: Flask-Migrate
-- **テンプレートエンジン**: Jinja2
-- **認証方式**: Flask Session (`user`, `is_admin` キーを使用)
-- **パスワードハッシュ**: Werkzeug security (`generate_password_hash`, `check_password_hash`)
-- **メール送信**: `smtplib` (Gmail SMTP server: `smtp.gmail.com:587`)
-- **環境変数**:
-    - `MAIL_ADDRESS`: 送信元メールアドレス
-    - `MAIL_PASSWORD`: 送信元メールパスワード
-- **トークン生成**: `itsdangerous.URLSafeTimedSerializer` (シークレットキー: ソースコード内に固定 `dev_key_123`)
-
----
-
-## 2. 機能一覧
-
-| カテゴリ | 機能名 | 詳細説明 |
-| --- | --- | --- |
-| **認証・管理** | 会員登録（メール認証） | トークン認証による安全なパスワード設定・本登録フロー。 |
-|  | ログイン / ログアウト | メールアドレスとパスワードによる認証。セッション管理。 |
-|  | マイページ | ニックネームおよびパスワードの変更機能。 |
-|  | 管理者機能 | 問題データ(CRUD)、ユーザー、管理者の管理。 |
-| **学習・演習** | 章別テスト | 全16章から特定の章を選択。体系的な学習確認用。 |
-|  | 模擬試験（ランダム） | 全問題からランダムに40問出題。本番試験想定。 |
-|  | 模擬試験（苦手克服） | 過去の正誤率が低い問題を優先的に40問出題。 |
-| **分析・記録** | 成績保存 | スコア、日時、個別の正誤詳細(JSON)をDBに保存。 |
-|  | 成績分析 | 週ごとの学習推移、章別正答率を可視化。 |
-| **その他** | お問い合わせ | 管理者（MAIL_ADDRESS）へのメール送信機能。 |
-
----
-
-## 3. 画面一覧
-
-| URL | テンプレート | 概要 | アクセス制御 |
-| :--- | :--- | :--- | :--- |
-| `/` | `login.html` | ログイン画面 アプリの入り口 | 全員 |
-| `/register` | `register.html` | 新規登録（メール送信） | 全員 |
-| `/confirm/<token>` | `set_password.html` | メール認証完了＆パスワード設定 | トークン保持者 |
-| `/home` | `home.html` | ログイン後のホーム画面 | 要ログイン |
-| `/mypage` | `mypage.html` | ユーザー情報確認、ニックネーム・PW変更 | 要ログイン |
-| `/material` | `material.html` | 学習資料ページ（試験概要、用語解説、リンク） | 要ログイン |
-| `/section_test` | `section_test.html` | 章別テスト選択 / 問題回答画面 | 要ログイン |
-| `/submit_section` | `result.html` | 章別テストの結果表示・採点処理 | 要ログイン(POST) |
-| `/practice` | `practice_test.html` | 実践モード設定 / 問題回答画面 | 要ログイン |
-| `/submit_practice` | `result.html` | 実践モードの結果表示・採点処理 | 要ログイン(POST) |
-| `/analytics` | `analytics.html` | 学習分析ダッシュボード | 要ログイン |
-| `/analytics_data` | (JSON) | 分析用データを返すAPI | 要ログイン |
-| `/support` | `support.html` | お問い合わせフォーム | 全員（ログイン時はEmail自動入力） |
-| `/admin` | `admin.html` | 管理画面トップ | 要管理者権限 |
-| `/admin/questions` | `admin_questions.html` | 問題一覧・検索・削除 | 要管理者権限 |
-| `/admin/question/new` | `new_question.html` | 新規問題作成 | 要管理者権限 |
-| `/admin/question/<id>` | `edit_question.html` | 問題編集 | 要管理者権限 |
-| `/admin/export` | (JSON File) | 全問題をJSON形式でダウンロード | 要管理者権限 |
-| `/admin/users` | `admin_users.html` | 一般ユーザー一覧・削除 | 要管理者権限 |
-| `/admin/admins` | `admin_admins.html` | 管理者一覧・削除 | 要管理者権限 |
-
----
-
-## 3. 画面遷移図
-
+## 2. 画面遷移図
 ```mermaid
 graph TD
     %% ログイン前・認証フロー
@@ -120,8 +56,33 @@ graph TD
 
 ---
 
-## 4. 認証・ユーザー登録仕様
+## 3. 画面一覧
+| URL | テンプレート | 概要 | アクセス制御 |
+| :--- | :--- | :--- | :--- |
+| `/` | `login.html` | ログイン画面 アプリの入り口 | 全員 |
+| `/register` | `register.html` | 新規登録（メール送信） | 全員 |
+| `/confirm/<token>` | `set_password.html` | メール認証完了＆パスワード設定 | トークン保持者 |
+| `/home` | `home.html` | ログイン後のホーム画面 | 要ログイン |
+| `/mypage` | `mypage.html` | ユーザー情報確認、ニックネーム・PW変更 | 要ログイン |
+| `/material` | `material.html` | 学習資料ページ（試験概要、用語解説、リンク） | 要ログイン |
+| `/section_test` | `section_test.html` | 章別テスト選択 / 問題回答画面 | 要ログイン |
+| `/submit_section` | `result.html` | 章別テストの結果表示・採点処理 | 要ログイン(POST) |
+| `/practice` | `practice_test.html` | 実践モード設定 / 問題回答画面 | 要ログイン |
+| `/submit_practice` | `result.html` | 実践モードの結果表示・採点処理 | 要ログイン(POST) |
+| `/analytics` | `analytics.html` | 学習分析ダッシュボード | 要ログイン |
+| `/analytics_data` | (JSON) | 分析用データを返すAPI | 要ログイン |
+| `/support` | `support.html` | お問い合わせフォーム | 全員（ログイン時はEmail自動入力） |
+| `/admin` | `admin.html` | 管理画面トップ | 要管理者権限 |
+| `/admin/questions` | `admin_questions.html` | 問題一覧・検索・削除 | 要管理者権限 |
+| `/admin/question/new` | `new_question.html` | 新規問題作成 | 要管理者権限 |
+| `/admin/question/<id>` | `edit_question.html` | 問題編集 | 要管理者権限 |
+| `/admin/export` | (JSON File) | 全問題をJSON形式でダウンロード | 要管理者権限 |
+| `/admin/users` | `admin_users.html` | 一般ユーザー一覧・削除 | 要管理者権限 |
+| `/admin/admins` | `admin_admins.html` | 管理者一覧・削除 | 要管理者権限 |
 
+---
+
+## 4. 認証・ユーザー登録仕様
 本システムでは、メールアドレスの有効性を確認するために「メール認証フロー」を採用しています。
 
 ### 登録フロー詳細
@@ -180,7 +141,6 @@ sequenceDiagram
 ---
 
 ## 5. クイズ仕様
-
 ### 5.1 章別テスト (Section Test)
 特定の章（カテゴリ）に絞って問題を解くモードです。
 
@@ -259,8 +219,57 @@ flowchart TD
 
 ---
 
-## 6. 管理機能 (Admin)
+## 6. お問い合わせ (Support)
+ユーザーからのフィードバックや質問を受け付ける機能です。
 
+- **URL**: `/support`
+- **Method**: GET (表示), POST (送信)
+- **メール仕様**:
+    - **To**: `MAIL_ADDRESS` (管理者)
+    - **From**: `MAIL_ADDRESS` (システムメール)
+    - **Reply-To**: ユーザーの入力したEmail
+    - **Subject**: `【お問い合わせ】{category} ({name}様)`
+- **完了後の挙動**: フラッシュメッセージを表示して `/support` へリダイレクト。
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant App
+    participant SMTP as Gmail SMTP
+
+    User->>App: お問い合わせ内容送信 (POST)
+    App->>App: 環境変数確認 (MAIL_ADDRESS/PASSWORD)
+    App->>SMTP: login()
+    App->>SMTP: send_message()
+    
+    alt 送信成功
+        SMTP-->>App: OK
+        App-->>User: Flash「送信しました」
+    else 送信失敗
+        SMTP-->>App: Exception
+        App-->>User: Flash「送信に失敗しました」
+    end
+```
+
+---
+
+## 7. 機能一覧
+| カテゴリ | 機能名 | 詳細説明 |
+| --- | --- | --- |
+| **認証・管理** | 会員登録（メール認証） | トークン認証による安全なパスワード設定・本登録フロー。 |
+|  | ログイン / ログアウト | メールアドレスとパスワードによる認証。セッション管理。 |
+|  | マイページ | ニックネームおよびパスワードの変更機能。 |
+|  | 管理者機能 | 問題データ(CRUD)、ユーザー、管理者の管理。 |
+| **学習・演習** | 章別テスト | 全16章から特定の章を選択。体系的な学習確認用。 |
+|  | 模擬試験（ランダム） | 全問題からランダムに40問出題。本番試験想定。 |
+|  | 模擬試験（苦手克服） | 過去の正誤率が低い問題を優先的に40問出題。 |
+| **分析・記録** | 成績保存 | スコア、日時、個別の正誤詳細(JSON)をDBに保存。 |
+|  | 成績分析 | 週ごとの学習推移、章別正答率を可視化。 |
+| **その他** | お問い合わせ | 管理者（MAIL_ADDRESS）へのメール送信機能。 |
+
+---
+
+## 8. 管理機能 (Admin)
 管理者権限（`is_admin=True`）を持つユーザーのみアクセス可能な領域です。
 
 ### 機能詳細
@@ -305,8 +314,7 @@ flowchart TD
 
 ---
 
-## 7. 分析 (Analytics)
-
+## 9. 分析 (Analytics)
 ユーザーの学習履歴を可視化します。データは `/analytics_data` APIからJSON形式で提供され、フロントエンドで描画されます。
 
 ### データ生成ロジック (`/analytics_data`)
@@ -351,43 +359,7 @@ flowchart TD
 
 ---
 
-## 8. お問い合わせ (Support)
-
-ユーザーからのフィードバックや質問を受け付ける機能です。
-
-- **URL**: `/support`
-- **Method**: GET (表示), POST (送信)
-- **メール仕様**:
-    - **To**: `MAIL_ADDRESS` (管理者)
-    - **From**: `MAIL_ADDRESS` (システムメール)
-    - **Reply-To**: ユーザーの入力したEmail
-    - **Subject**: `【お問い合わせ】{category} ({name}様)`
-- **完了後の挙動**: フラッシュメッセージを表示して `/support` へリダイレクト。
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant App
-    participant SMTP as Gmail SMTP
-
-    User->>App: お問い合わせ内容送信 (POST)
-    App->>App: 環境変数確認 (MAIL_ADDRESS/PASSWORD)
-    App->>SMTP: login()
-    App->>SMTP: send_message()
-    
-    alt 送信成功
-        SMTP-->>App: OK
-        App-->>User: Flash「送信しました」
-    else 送信失敗
-        SMTP-->>App: Exception
-        App-->>User: Flash「送信に失敗しました」
-    end
-```
-
----
-
-## 9. データモデル (ER図)
-
+## 10. データモデル (ER図)
 ### 主要エンティティ
 
 1. **User (users)**: ユーザーアカウント
@@ -437,8 +409,7 @@ erDiagram
 
 ---
 
-## 10. APIエンドポイント定義詳細
-
+## 11. APIエンドポイント定義詳細
 | Method | Path | 認可 | 入力 (Args/Form) | 処理概要 | DB更新 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | GET | `/section_test` | User | `category` (opt) | 指定カテゴリの問題を取得して表示。 | なし |
@@ -451,8 +422,26 @@ erDiagram
 
 ---
 
-## 11. 制約・注意点・改善提案
+## 12. 技術構成
+現状のコードベースに基づく技術スタックは以下の通りです。
 
+- **言語**: Python
+- **Webフレームワーク**: Flask
+- **データベース**: SQLite (ファイル名: `quiz.db`)
+- **ORM**: SQLAlchemy (Flask-SQLAlchemy)
+- **マイグレーション**: Flask-Migrate
+- **テンプレートエンジン**: Jinja2
+- **認証方式**: Flask Session (`user`, `is_admin` キーを使用)
+- **パスワードハッシュ**: Werkzeug security (`generate_password_hash`, `check_password_hash`)
+- **メール送信**: `smtplib` (Gmail SMTP server: `smtp.gmail.com:587`)
+- **環境変数**:
+    - `MAIL_ADDRESS`: 送信元メールアドレス
+    - `MAIL_PASSWORD`: 送信元メールパスワード
+- **トークン生成**: `itsdangerous.URLSafeTimedSerializer` (シークレットキー: ソースコード内に固定 `dev_key_123`)
+
+---
+
+## 13. 制約・注意点・改善提案
 ### 現状の制約と注意点
 1. **セキュリティ**:
     - CSRF保護（Flask-WTF等）が導入されていない。
@@ -476,7 +465,7 @@ erDiagram
 2. **シーケンス図（新規登録〜ログイン）**
 3. **ユーザーフロー（章別テスト）**
 4. **実践モード 分岐フロー**
-5. **管理者操作フロー**
-6. **データ生成フロー（Analytics）**
-7. **シーケンス図（お問い合わせ）**
+5. **シーケンス図（お問い合わせ）**
+6. **管理者操作フロー**
+7. **データ生成フロー（Analytics）**
 8. **ER図**
